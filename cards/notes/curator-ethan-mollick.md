@@ -10,7 +10,7 @@ created: 2026-08-01
 source: ethan-mollick-curated-corpus
 last_accessed: 2026-08-04
 tier: active
-relevance: 1.0
+relevance: 0.985
 ---
 
 # Ethan Mollick: внедрение ИИ
