@@ -1,17 +1,21 @@
 # CORE — memory core
 
-<!-- Always-on: injected into context every turn (≤~1200 chars). Durable facts only.
-     Written by the nightly rollup; on an explicit "remember …" the agent appends a line.
-     Rule: scripts/memory/instructions/rules/core-format.md (in the Iva repo) -->
-
 ## User
-- (name, role, how to address — fills in over time)
+- (name, role — fills in over time)
 
 ## Preferences
 - Concise, no fluff.
+- Посты: 1 сюжет = 1 пост; заголовок, 1–2 абзаца, польза, вопрос.
+- Черновики без служебных пометок; обложка релевантна; в обложках НИКОГДА нет текста.
+- После публикации — короткое «пост выпущен», без перегенераций и отчётов.
+- Финальные посты без ссылок; текст — редакционный подход.
+- Платное (озвучка >~30 ₽) — только после явного «ок», смета до запуска.
 
-## Active goals (≤3)
-- (appear as work progresses)
+## Active goals
+- Конвейер: AI-новости → черновики с обложками → согласование → очередь Telegram.
 
 ## Pointers
-- Latest day: — · Index: vault/MOC.md
+- Канал: «Стринги кота Бориса» — https://t.me/stringikotaborisa
+- Инфраструктура/секреты: notes/ops-security-journal.md
+- Озвучка YouTube: [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
+- Latest day: 2026-08-03 · Index: vault/MOC.md
