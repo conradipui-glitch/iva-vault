@@ -10,7 +10,7 @@ created: 2026-08-04
 source: daily/2026-08-04.md
 last_accessed: 2026-08-05
 tier: active
-relevance: 1.0
+relevance: 0.985
 ---
 
 # X: регулярные комментарии от имени владельца

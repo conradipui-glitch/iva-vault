@@ -10,7 +10,7 @@ created: 2026-08-02
 source: daily/2026-08-02.md
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.985
+relevance: 0.97
 ---
 
 # X Source Watchlist

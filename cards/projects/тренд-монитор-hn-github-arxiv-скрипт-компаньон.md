@@ -8,9 +8,11 @@ confidence: EXTRACTED
 domain: work
 created: 2026-08-02
 source: daily/2026-08-02.md
-last_accessed: 2026-08-04
+last_accessed: 2026-08-06
 tier: active
-relevance: 0.985
+relevance: 1.0
+updated: 2026-08-06
+access_count: 1
 ---
 
 # Тренд-монитор HN+GitHub+arXiv (скрипт-компаньон)
@@ -45,3 +47,8 @@ relevance: 0.985
 ## Related
 - [[cards/projects/конвейер-новостей-для-стрингов-кота-бориса]] (источники Superbash/HN/GitHub/arXiv из старых n8n)
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]] (черновики постов-мыслей идут сюда)
+## Log
+- 2026-08-06:
+  Обновление · 05.08.2026:
+  - 19:37 владелец спросил про сервис трендов репозиториев «с красным интерфейсом» (не GitHub Trending). Ответ: это GitTrends (gittrends.io) — альтернатива GitHub Trending, тёмный интерфейс с красными акцентами; также Trendshift (trendshift.io) и OSS Insight (ossinsight.io/trending), но у них нет красного стиля. GitTrends показывает динамику звёзд за день/неделю.
+  - 20:07 вопрос владельца про trendshift «Gained today» vs GitHub stars — судьба/выбор неизвестны (транскрипт не фиксирует ответ).

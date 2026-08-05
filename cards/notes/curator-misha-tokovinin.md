@@ -10,7 +10,7 @@ created: 2026-08-01
 source: misha-tokovinin-curated-corpus
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.985
+relevance: 0.97
 ---
 
 # Миша Токовинин: продукт и операционная трезвость
