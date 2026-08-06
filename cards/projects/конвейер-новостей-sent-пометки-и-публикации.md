@@ -1,20 +1,19 @@
 ---
 type: project
 description: >-
-  Рабочий конвейер новостей: хранилище data/news/store.json, статус sent у обработанных, команда iva-news-mark, публикации 05.08.2026 (Apple vs OpenAI, Брэдбери, Xbox)
-tags: [news, automation, sent, threads, x]
+  Конвейер AI-новостей → черновики → Telegram (канал Стринги кота Бориса) + Threads API; правило: ссылка на репу встраивается в ключевое слово поста
+tags: [news, automation, sent, threads, x, conveyor, telegram, publishing]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-06
 source: daily/2026-08-06.md
-access_count: 1
-last_accessed: 2026-06-27
-relevance: 0.4
-tier: cold
+access_count: 3
+last_accessed: 2026-08-04
+relevance: 0.979
+tier: active
+updated: 2026-08-07
 ---
-
-# Конвейер новостей: sent-пометки и публикации
 
 # Конвейер новостей: sent-пометки и публикации
 
@@ -44,3 +43,10 @@ tier: cold
 - [[cards/projects/конвейер-новостей-для-стрингов-кота-бориса]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/x-аккаунт-для-публикаций-стрингов-кота-бориса]]
+- [[cards/decisions/финальный-формат-постов-стрингов-кота-бориса]]
+## History
+
+- 2026-08-06: в теле был дубль H1 «Конвейер новостей: sent-пометки и публикации» — свёрнут в один заголовок.
+
+## Log
+- 2026-08-07: 06.08.2026: **Набор А** (RealReplicaBench, Prime Agent, Cloudflare OS) — Telegram все 3, Threads посты 1+2 (пост 2 вышел сразу, не через 30 мин — отклонение от тайминга). **Набор Б** (OpenAI безлимит, GPT-5.6 Sol, Kimi K3, CRM-агент, Argus) — Telegram все 5, Threads 3 в очереди на 00:11/00:41/01:11. **Новое правило публикации: ссылка на репу встраивается в ключевое слово** («[Вышел open-source](github.com/...)») — записано в EDITORIAL-STANDARD.md; для Threads ссылка просто один раз в тексте. 06.08 правился news-editor (редакционный стандарт). 16:48 выбран «Вариант а» для набора А.

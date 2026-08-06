@@ -1,21 +1,19 @@
 ---
 type: project
 description: >-
-  Скрипт-компаньон собирает свежие AI-тренды из Hacker News, GitHub trending и arXiv, шлёт сигнал в Telegram при >=3 новых и черновики постов-мыслей на одобрение
-tags: [news, automation, cron, ai-news, monitoring]
+  Скрипт-компаньон трендов (HN, GitHub, arXiv); 06.08.2026 решено добавить rerank-2.5-lite как «спасателя» отбора, эмбеддинги bge-m3 + косинус
+tags: [news, automation, cron, ai-news, monitoring, trends, hn, github, arxiv, rerank, bge-m3]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-02
 source: daily/2026-08-02.md
-last_accessed: 2026-08-06
+last_accessed: 2026-08-07
 tier: active
 relevance: 1.0
-updated: 2026-08-06
-access_count: 1
+updated: 2026-08-07
+access_count: 3
 ---
-
-# Тренд-монитор HN+GitHub+arXiv (скрипт-компаньон)
 
 # Тренд-монитор HN + GitHub + arXiv (скрипт-компаньон)
 
@@ -47,8 +45,14 @@ access_count: 1
 ## Related
 - [[cards/projects/конвейер-новостей-для-стрингов-кота-бориса]] (источники Superbash/HN/GitHub/arXiv из старых n8n)
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]] (черновики постов-мыслей идут сюда)
+- [[cards/decisions/решение-о-rerank-2-5-lite-в-цепочке-отбора-новостей]]
+## History
+
+- 2026-08-06: в теле был дубль H1 (разные формулировки: «HN+GitHub+arXiv» и «HN + GitHub + arXiv») — свёрнут в один канонический заголовок.
+
 ## Log
 - 2026-08-06:
   Обновление · 05.08.2026:
   - 19:37 владелец спросил про сервис трендов репозиториев «с красным интерфейсом» (не GitHub Trending). Ответ: это GitTrends (gittrends.io) — альтернатива GitHub Trending, тёмный интерфейс с красными акцентами; также Trendshift (trendshift.io) и OSS Insight (ossinsight.io/trending), но у них нет красного стиля. GitTrends показывает динамику звёзд за день/неделю.
   - 20:07 вопрос владельца про trendshift «Gained today» vs GitHub stars — судьба/выбор неизвестны (транскрипт не фиксирует ответ).
+- 2026-08-07: 06.08.2026: решено добавить в цепочку отбора новостей rerank-2.5-lite на позицию «спасателя» (после embedding-дедупликации, перед LLM-оценкой). Эмбеддинги: bge-m3 + косинус (текущая схема). Предложен тест на 20 кандидатах.

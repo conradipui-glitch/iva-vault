@@ -9,13 +9,11 @@ domain: work
 created: 2026-08-05
 source: daily/2026-08-05.md
 updated: 2026-08-06
-access_count: 1
-last_accessed: 2026-06-27
-relevance: 0.4
-tier: cold
+access_count: 2
+last_accessed: 2026-07-23
+relevance: 0.867
+tier: warm
 ---
-
-# Volmarr Wyrd (hrabanazviking)
 
 # Volmarr Wyrd (hrabanazviking)
 
@@ -53,3 +51,6 @@ tier: cold
 ## Related
 - [[cards/notes/astrology-engine-установлен]]
 - [[cards/notes/личная-система-памяти-владельца-rig-openmemory-lightrag]]
+## History
+
+- 2026-08-06: в теле был дубль H1 «Volmarr Wyrd (hrabanazviking)» — свёрнут в один заголовок.

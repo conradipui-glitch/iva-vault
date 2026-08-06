@@ -1,23 +1,21 @@
 ---
 type: note
 description: >-
-  Астрологический движок Volmarr (Swiss Ephemeris, 16 режимов) — установлен и проверен в /root/iva/repos/astrology-engine. Использовать для натальных карт, транзитов, синастрии, прогнозов; руны (12 из 24) — фича отложена.
-tags: [astrology, swiss-ephemeris, cli, installed, runes]
+  Установка и работа astrology-engine (hrabanazviking/astrology-engine): 12 рун по знакам Луны, «Руна дня». Расширение до 24 рун отложено.
+tags: [astrology, swiss-ephemeris, cli, installed, runes, python, hrabanazviking]
 status: active
 confidence: EXTRACTED
 created: 2026-08-05
 source: daily/2026-08-05.md
 domain: personal
 updated: 2026-08-06
-access_count: 1
-last_accessed: 2026-06-27
-relevance: 0.4
-tier: cold
+access_count: 2
+last_accessed: 2026-07-23
+relevance: 0.867
+tier: warm
 ---
 
 # Astrology Engine — установлен
-
-# Astrology Engine (hrabanazviking/astrology-engine)
 
 ## Что это
 Полноспектровый астрологический движок на Swiss Ephemeris (pyswisseph), без облака и API-ключей. Клонирован в `/root/iva/repos/astrology-engine`. Установлен: `pip install pyswisseph kerykeion geopy timezonefinder pytz`.
@@ -55,3 +53,6 @@ natal, transits, solar-return, lunar-return, progressions, synastry, composite, 
 
 ## Related
 - [[cards/contacts/volmarr-wyrd-hrabanazviking]]
+## History
+
+- 2026-08-06: в теле был дубль H1 (два разных заголовка: «Astrology Engine — установлен» и «Astrology Engine (hrabanazviking/astrology-engine)») — свёрнут в один канонический.
