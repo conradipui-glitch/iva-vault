@@ -11,6 +11,7 @@
 ## Active goals
 - Конвейер: AI-новости → черновики → Telegram.
 - X: ждать апелляции; не постить через API/куки.
+- Астро-автоматизация: 07:00 астропрогноз, 08:00 проверка окон (таймеры iva-astro/iva-money).
 
 ## Ops
 - Threads: только API; куки — резерв; реплаи: --reply-to (проверено 06.08).
@@ -22,4 +23,4 @@
 ## Pointers
 - Секреты: notes/ops-security-journal.md
 - Озвучка: [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
-- Latest day: 2026-08-06 · Index: vault/MOC.md
+- Latest day: 2026-08-07 · Index: vault/MOC.md

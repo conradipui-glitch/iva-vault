@@ -10,7 +10,7 @@ created: 2026-08-06
 source: daily/2026-08-06.md
 access_count: 3
 last_accessed: 2026-08-04
-relevance: 0.979
+relevance: 0.971
 tier: active
 updated: 2026-08-07
 ---

@@ -10,7 +10,7 @@ created: 2026-08-06
 source: daily/2026-08-06.md
 last_accessed: 2026-08-07
 tier: active
-relevance: 1.0
+relevance: 0.985
 ---
 
 # Политика кук Threads/X (резерв, без запросов)
