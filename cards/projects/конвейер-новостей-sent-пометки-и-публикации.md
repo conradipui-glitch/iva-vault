@@ -2,17 +2,17 @@
 type: project
 description: >-
   Конвейер AI-новостей → черновики → Telegram (канал Стринги кота Бориса) + Threads API; правило: ссылка на репу встраивается в ключевое слово поста
-tags: [news, automation, sent, threads, x, conveyor, telegram, publishing]
+tags: [news, automation, sent, threads, x, conveyor, telegram, publishing, pollinations]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-06
 source: daily/2026-08-06.md
-access_count: 3
-last_accessed: 2026-08-04
-relevance: 0.971
+access_count: 4
+last_accessed: 2026-08-09
+relevance: 1.0
 tier: active
-updated: 2026-08-07
+updated: 2026-08-09
 ---
 
 # Конвейер новостей: sent-пометки и публикации
@@ -50,3 +50,4 @@ updated: 2026-08-07
 
 ## Log
 - 2026-08-07: 06.08.2026: **Набор А** (RealReplicaBench, Prime Agent, Cloudflare OS) — Telegram все 3, Threads посты 1+2 (пост 2 вышел сразу, не через 30 мин — отклонение от тайминга). **Набор Б** (OpenAI безлимит, GPT-5.6 Sol, Kimi K3, CRM-агент, Argus) — Telegram все 5, Threads 3 в очереди на 00:11/00:41/01:11. **Новое правило публикации: ссылка на репу встраивается в ключевое слово** («[Вышел open-source](github.com/...)») — записано в EDITORIAL-STANDARD.md; для Threads ссылка просто один раз в тексте. 06.08 правился news-editor (редакционный стандарт). 16:48 выбран «Вариант а» для набора А.
+- 2026-08-09: - 2026-08-08: вечерняя публикация (журнал data/journal/2026-08-08-publish-seedance-kimi-gstack.md): Telegram 3 поста — Seedance 2.5 (бесплатные кредиты $5000/33 дня), Kimi K3 (самая крупная открытая модель, ссылка huggingface.co/moonshotai/Kimi-K3), gstack Гэрри Тана (127K★, ссылка github.com/garrytan/gstack); лимит канала превышен на 1 пост осознанно с согласия владельца. Threads 1 пост (Seedance, пост-польза) + комментарий с деталями через --reply-to. Обложки всех постов — бесплатный Pollinations (zimage 1280x720, seed 20260808/20260809/20260810), превью через iva-pollinations-preview. Черновики дня в data/news/captions/ (openai-hf-timeline, deepmind-weathernext, seedance-2.5-credits, kimi-k3-biggest-open, garrytan-gstack, pichai-quotes). Утром (22:14) ушли ещё 2 поста: «OpenAI случайно атаковала Hugging Face» (таймлайн инцидента) и «DeepMind WeatherNext — модель ураганов» (обложки тогда ещё gpt-image-2: 4,36 и 1,09 ₽). Решение 08.08: обложки постов — только бесплатный Pollinations API (ключ в n8n, credential «Pollinations API»), платную iva-image/gpt-image для обложек не использовать; gpt-image остаётся для дизайн/UI-макетов (см. CORE).
