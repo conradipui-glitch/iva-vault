@@ -1,8 +1,8 @@
 ---
 type: note
 description: >-
-  Конвейер работы с англоязычными YouTube-роликами на сервере: транскрипт, пересказ, пост и озвучка на русском (iva-yt-transcript/cost/dub, iva-src-check, iva-cast, iva-queue); цены, лимиты и принципы.
-tags: [youtube, ozvuchka, media, pipeline, pricing]
+  Конвейер работы с YouTube на сервере (транскрипт/пересказ/пост/озвучка iva-yt); с 09.08 добавлен план faceless YouTube-канала (скрипты iva-yt-voice/build, YouTube Data API v3) — владелец согласился, ждём cookies/OAuth
+tags: [youtube, ozvuchka, media, pipeline, pricing, faceless]
 status: active
 confidence: EXTRACTED
 domain: work
@@ -10,7 +10,8 @@ created: 2026-08-04
 source: daily/2026-08-04.md
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.925
+relevance: 0.91
+updated: 2026-08-10
 ---
 
 # Озвучка YouTube: конвейер iva-yt
@@ -33,3 +34,14 @@ relevance: 0.925
 
 ## Статус
 3 августа 2026 владельцу описан конвейер и план многоголосья; ссылка на ролик ещё не присылалась.
+
+## Log
+- 2026-08-10:
+  Faceless YouTube (12:49–12:59, 09.08.2026):
+  - Пост владельца: «барьера камеры больше нет»; работа = писать то, от чего не оторваться. У Ивы ~80% инфраструктуры: `iva-yt-dub.py` (TTS через routerai/fish-audio — аналог ElevenLabs) + whisper.
+  - План Ивы: скилл `faceless-youtube` (ниша → скрипт → озвучка → сборка → метаданные → очередь); скрипты `iva-yt-voice.py` (текст→голос, routerai) + `iva-yt-build.py` (ffmpeg-сборка); **YouTube Data API v3** — нужна авторизация канала (подключить один раз); тестовый ролик 2–3 мин.
+  - Подводные камни: 20–30 видео до результата (2–3 месяца еженедельного постинга); фасадность ffmpeg-сборки средняя (стоковые кадры) — для ниши «финансы для обычных людей» норм.
+  - Владелец: **«Круто. Я не знал, что ты так умеешь. Ну давай, попробуем.»** (12:59). Ива запросила cookies (сессия Google console: YouTube Data API v3, OAuth-клиент Desktop) + совет сменить пароль/завершить сессии. **Статус: ждём cookies/OAuth.**
+
+## Related
+- [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]

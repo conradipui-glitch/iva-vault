@@ -9,7 +9,7 @@ created: 2026-08-01
 source: christian-lempa-corpus-curated
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Ресурсный бюджет

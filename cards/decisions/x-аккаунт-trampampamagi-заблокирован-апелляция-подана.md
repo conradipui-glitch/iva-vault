@@ -10,7 +10,7 @@ created: 2026-08-06
 source: daily/2026-08-06.md
 last_accessed: 2026-08-07
 tier: active
-relevance: 0.97
+relevance: 0.955
 ---
 
 # X-аккаунт TrampampamAGI заблокирован (апелляция подана)

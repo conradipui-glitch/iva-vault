@@ -10,7 +10,7 @@ created: 2026-08-01
 source: daily/2026-08-01.md
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Постинг в X: рабочий способ и виральный формат

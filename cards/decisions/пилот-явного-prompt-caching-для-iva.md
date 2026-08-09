@@ -10,7 +10,7 @@ created: 2026-08-01
 source: daily/2026-08-01.md
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Пилот явного prompt caching для IVA
@@ -69,5 +69,5 @@ tool-loop к неизменному префиксу дописываются с
 заметно ниже 45% — это будет означать, что префикс действительно поехал.
 
 ## Related
-- [[[[cards/notes/curator-hamel-husain]]]]
-- [[[[cards/notes/curator-ai-security]]]]
+- [[cards/notes/curator-hamel-husain]]
+- [[cards/notes/curator-ai-security]]
