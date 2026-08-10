@@ -10,7 +10,7 @@ created: 2026-08-01
 source: maxim-ilyakhov-curated-corpus
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # Максим Ильяхов: редактура и ясность

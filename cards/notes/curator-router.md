@@ -10,7 +10,7 @@ created: 2026-08-01
 source: curated-public-source-profiles
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # Маршрутизатор кураторов
@@ -31,5 +31,6 @@ relevance: 0.91
 - Бренд и творческая подача: `curator-chris-do`.
 - B2B-позиционирование: `curator-april-dunford`.
 - Финансовые и рыночные риски: `curator-patrick-boyle`.
+- Threads и постинг с учётом X-алгоритма: `куратор-threads-формула-постинга-и-x-алгоритм`.
 
 Если две библиотеки противоречат, не выбирай молча: покажи конфликт и предложи проверку или решение владельца.

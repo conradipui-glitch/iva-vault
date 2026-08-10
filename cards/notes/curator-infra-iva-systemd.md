@@ -9,7 +9,7 @@ created: 2026-08-01
 source: current-vps-architecture
 last_accessed: 2026-08-04
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # IVA и Telegram-мост

@@ -10,7 +10,7 @@ created: 2026-08-10
 source: "daily/2026-08-10.mdtier: active"
 last_accessed: 2026-08-10
 tier: active
-relevance: 1.0
+relevance: 0.985
 ---
 
 # Google CLI / Antigravity: статус

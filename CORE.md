@@ -4,12 +4,11 @@
 - Антон (30.07.1984, Омск); TG toha_ro; Threads @toharo_pro; канал t.me/stringikotaborisa
 
 ## Preferences
-- Посты: человечно, суть в первом предложении; репо: ссылка в посте, суть в комменте.
-- Публикация: TG, Threads (API) — официальные пути.
-- Обложки: Pollinations (ключ в n8n); gpt-image — нет.
-- Обложки канала = вайб с котом Борисом (тёмная неоновая серверная, без текста/лого). (09.08)
-- Акции: условия проверять до публикации, цифры на веру не брать. (09.08)
-- Карточки: после write_card — tier: active до touch. (08.08)
+- Посты: человечно, суть в 1-м предлож.; репо: ссылка в посте, суть в комменте. (08.08)
+- Обложки: Pollinations; канал = кот Борис. (09.08)
+- Контент через codex, при лимитах — самой. (10.08)
+- Перед публикацией — post-review; «Котятки» = фишка Threads. (11.08)
+- Голосовые: транскрибация искажает — анализировать входящие. (11.08)
 
 ## Active goals
 - Конвейер: AI-новости → черновики → Telegram.
@@ -17,13 +16,11 @@
 - Астро: 07:00 прогноз, 08:00 окна (iva-astro/iva-money).
 
 ## Ops
-- Threads: только API; куки — резерв; реплаи: --reply-to.
-- X: постинг вручную (403 code 64).
-- Журнал: data/journal/; реакции: iva-buffer.
-- Факты: cards/contacts/антон-владелец.md.
-- publish-boris-post.sh: не хранит message_id — доработать или userbot. (09.08)
+- Threads: только API; куки — резерв; реплаи: --reply-to. X: вручную (403).
+- publish-boris-post.sh: не хранит message_id — доработать или userbot. (11.08)
+- Ответ API не разобран → НЕИЗВЕСТНО, проверять канал. (10.08)
 
 ## Pointers
-- Секреты: notes/ops-security-journal.md
-- Озвучка: [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
-- Latest day: 2026-08-09 · Index: vault/MOC.md
+- Секреты: notes/ops-security-journal.md ; Озвучка: [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
+- Астро-защита: [[cards/notes/астро-гороскоп-починка-и-защита-от-повтора]] ; Обложки: [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
+- Latest day: 2026-08-10 · Index: vault/MOC.md
