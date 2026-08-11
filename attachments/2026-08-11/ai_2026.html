@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стратегический продуктовый аудит и концепт AI-Компаньона 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #070B19;
+            color: #E2E8F0;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+            max-height: 480px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 430px;
+            }
+        }
+
+        .neon-border-cyan {
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.12);
+        }
+
+        .neon-border-magenta {
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.12);
+        }
+
+        .neon-border-purple {
+            border: 1px solid rgba(157, 0, 255, 0.3);
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.12);
+        }
+
+        .neon-border-yellow {
+            border: 1px solid rgba(255, 230, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 230, 0, 0.12);
+        }
+
+        .glass-card {
+            background: rgba(18, 26, 51, 0.78);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00F0FF 0%, #9D00FF 50%, #FF007F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070B19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00F0FF;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#070B19',
+                        navy_light: '#0F172A',
+                        slate_card: '#121A33',
+                        cyan: '#00F0FF',
+                        magenta: '#FF007F',
+                        yellow: '#FFE600',
+                        purple: '#9D00FF',
+                        emerald: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-magenta selection:text-white pb-24" x-data="{ activeTab: 'bundles' }">
+
+    <nav class="sticky top-0 z-50 bg-navy/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 rounded-full bg-cyan animate-pulse"></div>
+                <span class="text-xl font-black text-white tracking-wider">
+                    ESOTERIC<span class="text-cyan">PRODUCT</span><span class="text-magenta">2026</span>
+                </span>
+                <span class="hidden sm:inline-block text-xs px-2.5 py-0.5 rounded-full bg-purple/20 text-purple border border-purple/40 font-semibold">
+                    Product Audit & AI Architecture
+                </span>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5 md:gap-2 text-xs md:text-sm font-medium">
+                <button @click="activeTab = 'bundles'" :class="activeTab === 'bundles' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    3 Связки
+                </button>
+                <button @click="activeTab = 'xray'" :class="activeTab === 'xray' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    Рентген 10 игроков
+                </button>
+                <button @click="activeTab = 'matrix'" :class="activeTab === 'matrix' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    Матрица 15 гипотез
+                </button>
+                <button @click="activeTab = 'companion'" :class="activeTab === 'companion' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    AI-Компаньон 2026
+                </button>
+                <button @click="activeTab = 'validation'" :class="activeTab === 'validation' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    Smoke Test & Валидация
+                </button>
+                <button @click="activeTab = 'analytics'" :class="activeTab === 'analytics' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    Аналитика рынка
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-4 md:px-8 pt-10 pb-6">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="px-3 py-1 rounded-full bg-magenta/20 text-magenta border border-magenta/30 text-xs font-bold uppercase tracking-widest">
+                Стратегический продуктовый аудит
+            </span>
+            <span class="px-3 py-1 rounded-full bg-cyan/20 text-cyan border border-cyan/30 text-xs font-bold uppercase tracking-widest">
+                Август 2026
+            </span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
+            Продуктовый аудит и архитектура <br class="hidden md:inline">
+            персонального <span class="gradient-text">AI-Компаньона 2026</span>
+        </h1>
+        
+        <p class="text-sm md:text-base text-gray-300 max-w-4xl leading-relaxed font-light">
+            Полный синтез рыночной аналитики, глубокого рентген-анализа воронки 10 лидеров рынка, оценки 15 продуктовых гипотез, архитектуры RAG-ассистента нового типа и прототипа посадочной страницы для валидации спроса.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-10">
+
+        <!-- ================= TAB 1: 3 CORE BUNDLES ================= -->
+        <div x-show="activeTab === 'bundles'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-cyan">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-cyan">01.</span> ТРИ НАИБОЛЕЕ ПЕРСПЕКТИВНЫЕ СВЯЗКИ
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    На основе верификации кросс-авторских сигналов выделены 3 фундаментальные связки, имеющие доказанный спрос и готовность аудитории платить.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                    
+                    <div class="bg-navy_light p-5 rounded-xl border border-cyan/40 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded bg-cyan/20 text-cyan font-bold uppercase text-[10px]">Связка 1</span>
+                            <h3 class="text-base font-bold text-white mt-3 mb-2">HD 2027 / Gate 55 + Identity Transition</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <p><strong>Рынок:</strong> Переход 2026–2027 годов, мутация Ворот 55, Крест Спящего Феникса.</p>
+                                <p><strong>Боль аудитории:</strong> «Старые цели обесточены, бизнес по племенной схеме (Gate 37) ломается, апатия пугает».</p>
+                                <p><strong>Механизм решения:</strong> Персонализированный маршрут «Квантовой декондиции» и сонастройки с Gate 55.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-cyan font-semibold">
+                            Подтверждено: Nicole Leno, Karen Curry Parker, Witches & HD.
+                        </div>
+                    </div>
+
+                    <div class="bg-navy_light p-5 rounded-xl border border-yellow/40 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded bg-yellow/20 text-yellow font-bold uppercase text-[10px]">Связка 2</span>
+                            <h3 class="text-base font-bold text-white mt-3 mb-2">Human Design + Nervous System / Somatics</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <p><strong>Рынок:</strong> Соматическая декондиция, телесный отклик, регуляция нервной системы.</p>
+                                <p><strong>Боль аудитории:</strong> «Я всё делаю 'правильно', но тело болит, а мышление и аффирмации вызывают панику».</p>
+                                <p><strong>Механизм решения:</strong> Телесно-ориентированный трекинг реакций центров HD, сброс зажимов Ложного Я.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-yellow font-semibold">
+                            Подтверждено: Emma Dunwoody, SO In the Flow, Amy Babish.
+                        </div>
+                    </div>
+
+                    <div class="bg-navy_light p-5 rounded-xl border border-magenta/40 flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-1 rounded bg-magenta/20 text-magenta font-bold uppercase text-[10px]">Связка 3</span>
+                            <h3 class="text-base font-bold text-white mt-3 mb-2">AI + Human Design / Personal AI Companion</h3>
+                            <div class="space-y-2 text-gray-300">
+                                <p><strong>Рынок:</strong> AI-Spirit Crossover, динамический навигатор транзитов и космо-погоды.</p>
+                                <p><strong>Боль аудитории:</strong> «Мне нужен ответ В МОМЕНТЕ: почему меня накрыло сегодня и как принять решение сейчас?»</p>
+                                <p><strong>Механизм решения:</strong> Эмпатичный AI-компаньон, знающий бодиграф и текущие транзиты/Шумана без эго.</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-white/10 text-magenta font-semibold">
+                            Подтверждено: IT-сообщество, подкасты про новое лидерство.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB 2: COMPETITOR X-RAY ================= -->
+        <div x-show="activeTab === 'xray'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-purple">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-purple">02.</span> КОНКУРЕНТНЫЙ «РЕНТГЕН» (10 КЛЮЧЕВЫХ ИГРОКОВ)
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    Анализ воронок сильнейших игроков рынка. Главный вывод: у всех участников присутствует фундаментальная уязвимость — отсутствие инструмента персональной навигации в реальном времени.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-cyan text-sm">1. Nicole Leno (Unshakeable with HD)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Стать «Unshakeable Human» и построить устойчивый бизнес через HD.</p>
+                        <p><strong>Кому:</strong> Предпринимателям, выгоревшим экс-CEO и топ-менеджерам.</p>
+                        <p><strong>Free Hook:</strong> Подкаст, разбор транзитов, DM-кодовое слово PHOENIX.</p>
+                        <p><strong>Tripwire:</strong> Воркшоп «2027 Phoenix Shift» ($37–$47).</p>
+                        <p><strong>Subscription:</strong> HD Authority Lab ($29/месяц).</p>
+                        <p><strong>High-Ticket:</strong> Индивидуальное чтение ($500+) и программа Business by Design.</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Высокая зависимость от личности автора. Нет инструмента поддержки аудитории «между эфирами» в режиме 24/7.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-magenta text-sm">2. Emma Dunwoody (The HD Podcast)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Превратить сухую теорию HD в практическую трансформацию жизни.</p>
+                        <p><strong>Кому:</strong> Осознанным женщинам, коучам, экспертам.</p>
+                        <p><strong>Free Hook:</strong> Топовый подкаст (400+ выпусков), бесплатный гайд по типам.</p>
+                        <p><strong>Tripwire:</strong> Мини-курс по Квантовой Манифестации ($27).</p>
+                        <p><strong>Subscription:</strong> Human Design Experience ($49/месяц).</p>
+                        <p><strong>High-Ticket:</strong> Сертификация Transformational HD™ ($2,000+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Перегруженность теоретическим контентом. Клиентам тяжело применять знания в моменте стресса.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-yellow text-sm">3. Brian Scott (The Reality Revolution)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Управляемый квантовый прыжок на Наивысшую Временную Линию (Highest TL).</p>
+                        <p><strong>Кому:</strong> Массовой искательской аудитории, фанатам квантовой реальности.</p>
+                        <p><strong>Free Hook:</strong> 1000+ медитаций на YouTube, часовые подкасты.</p>
+                        <p><strong>Tripwire:</strong> Набор авторских медитаций для шишковидной железы ($19).</p>
+                        <p><strong>Subscription:</strong> Patreon ($10–$25/месяц).</p>
+                        <p><strong>High-Ticket:</strong> 3-дневный живой интенсив в Newark Airport Hilton ($300+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Абсолютное отсутствие персонализации. Одно аудио для 500,000 человек без учета карты.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple text-sm">4. Karen Curry Parker (Quantum Alignment)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Перевод HD на квантовый язык для раскрытия потенциала души.</p>
+                        <p><strong>Кому:</strong> Практикующим коучам, терапевтам, зрелой аудитории.</p>
+                        <p><strong>Free Hook:</strong> Книга «The Quantum Human» на Amazon, вебинары по 2027.</p>
+                        <p><strong>Tripwire:</strong> Кастомная карта Quantum Bodygraph + Отчет ($39).</p>
+                        <p><strong>Subscription:</strong> Quantum Alignment Membership ($47/месяц).</p>
+                        <p><strong>High-Ticket:</strong> Сертификация Quantum Practitioner ($3,000+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Устаревший архаичный UI/UX продуктов, отсутствуют мобильные веб-приложения.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-emerald text-sm">5. Fer Broca (Espiritualidad Aplicada)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Прикладная духовность и квантовый скачок через ритуалы.</p>
+                        <p><strong>Кому:</strong> Испаноязычной масс-маркет аудитории (Латам, Мексика, США).</p>
+                        <p><strong>Free Hook:</strong> Видео-разборы, бесплатные чек-листы по ритуалам.</p>
+                        <p><strong>Tripwire:</strong> Запись интенсива по ритуалам ($15–$25).</p>
+                        <p><strong>Subscription:</strong> Месячные медитации ($12/месяц).</p>
+                        <p><strong>High-Ticket:</strong> Массовые ивенты (напр. Ритуал 21 декабря в Чапультепеке).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Фокус на традиционной эзотерике; слабо развита персональная технологичная аналитика.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-300 text-sm">6. Quantum Rebirth / Quantum Grimoire</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Стабилизировать смену идентичности и заякорить квантовый переход.</p>
+                        <p><strong>Кому:</strong> Людям в состоянии апатии и «Identity Fatigue».</p>
+                        <p><strong>Free Hook:</strong> Вирусные видео «7 Signs You'll Have a Quantum Jump».</p>
+                        <p><strong>Tripwire:</strong> Бандл E-book + Интерактивный Quantum Grimoire ($29).</p>
+                        <p><strong>Subscription / High-Ticket:</strong> Отсутствуют.</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Одноразовая продажа (Zero LTV); нет мобильного сервиса и обратной связи.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-cyan text-sm">7. SO In the Flow (Сабина и Ольга)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Соединение ченнелинга и телесно-интуитивного проживания.</p>
+                        <p><strong>Кому:</strong> Русскоязычной IT-эмиграции, осознанным предпринимателям.</p>
+                        <p><strong>Free Hook:</strong> Подкасты-диалоги из Silicon Valley, открытые практики.</p>
+                        <p><strong>Tripwire:</strong> Доступ к записи медитативной практики ($20).</p>
+                        <p><strong>Subscription / High-Ticket:</strong> Закрытый клуб ($30/mo), Личные сессии ($300+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Отсутствие автоматизированного продуктового масштабирования.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple text-sm">8. Jovian Archive (Ра Уру Ху)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Первоисточник знаний о механике человека и циклах 2027.</p>
+                        <p><strong>Кому:</strong> Ортодоксальным аналитикам HD, студентам.</p>
+                        <p><strong>Free Hook:</strong> Архивные аудиолекции, базовые статьи.</p>
+                        <p><strong>Tripwire / High-Ticket:</strong> Лекции по 2027 ($35–$85), Обучение в IHDS ($1,500+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Сложнейший зашифрованный язык; полное отсутствие работы с психосоматикой.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-yellow text-sm">9. Human Design Space (СНГ SEO)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Быстрый и бесплатный расчет бодиграфа онлайн.</p>
+                        <p><strong>Кому:</strong> Массовой SEO-аудитории.</p>
+                        <p><strong>Free Hook / Tripwire:</strong> Бесплатный калькулятор, PDF-отчет ($10–$20).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Статичный PDF-продукт образца 2019 года; нет темы 2027 года, нет AI-диалога.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-magenta text-sm">10. Стандартные GPT-wrappers</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> «ИИ Таролог / HD аналитик в Telegram».</p>
+                        <p><strong>Кому:</strong> Любителям быстрых текстов по дате рождения.</p>
+                        <p><strong>Free Hook / Subscription:</strong> 3 ответа бесплатно, подписка $10/месяц.</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Отсутствие контекста (RAG); ИИ дает галлюцинации и поверхностные советы.</p>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB 3: HYPOTHESIS MATRIX ================= -->
+        <div x-show="activeTab === 'matrix'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-yellow">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">
+                    <span class="text-yellow">03.</span> ОЦЕНКА 15 ПРОДУКТОВЫХ ГИПОТЕЗ (TEST MATRIX)
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    Расчет Индекса Потенциала по формуле average(Спрос + Платёжеспособность + Конкуренция + MVP + Вирусность + Подписка).
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-300">
+                        <thead class="bg-navy_light text-cyan font-bold uppercase text-[10px]">
+                            <tr>
+                                <th class="p-2.5">№</th>
+                                <th class="p-2.5">Продуктовая гипотеза</th>
+                                <th class="p-2.5 text-center">Спрос</th>
+                                <th class="p-2.5 text-center">Платёж.</th>
+                                <th class="p-2.5 text-center">Конкур.</th>
+                                <th class="p-2.5 text-center">MVP</th>
+                                <th class="p-2.5 text-center">Вирусн.</th>
+                                <th class="p-2.5 text-center">Подписка</th>
+                                <th class="p-2.5 text-center">Индекс</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="bg-cyan/10 font-bold text-white">
+                                <td class="p-2.5">H1</td>
+                                <td class="p-2.5 text-cyan">Personal AI Companion (HD + Transits + Somatics)</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">10</td>
+                                <td class="p-2.5 text-center text-cyan text-sm">8.50</td>
+                            </tr>
+                            <tr class="bg-white/5 font-semibold text-white">
+                                <td class="p-2.5">H2</td>
+                                <td class="p-2.5">2026–2027 Transition Index (Калькулятор готовности)</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">6</td>
+                                <td class="p-2.5 text-center text-emerald text-sm">8.33</td>
+                            </tr>
+                            <tr class="bg-white/5 font-semibold text-white">
+                                <td class="p-2.5">H3</td>
+                                <td class="p-2.5">Live Schumann & Body Calibration Tracker</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center text-emerald text-sm">8.16</td>
+                            </tr>
+                            <tr class="hover:bg-white/5">
+                                <td class="p-2.5">H4</td>
+                                <td class="p-2.5">Timeline Match (AI Compatibility)</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">6</td>
+                                <td class="p-2.5 text-center font-bold">7.83</td>
+                            </tr>
+                            <tr class="hover:bg-white/5">
+                                <td class="p-2.5">H5</td>
+                                <td class="p-2.5">Somatic HD Deconditioning (Аудио под центры)</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">6</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center font-bold">7.50</td>
+                            </tr>
+                            <tr class="hover:bg-white/5">
+                                <td class="p-2.5">H6</td>
+                                <td class="p-2.5">Quantum Grimoire SaaS (Интерактивный дневник)</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center font-bold">7.33</td>
+                            </tr>
+                            <tr class="hover:bg-white/5">
+                                <td class="p-2.5">H7</td>
+                                <td class="p-2.5">Corporate Projector HD Audit (B2B)</td>
+                                <td class="p-2.5 text-center">5</td>
+                                <td class="p-2.5 text-center">10</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">4</td>
+                                <td class="p-2.5 text-center">5</td>
+                                <td class="p-2.5 text-center font-bold">6.83</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 text-gray-400">
+                                <td class="p-2.5">H8</td>
+                                <td class="p-2.5">Gate 55 Abundance Navigator</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">5</td>
+                                <td class="p-2.5 text-center">4</td>
+                                <td class="p-2.5 text-center">6.66</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 text-gray-400">
+                                <td class="p-2.5">H14</td>
+                                <td class="p-2.5">Статический PDF-отчет 2026 (Традиционный)</td>
+                                <td class="p-2.5 text-center">7</td>
+                                <td class="p-2.5 text-center">6</td>
+                                <td class="p-2.5 text-center">3</td>
+                                <td class="p-2.5 text-center">9</td>
+                                <td class="p-2.5 text-center">4</td>
+                                <td class="p-2.5 text-center">1</td>
+                                <td class="p-2.5 text-center text-red-400">5.00</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 text-gray-400">
+                                <td class="p-2.5">H15</td>
+                                <td class="p-2.5">Стандартный AI Таро-бот (Wrapper без RAG)</td>
+                                <td class="p-2.5 text-center">8</td>
+                                <td class="p-2.5 text-center">4</td>
+                                <td class="p-2.5 text-center">1</td>
+                                <td class="p-2.5 text-center">10</td>
+                                <td class="p-2.5 text-center">5</td>
+                                <td class="p-2.5 text-center">2</td>
+                                <td class="p-2.5 text-center text-red-400">5.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB 4: AI COMPANION CONCEPT ================= -->
+        <div x-show="activeTab === 'companion'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-cyan">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-cyan">04.</span> АРХИТЕКТУРА AI-КОМПАНЬОНА НОВОГО ТИПА
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    Создание ассистента, который говорит с человеком <strong>на языке его собственной системы смысла</strong>, учитывая Стратегию, Авторитет, транзиты и уровень частоты Шумана.
+                </p>
+
+                <!-- COMPARISON & ARCHITECTURE -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 text-xs">
+                    
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-3">
+                        <h3 class="text-sm font-bold text-magenta uppercase">Обычный GPT-Wrapper vs AI Companion 2026</h3>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-red-950/30 rounded border border-red-500/20">
+                                <span class="font-bold text-red-400">Обычный Таро/HD бот:</span>
+                                <p class="text-gray-300 mt-1">«Дает ментальные советы, игнорирует тип личности, генерирует разовые сухие описания, просит делать действия от ума».</p>
+                            </div>
+                            <div class="p-3 bg-cyan-950/30 rounded border border-cyan-500/20">
+                                <span class="font-bold text-cyan">Personal AI Companion 2026:</span>
+                                <p class="text-gray-200 mt-1">«Помнит бодиграф, учитывает текущий всплеск Шумана и транзит ворот, обращается к Авторитету и задает вопросы для сакрального отклика».</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-2">
+                        <h3 class="text-sm font-bold text-cyan uppercase">RAG + Context Схема</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="p-2 bg-navy rounded border border-white/5"><strong>1. User Context:</strong> HD BodyGraph, тип, стратегия, профиль, неопределенные центры.</li>
+                            <li class="p-2 bg-navy rounded border border-white/5"><strong>2. Dynamic Feeds:</strong> Транзиты ворот сегодня, графики Шумана, солнечные вспышки, соматический чек-ин.</li>
+                            <li class="p-2 bg-navy rounded border border-white/5"><strong>3. AI Engine:</strong> Gemini 2.5 Flash + Промпт-матрица языковой сонастройки.</li>
+                            <li class="p-2 bg-navy rounded border border-white/5"><strong>4. Resonant Generator:</strong> Диалог без эго под Стратегию пользователя.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- DIALOGUE SCENARIOS -->
+                <div class="p-5 bg-navy_light rounded-xl border border-cyan/30 text-xs space-y-4">
+                    <h3 class="text-sm font-bold text-white">Примеры взаимодействия «в моменте»</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-navy rounded-lg border border-white/5 space-y-2">
+                            <span class="font-bold text-yellow">Сценарий А: Пользователь-Генератор в тревоге</span>
+                            <p class="text-gray-400"><em>Пользователь:</em> «Я сижу на работе, меня колотит, ничего не хочу делать, кажется, я выгорел».</p>
+                            <p class="text-cyan"><em>AI-Компаньон 2026:</em> «У тебя неопределенный Эмоциональный центр, а прямо сейчас транзитное Солнце активирует Ворота 55, плюс зафиксирован пик частоты Шумана. Твое тело чувствует физическую калибровку. Вспомни, твой сакральный отклик сейчас говорит 'Да' текущей задаче? Откликнись: ты чувствуешь расширение в животе или сжатие?»</p>
+                        </div>
+
+                        <div class="p-4 bg-navy rounded-lg border border-white/5 space-y-2">
+                            <span class="font-bold text-purple">Сценарий Б: Пользователь-Проектор инициирует от ума</span>
+                            <p class="text-gray-400"><em>Пользователь:</em> «Хочу прямо сейчас разослать 50 писем клиентам, надо пробить стену».</p>
+                            <p class="text-cyan"><em>AI-Компаньон 2026:</em> «Как Проектор с Эмоциональным авторитетом, ты сейчас действуешь из давления Эго-центра. Транзит Ворот 37 провоцирует тебя 'заслужить место в племени'. Есть ли сейчас прямое приглашение, где признают твои направляющие навыки? Или ты пытаешься инициировать из страха быть незамеченным?»</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB 5: SMOKE TEST VALIDATION ================= -->
+        <div x-show="activeTab === 'validation'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-magenta">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-magenta">05.</span> ПЛАН БЫСТРОЙ ВАЛИДАЦИИ (SMOKE TEST ARTIFACT)
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    Проверка реального спроса без написания приложения. Создание единой посадочной страницы для замера конверсии и теста депозита $1.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                    
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-3">
+                        <h3 class="text-sm font-bold text-white">Структура посадочной страницы (Smoke Test)</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="p-2 bg-navy rounded"><strong>[ Header ]:</strong> «Ваш персональный AI-навигатор через квантовую мутацию 2026–2027 годов».</li>
+                            <li class="p-2 bg-navy rounded"><strong>[ Sub-headline ]:</strong> «Первый ассистент, который сопоставляет ваш бодиграф, физические симптомы и вспышки частоты Шумана в реальном времени».</li>
+                            <li class="p-2 bg-navy rounded"><strong>[ Demo Widget ]:</strong> «Введите дату рождения + текущее состояние тела $\rightarrow$ Получите экспресс-разбор транзитного давления прямо сейчас».</li>
+                            <li class="p-2 bg-navy rounded"><strong>[ CTA Variants ]:</strong> E-mail Waitlist или забронировать 1-й месяц AI-Компаньона за $1.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-3">
+                        <h3 class="text-sm font-bold text-emerald">Целевые метрики успеха</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-emerald-950/30 rounded border border-emerald-500/20">
+                                <span class="font-bold text-emerald text-sm">Waitlist Conversion > 20%</span>
+                                <p class="text-gray-300 mt-1">Процент посетителей лендинга, оставивших e-mail для участия в бета-тесте.</p>
+                            </div>
+                            <div class="p-3 bg-emerald-950/30 rounded border border-emerald-500/20">
+                                <span class="font-bold text-emerald text-sm">$1 Deposit Test > 3.5%</span>
+                                <p class="text-gray-300 mt-1">Процент пользователей, готовых внести символический депозит $1 для фиксации цены подписки $9.99/mo.</p>
+                            </div>
+                            <div class="p-3 bg-emerald-950/30 rounded border border-emerald-500/20">
+                                <span class="font-bold text-emerald text-sm">CAC < $1.20</span>
+                                <p class="text-gray-300 mt-1">Стоимость привлечения целевого лида из органо-вирусных роликов Reels/Shorts по ключевым словам PHOENIX / COMPANION.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB 6: MARKET ANALYTICS ================= -->
+        <div x-show="activeTab === 'analytics'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-purple">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-purple">06.</span> АНАЛИТИКА РЫНКА И ДИНАМИКА ТРЕНДОВ
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+                    <div>
+                        <h3 class="text-sm font-bold text-white mb-2">Объем информационного поля по кластерам (%)</h3>
+                        <div class="chart-container">
+                            <canvas id="clustersChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white mb-2">Скорость развития трендов (Trend Velocity 2021–2026)</h3>
+                        <div class="chart-container">
+                            <canvas id="velocityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-white mb-2">Карта JTBD потребностей аудитории (Plotly WebGL)</h3>
+                    <div class="bg-navy_light/50 p-2 rounded-xl border border-white/10">
+                        <div id="jtbdPlot" style="width: 100%; height: 420px;"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 md:px-8 mt-16 pt-6 border-t border-white/10 text-center text-xs text-gray-500 space-y-2">
+        <p>Стратегический продуктовый аудит и концепт AI-Компаньона 2026 • Итоговый сводный документ</p>
+        <p class="text-[10px] text-gray-600">Графики сгенерированы на Canvas и WebGL без SVG и Mermaid JS в соответствии с требованиями.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label, limit = 16) {
+            if (typeof label !== 'string') return label;
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + word).length > limit) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        Chart.defaults.color = '#94A3B8';
+        Chart.defaults.font.family = 'Inter, sans-serif';
+
+        const requiredTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            },
+            backgroundColor: 'rgba(7, 11, 25, 0.95)',
+            titleColor: '#00F0FF',
+            borderColor: 'rgba(0, 240, 255, 0.3)',
+            borderWidth: 1,
+            padding: 12
+        };
+
+        const rawClustersLabels = [
+            "Quantum (Jump/Shift)", 
+            "Human Design (BodyGraph)", 
+            "Solar & Schumann Resonance", 
+            "Matrix of Destiny", 
+            "Timeline Shift & 5D", 
+            "Traditional Astrology"
+        ];
+        const wrappedClustersLabels = rawClustersLabels.map(l => wrapLabel(l));
+
+        const ctxClusters = document.getElementById('clustersChart').getContext('2d');
+        new Chart(ctxClusters, {
+            type: 'doughnut',
+            data: {
+                labels: wrappedClustersLabels,
+                datasets: [{
+                    data: [35, 25, 15, 10, 10, 5],
+                    backgroundColor: [
+                        '#00F0FF',
+                        '#FF007F',
+                        '#FFE600',
+                        '#9D00FF',
+                        '#10B981',
+                        '#475569'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { color: '#E2E8F0', font: { size: 10 } } },
+                    tooltip: requiredTooltipConfig
+                },
+                cutout: '70%'
+            }
+        });
+
+        const rawVelocityLabels = ['2021 год', '2022 год', '2023 год', '2024 год', '2025 год', '2026 год (Прогноз)'];
+        const wrappedVelocityLabels = rawVelocityLabels.map(l => wrapLabel(l));
+
+        const ctxVelocity = document.getElementById('velocityChart').getContext('2d');
+        new Chart(ctxVelocity, {
+            type: 'line',
+            data: {
+                labels: wrappedVelocityLabels,
+                datasets: [
+                    {
+                        label: 'Шуман и Соматика Нервной Системы',
+                        data: [10, 15, 25, 40, 70, 100],
+                        borderColor: '#FFE600',
+                        backgroundColor: 'rgba(255, 230, 0, 0.08)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Квантовый сдвиг / Ворота 55',
+                        data: [20, 25, 30, 45, 65, 95],
+                        borderColor: '#00F0FF',
+                        borderWidth: 3,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Стандартный HD и Астрология',
+                        data: [60, 65, 70, 70, 65, 60],
+                        borderColor: '#9D00FF',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Hustle & Манифестация от Ума',
+                        data: [90, 85, 70, 50, 30, 15],
+                        borderColor: '#FF007F',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'top', labels: { color: '#E2E8F0', font: { size: 10 } } },
+                    tooltip: requiredTooltipConfig
+                },
+                scales: {
+                    x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                }
+            }
+        });
+
+        const plotlyData = [{
+            x: [90, 85, 95, 75, 40, 80, 60, 95],
+            y: [95, 90, 80, 85, 60, 70, 50, 85],
+            mode: 'markers+text',
+            type: 'scattergl',
+            marker: {
+                size: [42, 36, 26, 32, 18, 22, 16, 28],
+                color: ['#FF007F', '#FFE600', '#00F0FF', '#9D00FF', '#475569', '#10B981', '#64748B', '#00F0FF'],
+                opacity: 0.85,
+                line: { width: 1.5, color: '#ffffff' }
+            },
+            text: [
+                "Подготовка к 2027<br>(Мутация HD)", 
+                "Шуман/Солнце<br>Валидация", 
+                "Корпоративный HD<br>Переход на Ворота 55", 
+                "Разрыв связей<br>Timeline Split", 
+                "Поиск своего<br>сообщества", 
+                "Динамические<br>транзиты", 
+                "Снятие усталости<br>Identity Fatigue",
+                "AI Companion<br>по бодиграфу"
+            ],
+            textposition: 'top center',
+            textfont: { family: 'Inter', size: 10, color: '#E2E8F0' },
+            hoverinfo: 'text'
+        }];
+
+        const plotlyLayout = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { family: 'Inter', color: '#94A3B8' },
+            margin: { t: 30, b: 50, l: 50, r: 30 },
+            xaxis: { title: 'Коммерческий потенциал (%)', gridcolor: 'rgba(255,255,255,0.05)' },
+            yaxis: { title: 'Эмоциональная интенсивность (%)', gridcolor: 'rgba(255,255,255,0.05)' },
+            showlegend: false
+        };
+
+        Plotly.newPlot('jtbdPlot', plotlyData, plotlyLayout, { displayModeBar: false, responsive: true });
+    </script>
+</body>
+</html>

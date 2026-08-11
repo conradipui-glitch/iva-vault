@@ -1,6 +1,6 @@
 ---
 tier: active
-relevance: 1.0
+relevance: 0.985
 type: project
 description: >-
   Задача 13 (10.08.2026): сайт на GitHub Pages для публикации контента (TG/Threads/сайт). Владелец пишет правила/настройки; ждём их для настройки постинга.

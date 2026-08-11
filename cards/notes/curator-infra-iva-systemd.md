@@ -8,8 +8,8 @@ domain: knowledge
 created: 2026-08-01
 source: current-vps-architecture
 last_accessed: 2026-08-04
-tier: active
-relevance: 0.895
+tier: warm
+relevance: 0.88
 ---
 
 # IVA и Telegram-мост

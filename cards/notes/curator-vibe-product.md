@@ -9,8 +9,8 @@ domain: knowledge
 created: 2026-08-01
 source: roma-wright-neuroprosveshchenie-curated-corpus
 last_accessed: 2026-08-04
-tier: active
-relevance: 0.895
+tier: warm
+relevance: 0.88
 ---
 
 # Vibe coding: от боли к проверяемому MVP

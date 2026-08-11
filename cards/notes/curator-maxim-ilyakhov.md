@@ -9,8 +9,8 @@ domain: knowledge
 created: 2026-08-01
 source: maxim-ilyakhov-curated-corpus
 last_accessed: 2026-08-04
-tier: active
-relevance: 0.895
+tier: warm
+relevance: 0.88
 ---
 
 # Максим Ильяхов: редактура и ясность

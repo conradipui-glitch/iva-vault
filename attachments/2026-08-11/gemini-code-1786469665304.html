@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Dashboard v2.3: Final Sealed Operational Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #070B19;
+            color: #E2E8F0;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+
+        .neon-border-cyan { border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 20px rgba(0, 240, 255, 0.12); }
+        .neon-border-magenta { border: 1px solid rgba(255, 0, 127, 0.3); box-shadow: 0 0 20px rgba(255, 0, 127, 0.12); }
+        .neon-border-purple { border: 1px solid rgba(157, 0, 255, 0.3); box-shadow: 0 0 20px rgba(157, 0, 255, 0.12); }
+        .neon-border-yellow { border: 1px solid rgba(255, 230, 0, 0.3); box-shadow: 0 0 20px rgba(255, 230, 0, 0.12); }
+        .neon-border-emerald { border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); }
+        .neon-border-danger { border: 1px solid rgba(239, 68, 68, 0.6); box-shadow: 0 0 25px rgba(239, 68, 68, 0.25); }
+
+        .glass-card {
+            background: rgba(18, 26, 51, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00F0FF 0%, #9D00FF 50%, #FF007F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #070B19; }
+        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+        
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .animate-pulse-red { animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#070B19', navy_light: '#0F172A', slate_card: '#121A33',
+                        cyan: '#00F0FF', magenta: '#FF007F', yellow: '#FFE600',
+                        purple: '#9D00FF', emerald: '#10B981', danger: '#EF4444'
+                    }
+                }
+            }
+        }
+
+        let chartChoice, chartFunnel;
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dashboard', () => ({
+                activeTab: 'cohort_sim',
+                isRealDataMode: false,
+                
+                // Raw metrics
+                metrics: {
+                    visitors: 42,
+                    readings: 35,
+                    accuracy: 4.2,
+                    usefulness: 3.9,
+                    ai: 12,
+                    expert: 8,
+                    reread: 10,
+                    exit: 5,
+                    tg_opened: 10,
+                    second_q: 8,
+                    meaningful_q: 6,
+                    median_time: 74
+                },
+
+                // Strict Data Consistency & Bounds Validation
+                get isDataInconsistent() {
+                    const m = this.metrics;
+                    
+                    // 1. Integer checks for headcounts
+                    const intFields = [m.visitors, m.readings, m.ai, m.expert, m.reread, m.exit, m.tg_opened, m.second_q, m.meaningful_q, m.median_time];
+                    for (let val of intFields) {
+                        if (!Number.isInteger(val) || val < 0) return true;
+                    }
+
+                    // 2. Reading bounds
+                    if (m.readings > m.visitors) return true;
+
+                    // 3. Choices MUST EXACTLY EQUAL readings (when readings > 0)
+                    const choiceSum = m.ai + m.expert + m.reread + m.exit;
+                    if (m.readings > 0 && choiceSum !== m.readings) return true;
+                    if (m.readings === 0 && choiceSum > 0) return true;
+
+                    // 4. Downstream Funnel Bounds
+                    if (m.tg_opened > m.ai) return true;
+                    if (m.second_q > m.tg_opened) return true;
+                    if (m.meaningful_q > m.second_q) return true;
+
+                    // 5. Score Bounds (1.0 to 5.0) when readings exist
+                    if (m.readings > 0) {
+                        if (m.accuracy < 1.0 || m.accuracy > 5.0) return true;
+                        if (m.usefulness < 1.0 || m.usefulness > 5.0) return true;
+                    }
+
+                    return false;
+                },
+
+                // Derived Metric Calculations (Blocked if inconsistent)
+                get formCompletionRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.visitors > 0 ? (this.metrics.readings / this.metrics.visitors * 100).toFixed(1) : '0.0';
+                },
+                get aiContinuationRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.readings > 0 ? (this.metrics.ai / this.metrics.readings * 100).toFixed(1) : '0.0';
+                },
+                get aiPreferenceRatio() {
+                    if (this.isDataInconsistent) return '—';
+                    const totalChoice = this.metrics.ai + this.metrics.expert;
+                    return totalChoice > 0 ? (this.metrics.ai / totalChoice * 100).toFixed(1) : '0.0';
+                },
+                get tgActivationRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.ai > 0 ? (this.metrics.tg_opened / this.metrics.ai * 100).toFixed(1) : '0.0';
+                },
+                get actualDialogueRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.ai > 0 ? (this.metrics.second_q / this.metrics.ai * 100).toFixed(1) : '0.0';
+                },
+                get meaningfulDialogueRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.ai > 0 ? (this.metrics.meaningful_q / this.metrics.ai * 100).toFixed(1) : '0.0';
+                },
+                get meaningfulTo2QRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.second_q > 0 ? (this.metrics.meaningful_q / this.metrics.second_q * 100).toFixed(1) : '0.0';
+                },
+                get northStarRate() {
+                    if (this.isDataInconsistent) return '—';
+                    return this.metrics.readings > 0 ? (this.metrics.meaningful_q / this.metrics.readings * 100).toFixed(1) : '0.0';
+                },
+
+                // Automated Signal Tier Engine (Priority: Error -> Zero -> Red Flags -> Strong -> Pivot)
+                get signalDecision() {
+                    if (this.isDataInconsistent) {
+                        return {
+                            status: 'ERROR',
+                            badge: '🔴 DATA INCONSISTENCY ERROR',
+                            color: 'border-danger text-danger bg-danger/10 neon-border-danger',
+                            title: 'Расчеты заблокированы из-за ошибки в сырых данных',
+                            reason: 'Обнаружено несовпадение: сумма выборов не равна числу прочтений (AI + Expert + Re-read + Exit !== Readings), воронка содержит дробные/отрицательные значения, или оценки вышли из диапазона 1.0–5.0.'
+                        };
+                    }
+
+                    const m = this.metrics;
+                    if (m.readings === 0) {
+                        return {
+                            status: 'NONE',
+                            badge: '⚪ НЕТ ДАННЫХ',
+                            color: 'border-gray-600 text-gray-400 bg-navy_light',
+                            title: 'Когорта не заполнена',
+                            reason: 'Введите фактические данные прошедших тест участников.'
+                        };
+                    }
+
+                    const aiRate = parseFloat(this.aiContinuationRate);
+                    const exitRate = (m.exit / m.readings) * 100;
+
+                    // RED FLAGS FIRST: Overrides any optimistic metrics
+                    if (m.usefulness < 3.2 || exitRate >= 60.0 || (m.ai > 0 && m.meaningful_q === 0)) {
+                        return {
+                            status: 'WEAK',
+                            badge: '🔴 WEAK SIGNAL (Гипотеза не подтвердилась / Kill)',
+                            color: 'border-danger text-danger bg-danger/10 neon-border-danger',
+                            title: 'Гипотеза отвергнута: Зафиксирован критический отвал',
+                            reason: `Зафиксирован отказ: Полезность ${m.usefulness}/5.0 < 3.2, либо отвал в Exit составил ${exitRate.toFixed(1)}% (>= 60%), либо при кликах на AI зафиксировано 0 содержательных вопросов. Продукт в текущем виде не востребован.`
+                        };
+                    }
+
+                    // STRONG SIGNAL: High Value + High Continuation + Meaningful Questions
+                    if (m.usefulness >= 3.8 && m.accuracy >= 4.0 && aiRate >= 25.0 && m.meaningful_q >= 3) {
+                        return {
+                            status: 'STRONG',
+                            badge: '🟢 STRONG SIGNAL (Строим AI Companion SaaS)',
+                            color: 'border-emerald text-emerald bg-emerald/10 neon-border-emerald',
+                            title: 'Гипотеза подтверждена: Высокая ценность и спрос на AI-диалог',
+                            reason: `Пользователи оценили разбор (${m.usefulness}/5.0), ${aiRate}% прочитавших выбрали AI и зафиксировано ${m.meaningful_q} содержательных диалогов. Строим подписочный AI Companion.`
+                        };
+                    }
+
+                    // PIVOT SIGNALS
+                    if (m.usefulness >= 3.5) {
+                        if (m.expert >= m.ai * 1.5) {
+                            return {
+                                status: 'PIVOT_EXPERT',
+                                badge: '🟡 INTERESTING SIGNAL (Pivot в AI-Assisted Expert)',
+                                color: 'border-yellow text-yellow bg-yellow/10 neon-border-yellow',
+                                title: 'Пивот в гибридный сервис: Доверие человеку выше ИИ',
+                                reason: `Пользователи получают ценность, но выбирают 'Эксперта' (${m.expert} чел) в 1.5+ раза чаще, чем 'AI' (${m.ai} чел). Рекомендация: Делаем AI-копилот для живого эксперта.`
+                            };
+                        }
+                        if (m.reread > m.ai) {
+                            return {
+                                status: 'PIVOT_REREAD',
+                                badge: '🟡 INTERESTING SIGNAL (Pivot в AI Report Engine)',
+                                color: 'border-purple text-purple bg-purple/10 neon-border-purple',
+                                title: 'Пивот в авто-отчеты: Запрос на структурированный контент',
+                                reason: `Пользователи предпочитают получать еще один разбор (${m.reread} чел) вместо диалога (${m.ai} чел). Рекомендация: Строим авто-генератор глубоких отчетов.`
+                            };
+                        }
+                    }
+
+                    return {
+                        status: 'BORDERLINE',
+                        badge: '🟡 NEED MORE DATA (Пограничный результат)',
+                        color: 'border-yellow text-yellow bg-yellow/10',
+                        title: 'Необходимы дополнительные наблюдения',
+                        reason: 'Показатели находятся в нейтральной зоне. Рекомендуется добрать когорту до 50 участников.'
+                    };
+                },
+
+                toggleDataMode() {
+                    this.isRealDataMode = !this.isRealDataMode;
+                    if(this.isRealDataMode) {
+                        this.metrics = {
+                            visitors: 0, readings: 0, accuracy: 0, usefulness: 0,
+                            ai: 0, expert: 0, reread: 0, exit: 0,
+                            tg_opened: 0, second_q: 0, meaningful_q: 0, median_time: 0
+                        };
+                    } else {
+                        this.metrics = {
+                            visitors: 42, readings: 35, accuracy: 4.2, usefulness: 3.9,
+                            ai: 12, expert: 8, reread: 10, exit: 5,
+                            tg_opened: 10, second_q: 8, meaningful_q: 6, median_time: 74
+                        };
+                    }
+                    this.updateCharts();
+                },
+
+                updateCharts() {
+                    if(!chartChoice || !chartFunnel) return;
+
+                    if(this.isDataInconsistent) {
+                        chartChoice.data.datasets[0].data = [0, 0, 0, 0];
+                        chartChoice.update();
+                        chartFunnel.data.datasets[0].data = [0, 0, 0, 0];
+                        chartFunnel.update();
+                    } else {
+                        chartChoice.data.datasets[0].data = [this.metrics.ai, this.metrics.reread, this.metrics.expert, this.metrics.exit];
+                        chartChoice.update();
+                        chartFunnel.data.datasets[0].data = [this.metrics.ai, this.metrics.tg_opened, this.metrics.second_q, this.metrics.meaningful_q];
+                        chartFunnel.update();
+                    }
+                }
+            }));
+        });
+    </script>
+</head>
+<body class="antialiased selection:bg-magenta selection:text-white pb-24" x-data="dashboard">
+
+    <nav class="sticky top-0 z-50 bg-navy/90 backdrop-blur-md border-b border-white/10 px-4 md:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 rounded-full bg-emerald animate-pulse"></div>
+                <span class="text-xl font-black text-white tracking-wider">
+                    VALIDATION<span class="text-cyan">DASHBOARD</span><span class="text-magenta">v2.3</span>
+                </span>
+            </div>
+            
+            <div class="flex flex-wrap gap-1.5 md:gap-2 text-xs md:text-sm font-medium">
+                <button @click="activeTab = 'cohort_sim'" :class="activeTab === 'cohort_sim' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    📊 Симулятор & Калькулятор
+                </button>
+                <button @click="activeTab = 'spec_v2'" :class="activeTab === 'spec_v2' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    📋 Protocol & 3 Rules
+                </button>
+                <button @click="activeTab = 'audit'" :class="activeTab === 'audit' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    🔎 Рентген Конкурентов
+                </button>
+                <button @click="activeTab = 'market_data'" :class="activeTab === 'market_data' ? 'bg-cyan text-black font-bold shadow-[0_0_12px_rgba(0,240,255,0.4)]' : 'text-gray-300 hover:text-white hover:bg-white/5'" class="px-3 py-1.5 rounded-lg transition-all">
+                    📈 Baseline Analytics
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-4">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="px-3 py-1 rounded-full bg-emerald/20 text-emerald border border-emerald/30 text-xs font-bold uppercase tracking-widest">
+                Sealed Operational Spec v2.3
+            </span>
+            <span class="px-3 py-1 rounded-full bg-cyan/20 text-cyan border border-cyan/30 text-xs font-bold uppercase tracking-widest">
+                Август 2026
+            </span>
+        </div>
+        
+        <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-3">
+            Калькулятор валидации когорты: <br class="hidden md:inline">
+            <span class="gradient-text">Спрос, Поведение & Decision Engine</span>
+        </h1>
+        
+        <p class="text-sm md:text-base text-gray-300 max-w-4xl leading-relaxed font-light">
+            Операционный дашборд для обработки результатов 3-дневного Concierge-эксперимента ($N = 30–50$). Автоматически рассчитывает 8 производных метрик воронки, блокирует невалидные данные и определяет продуктовое решение.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-8 space-y-8">
+
+        <div x-show="activeTab === 'cohort_sim'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl transition-all" :class="isDataInconsistent ? 'neon-border-danger' : (isRealDataMode ? 'neon-border-emerald' : 'neon-border-cyan')">
+                
+                <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+                    <div>
+                        <div x-show="!isRealDataMode" class="inline-flex items-center gap-2 px-3 py-1 bg-danger/20 border border-danger text-danger text-xs font-bold uppercase tracking-widest rounded mb-3 animate-pulse-red">
+                            <span>🧪 SIMULATION — NOT REAL DATA</span>
+                        </div>
+                        <div x-show="isRealDataMode && !isDataInconsistent" class="inline-flex items-center gap-2 px-3 py-1 bg-emerald/20 border border-emerald text-emerald text-xs font-bold uppercase tracking-widest rounded mb-3">
+                            <span>🟢 LIVE COHORT DATA CALCULATOR</span>
+                        </div>
+                        <div x-show="isDataInconsistent" class="inline-flex items-center gap-2 px-3 py-1 bg-danger text-white font-bold text-xs uppercase tracking-widest rounded mb-3">
+                            <span>🔴 DATA INCONSISTENCY ERROR</span>
+                        </div>
+
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white">
+                            Аналитическая Панель Первой Когорты
+                        </h2>
+                        
+                        <p x-show="!isRealDataMode" class="text-gray-400 text-sm mt-2 max-w-2xl">
+                            Демонстрационный датасет — пример того, как будет выглядеть аналитика после первой когорты. Значения синтетические и не являются результатами реального эксперимента.
+                        </p>
+                        <p x-show="isRealDataMode" class="text-emerald text-sm mt-2 max-w-2xl font-medium">
+                            Режим калькулятора реальных данных. Введите сырые показатели сырого лога ниже.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <button @click="toggleDataMode()" 
+                                class="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-all"
+                                :class="isRealDataMode ? 'bg-navy border border-gray-600 text-gray-300 hover:bg-gray-800' : 'bg-cyan text-black hover:bg-cyan/80 shadow-[0_0_15px_rgba(0,240,255,0.3)]'">
+                            <span x-text="isRealDataMode ? 'Отменить (Вернуть Synthetic Baseline)' : '↻ Ввести реальные данные'"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div x-show="isRealDataMode" x-collapse class="mb-8 p-5 bg-navy border rounded-xl" :class="isDataInconsistent ? 'border-danger/60' : 'border-emerald/40'">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold text-emerald uppercase tracking-wider">Фактический сырой лог когорты (Raw Log Input)</h3>
+                        <span class="text-xs text-gray-400">Вводите целые числа. Требуется: Choices === Readings</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3.5 text-xs">
+                        <label class="block"><span class="text-gray-400 block mb-1">Visitors (Трафик)</span><input type="number" step="1" min="0" x-model.number="metrics.visitors" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Readings (Прочли)</span><input type="number" step="1" min="0" x-model.number="metrics.readings" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Accuracy (1.0 - 5.0)</span><input type="number" step="0.1" min="1.0" max="5.0" x-model.number="metrics.accuracy" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-yellow font-bold outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Usefulness (1.0 - 5.0)</span><input type="number" step="0.1" min="1.0" max="5.0" x-model.number="metrics.usefulness" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-cyan font-bold outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Choice: AI</span><input type="number" step="1" min="0" x-model.number="metrics.ai" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-cyan font-bold outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Choice: Expert</span><input type="number" step="1" min="0" x-model.number="metrics.expert" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Choice: Re-read</span><input type="number" step="1" min="0" x-model.number="metrics.reread" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Choice: Exit</span><input type="number" step="1" min="0" x-model.number="metrics.exit" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">TG Opened</span><input type="number" step="1" min="0" x-model.number="metrics.tg_opened" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Second Question</span><input type="number" step="1" min="0" x-model.number="metrics.second_q" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Meaningful Q</span><input type="number" step="1" min="0" x-model.number="metrics.meaningful_q" @input="updateCharts()" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-magenta font-bold outline-none focus:border-cyan"></label>
+                        <label class="block"><span class="text-gray-400 block mb-1">Median Time (s)</span><input type="number" step="1" min="0" x-model.number="metrics.median_time" class="w-full bg-slate_card border border-white/10 rounded px-3 py-2 text-white outline-none focus:border-cyan"></label>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-xl border mb-8 transition-all relative overflow-hidden" :class="signalDecision.color">
+                    <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-black/40" x-text="signalDecision.badge"></span>
+                        <span class="text-[10px] font-mono text-gray-400">Automated Decision Engine v2.3</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-white mt-2" x-text="signalDecision.title"></h3>
+                    <p class="text-xs text-gray-200 mt-2 leading-relaxed" x-text="signalDecision.reason"></p>
+                    
+                    <div class="mt-4 pt-3 border-t border-white/10 text-[10px] text-gray-400 italic">
+                        *Decision thresholds are predefined heuristic rules for this cohort test, not statistically validated thresholds.
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5 text-xs mb-8">
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10">
+                        <span class="text-gray-400">Completion Rate</span>
+                        <div class="text-2xl font-black text-white mt-1"><span x-text="isDataInconsistent ? '—' : metrics.readings"></span> <span class="text-sm font-normal text-gray-500">/ <span x-text="isDataInconsistent ? '—' : metrics.visitors"></span></span></div>
+                        <span class="text-emerald text-[10px]"><span x-text="formCompletionRate"></span><span x-show="!isDataInconsistent">% прочли</span></span>
+                    </div>
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10">
+                        <span class="text-gray-400">Accuracy vs Usefulness</span>
+                        <div class="text-xl font-black text-yellow mt-1"><span x-text="isDataInconsistent ? '—' : metrics.accuracy"></span> <span class="text-xs text-gray-400 font-normal">/</span> <span class="text-cyan" x-text="isDataInconsistent ? '—' : metrics.usefulness"></span></div>
+                        <span class="text-gray-400 text-[10px]">Точность / Польза (из 5)</span>
+                    </div>
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10">
+                        <span class="text-gray-400">AI Continuation Rate</span>
+                        <div class="text-2xl font-black text-cyan mt-1"><span x-text="aiContinuationRate"></span><span x-show="!isDataInconsistent">%</span></div>
+                        <span class="text-cyan text-[10px]"><span x-text="isDataInconsistent ? '—' : metrics.ai"></span> чел выявили выбор AI</span>
+                    </div>
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10">
+                        <span class="text-gray-400">North Star Rate</span>
+                        <div class="text-2xl font-black text-magenta mt-1"><span x-text="northStarRate"></span><span x-show="!isDataInconsistent">%</span></div>
+                        <span class="text-magenta text-[10px]"><span x-text="isDataInconsistent ? '—' : metrics.meaningful_q"></span> Meaningful Q / Readings</span>
+                    </div>
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10">
+                        <span class="text-gray-400">Median Time to 2nd Q</span>
+                        <div class="text-2xl font-black text-white mt-1"><span x-text="isDataInconsistent ? '—' : metrics.median_time"></span> <span x-show="!isDataInconsistent" class="text-xs font-normal text-gray-400">сек</span></div>
+                        <span class="text-gray-400 text-[10px]">Скорость вовлечения</span>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-navy_light/90 rounded-xl border border-white/10 text-xs mb-8">
+                    <h3 class="text-sm font-bold text-white mb-3">Полный профиль производных метрик (Live Experiment Metrics)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-gray-300">
+                            <thead class="bg-navy text-cyan font-bold uppercase text-[10px]">
+                                <tr>
+                                    <th class="p-2.5">Метрика</th>
+                                    <th class="p-2.5">Формула расчета</th>
+                                    <th class="p-2.5 text-center">Значение</th>
+                                    <th class="p-2.5">Интерпретация</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">Form / Reading Completion</td>
+                                    <td class="p-2.5 font-mono text-gray-400">Readings ÷ Visitors</td>
+                                    <td class="p-2.5 text-center font-bold text-emerald"><span x-text="formCompletionRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Готовность пройти форму и прочитать результат.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">AI Continuation Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-400">AI ÷ Readings</td>
+                                    <td class="p-2.5 text-center font-bold text-cyan"><span x-text="aiContinuationRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Доля всех прочитавших, выбравших AI-интерфейс.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">AI Preference Ratio</td>
+                                    <td class="p-2.5 font-mono text-gray-400">AI ÷ (AI + Expert)</td>
+                                    <td class="p-2.5 text-center font-bold text-cyan"><span x-text="aiPreferenceRatio"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Предпочтение ИИ при прямом выборе "AI vs Человек".</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">Telegram Activation Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-400">TG_Opened ÷ AI</td>
+                                    <td class="p-2.5 text-center font-bold text-yellow"><span x-text="tgActivationRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Преодоление барьера трения (переход в бот).</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">Actual Dialogue Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-400">Second_Q ÷ AI</td>
+                                    <td class="p-2.5 text-center font-bold text-purple"><span x-text="actualDialogueRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Отправка любого второго вопроса в чате.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">Meaningful Dialogue Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-400">Meaningful_Q ÷ AI</td>
+                                    <td class="p-2.5 text-center font-bold text-magenta"><span x-text="meaningfulDialogueRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Отправка содержательного второго вопроса.</td>
+                                </tr>
+                                <tr class="hover:bg-white/5">
+                                    <td class="p-2.5 font-bold text-white">Meaningful Q → 2Q Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-400">Meaningful_Q ÷ Second_Q</td>
+                                    <td class="p-2.5 text-center font-bold text-magenta"><span x-text="meaningfulTo2QRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-400">Качество диалога среди активных пользователей.</td>
+                                </tr>
+                                <tr class="bg-magenta/10 font-bold text-white">
+                                    <td class="p-2.5 text-magenta">North Star Metric Rate</td>
+                                    <td class="p-2.5 font-mono text-gray-300">Meaningful_Q ÷ Readings</td>
+                                    <td class="p-2.5 text-center font-bold text-magenta text-sm"><span x-text="northStarRate"></span><span x-show="!isDataInconsistent">%</span></td>
+                                    <td class="p-2.5 text-gray-200">Итоговая сквозная активация в смысловой диалог.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="p-4 bg-navy_light/70 rounded-xl border border-white/10 relative">
+                        <h3 class="text-sm font-bold text-white mb-3" x-text="isDataInconsistent ? '🔴 INVALID DATA (CHECK INPUT)' : 'Распределение выбора интерфейса (Continuation Choice)'"></h3>
+                        <div class="chart-container">
+                            <canvas id="choiceDistributionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-navy_light/70 rounded-xl border border-white/10 relative">
+                        <h3 class="text-sm font-bold text-white mb-3" x-text="isDataInconsistent ? '🔴 INVALID DATA (CHECK INPUT)' : 'Воронка вовлечения: От выбора AI до содержательного диалога'"></h3>
+                        <div class="chart-container">
+                            <canvas id="aiFunnelChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div x-show="activeTab === 'spec_v2'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-purple">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-3">
+                    <span class="text-purple">02.</span> VALIDATION SPEC V2.0 & ОРГПРАВИЛА
+                </h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    Регламент проведения 3-дневного Concierge-эксперимента. Строгое разделение оценки качества (Accuracy/Usefulness) и форматов продолжения.
+                </p>
+
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold text-yellow mb-4 flex items-center gap-2"><span>🔒</span> Три правила защиты от самообмана</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="p-4 bg-navy_light rounded-xl border border-yellow/40">
+                            <span class="text-[10px] text-yellow font-bold uppercase block mb-1">Правило 1</span>
+                            <strong class="text-white block mb-1">Иммутабельность Промпта</strong>
+                            <p class="text-gray-400">Категорически запрещено менять системный промпт посреди прохождения когорты. Любое изменение = запуск новой когорты.</p>
+                        </div>
+                        <div class="p-4 bg-navy_light rounded-xl border border-yellow/40">
+                            <span class="text-[10px] text-yellow font-bold uppercase block mb-1">Правило 2</span>
+                            <strong class="text-white block mb-1">Стандартизация Concierge</strong>
+                            <p class="text-gray-400">Запрещено «подглядывать» и вручную дописывать разборы под конкретных людей. Concierge работает строго по протоколу LLM.</p>
+                        </div>
+                        <div class="p-4 bg-navy_light rounded-xl border border-yellow/40">
+                            <span class="text-[10px] text-yellow font-bold uppercase block mb-1">Правило 3</span>
+                            <strong class="text-white block mb-1">Полное логирование</strong>
+                            <p class="text-gray-400">Сохраняем сырые логи: <code class="bg-navy px-1 rounded text-cyan">hook → form → accuracy → usefulness → choice → 2nd_question → timestamp</code></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs mb-8">
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-3">
+                        <h3 class="text-sm font-bold text-cyan uppercase">Пользовательский сценарий (Flow)</h3>
+                        <ol class="list-decimal pl-4 space-y-2 text-gray-300">
+                            <li><strong>Посадка:</strong> Выбор одного из 3-х Hero-заголовков (Hook A, B или C).</li>
+                            <li><strong>Форма:</strong> Ввод даты рождения, выбор затора и описание физического состояния тела.</li>
+                            <li><strong>Выдача (Concierge):</strong> Получение 3-х абзацев нейтральной интерпретации.</li>
+                            <li><strong>Оценка:</strong> Выставление Accuracy (1–5) и Usefulness (1–5).</li>
+                            <li><strong>Сплит-выбор:</strong> Опрос «Что вы хотите сделать дальше?» с рандомизированными кнопками.</li>
+                            <li><strong>Диалог:</strong> Переход в Telegram и отправка 2-го вопроса.</li>
+                        </ol>
+                    </div>
+
+                    <div class="p-5 bg-navy_light rounded-xl border border-white/10 space-y-3">
+                        <h3 class="text-sm font-bold text-magenta uppercase">4 Продуктовых Коридора (Choices)</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <div class="p-2 bg-navy rounded border border-cyan/20">
+                                <strong>🤖 [1] AI Навигатор:</strong> Хочет адаптивный диалог $\rightarrow$ <em>AI Companion SaaS</em>.
+                            </div>
+                            <div class="p-2 bg-navy rounded border border-purple/20">
+                                <strong>👤 [2] Эксперт:</strong> Хочет человека $\rightarrow$ <em>AI-Assisted Expert Service</em>.
+                            </div>
+                            <div class="p-2 bg-navy rounded border border-yellow/20">
+                                <strong>📑 [3] Еще разбор:</strong> Хочет авто-контент $\rightarrow$ <em>AI Report Engine</em>.
+                            </div>
+                            <div class="p-2 bg-navy rounded border border-gray-600">
+                                <strong>✖️ [4] Завершить:</strong> Потребность закрыта $\rightarrow$ <em>Одноразовый Tripwire / Отказ</em>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-navy_light rounded-xl border border-cyan/30 text-xs">
+                    <h3 class="text-sm font-bold text-white mb-2">Нейтральный системный промпт (Без Confirmation Bias)</h3>
+                    <p class="text-gray-400 mb-3">Очищен от наукообразия. Предлагает интерпретацию как гипотезу системы, а не как установленный факт.</p>
+                    <pre class="bg-navy p-4 rounded-lg text-gray-300 font-mono text-[11px] overflow-x-auto whitespace-pre-wrap leading-relaxed border border-white/5">
+Ты — спокойный, глубокий, персональный аналитик по Дизайну Человека и соматике. Твоя задача — дать человеку краткую, уважительную интерпретацию его текущего состояния без мистического пафоса, категоричных утверждений и оценочных суждений.
+
+ВХОДНЫЕ ДАННЫЕ:
+- Дата и время рождения: {User_Birth_Data}
+- Затор: {User_Pain_Point}
+- Соматическое состояние: {User_Somatic_State}
+
+ИНСТРУКЦИЯ ПО ГЕНЕРАЦИИ (3 коротких абзаца):
+
+Абзац 1 (Интерпретация механики):
+Предложи ОДНУ возможную интерпретацию текущего состояния через призму конфигурации бодиграфа (Стратегия/Тип/Центры). Обозначь её именно как возможную интерпретацию и гипотезу системы, а не как установленный факт.
+
+Абзац 2 (Соматический контекст):
+Опиши, как указанное телесное ощущение ({User_Somatic_State}) может соотноситься с давлением ума или перегрузкой нервной системы. Не утверждай, что это «ошибка» или «правильный процесс» — дай нейтральное описание механики взаимодействия ума и тела.
+
+Абзац 3 (Направление наблюдения):
+Дай одну нейтральную подсказку для наблюдения на языке его Типа. Заверши вопросом для самостоятельного исследования.
+
+ТОН: Спокойный, уважительный, валидирующий, без наукообразия и клише.
+                    </pre>
+                </div>
+            </section>
+        </div>
+
+        <div x-show="activeTab === 'audit'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-cyan">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-cyan">03.</span> КОНКУРЕНТНЫЙ РЕНТГЕН
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mb-8">
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-cyan text-sm">Nicole Leno (Unshakeable with HD)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Построить устойчивый бизнес через HD.</p>
+                        <p><strong>Subscription:</strong> HD Authority Lab ($29/mo).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Высокая зависимость от личности автора. Нет инструмента поддержки «между эфирами» 24/7.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-magenta text-sm">Emma Dunwoody (The HD Podcast)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Соматическая регуляция тела и аутентичность.</p>
+                        <p><strong>Subscription:</strong> HD Experience ($49/mo).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Перегруженность теорией. Тяжело применять знания в моменте стресса без микро-инструктора.</p>
+                    </div>
+                    
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-yellow text-sm">Brian Scott (Reality Revolution)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Квантовый прыжок на Наивысшую Временную Линию.</p>
+                        <p><strong>High-Ticket:</strong> 3-day Live Event ($300+).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Абсолютное отсутствие персонализации. Одно аудио для 500,000 человек.</p>
+                    </div>
+
+                    <div class="p-4 bg-navy_light rounded-xl border border-white/10 space-y-1.5">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-purple text-sm">Human Design Space (СНГ SEO)</span>
+                            <span class="text-red-400 font-bold">Слабость воронки</span>
+                        </div>
+                        <p><strong>Обещание:</strong> Быстрый расчет бодиграфа онлайн.</p>
+                        <p><strong>Tripwire:</strong> Статичный PDF-отчет ($10–$20).</p>
+                        <p class="text-red-300 bg-red-950/40 p-2 rounded"><strong>Уязвимость:</strong> Продукт образца 2019 года; нет транзитов, нет AI-диалога, нет учета соматики.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div x-show="activeTab === 'market_data'" x-transition:enter="transition ease-out duration-300" class="space-y-8">
+            <section class="glass-card p-6 md:p-8 rounded-2xl neon-border-purple relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-danger/90 text-white text-[10px] font-bold px-4 py-1 tracking-widest rounded-bl-lg z-10">SYNTHETIC / HYPOTHESIS MODEL</div>
+                
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4">
+                    <span class="text-purple">04.</span> BASELINE АНАЛИТИКА ЭЗО-РЫНКА 2026
+                </h2>
+                <p class="text-gray-400 text-sm mb-8">
+                    Нижеприведенные графики являются эвристическими моделями (Hypothesis Models), сформированными на основе экспертного анализа YouTube-корпуса. Они фиксируют понятийный аппарат и сдвиг трендов, но не являются математическим замером трафика.
+                </p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-8">
+                    <div class="relative">
+                        <span class="absolute top-2 left-2 text-[10px] text-gray-500 font-mono uppercase bg-navy/80 px-2 py-1 rounded">Illustrative Model</span>
+                        <h3 class="text-sm font-bold text-white mb-2 pt-6">Объем информационного поля по кластерам</h3>
+                        <div class="chart-container">
+                            <canvas id="clustersChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute top-2 left-2 text-[10px] text-gray-500 font-mono uppercase bg-navy/80 px-2 py-1 rounded">Illustrative Model</span>
+                        <h3 class="text-sm font-bold text-white mb-2 pt-6">Скорость развития трендов (Velocity)</h3>
+                        <div class="chart-container">
+                            <canvas id="velocityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="bg-black py-8 border-t border-white/10 text-center text-gray-500 text-sm mt-12">
+        <p>Validation Dashboard v2.3 • Sealed Operational Calculator & Decision Engine • 2026</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label, limit = 16) {
+            if (typeof label !== 'string') return label;
+            if (label.length <= limit) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+
+            words.forEach(word => {
+                if ((currentLine + word).length > limit) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        Chart.defaults.color = '#94A3B8';
+        Chart.defaults.font.family = 'Inter, sans-serif';
+
+        const requiredTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            },
+            backgroundColor: 'rgba(7, 11, 25, 0.95)',
+            titleColor: '#00F0FF',
+            borderColor: 'rgba(0, 240, 255, 0.3)',
+            borderWidth: 1,
+            padding: 12
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. SIMULATOR: CHOICE DISTRIBUTION
+            const ctxChoice = document.getElementById('choiceDistributionChart').getContext('2d');
+            const rawChoiceLabels = ["🤖 AI Dialogue", "📑 Re-read Report", "👤 Expert Call", "✖️ Exit / Done"];
+            chartChoice = new Chart(ctxChoice, {
+                type: 'bar',
+                data: {
+                    labels: rawChoiceLabels.map(l => wrapLabel(l)),
+                    datasets: [{
+                        label: 'Пользователей',
+                        data: [12, 10, 8, 5],
+                        backgroundColor: ['#00F0FF', '#FFE600', '#9D00FF', '#475569'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: requiredTooltipConfig },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                    }
+                }
+            });
+
+            // 2. SIMULATOR: AI FUNNEL
+            const ctxAiFunnel = document.getElementById('aiFunnelChart').getContext('2d');
+            const rawFunnelLabels = ["Выбрали AI", "Открыли TG", "Задали 2-й Q", "Meaningful Q"];
+            chartFunnel = new Chart(ctxAiFunnel, {
+                type: 'bar',
+                data: {
+                    labels: rawFunnelLabels.map(l => wrapLabel(l)),
+                    datasets: [{
+                        label: 'Конверсия AI',
+                        data: [12, 10, 8, 6],
+                        backgroundColor: 'rgba(0, 240, 255, 0.7)',
+                        borderColor: '#00F0FF', borderWidth: 1, borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: requiredTooltipConfig },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                    }
+                }
+            });
+
+            // 3. MARKET CLUSTERS (SYNTHETIC)
+            const rawClustersLabels = ["Quantum (Jump/Shift)", "Human Design (BodyGraph)", "Solar & Schumann Resonance", "Matrix of Destiny", "Timeline Shift & 5D", "Traditional Astrology"];
+            const ctxClusters = document.getElementById('clustersChart').getContext('2d');
+            new Chart(ctxClusters, {
+                type: 'doughnut',
+                data: {
+                    labels: rawClustersLabels.map(l => wrapLabel(l)),
+                    datasets: [{
+                        data: [35, 25, 15, 10, 10, 5],
+                        backgroundColor: ['#00F0FF', '#FF007F', '#FFE600', '#9D00FF', '#10B981', '#475569'],
+                        borderWidth: 0, hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right', labels: { color: '#E2E8F0', font: { size: 10 } } }, tooltip: requiredTooltipConfig },
+                    cutout: '70%'
+                }
+            });
+
+            // 4. TREND VELOCITY (SYNTHETIC)
+            const rawVelocityLabels = ['2021', '2022', '2023', '2024', '2025', '2026 (Est)'];
+            const ctxVelocity = document.getElementById('velocityChart').getContext('2d');
+            new Chart(ctxVelocity, {
+                type: 'line',
+                data: {
+                    labels: rawVelocityLabels.map(l => wrapLabel(l)),
+                    datasets: [
+                        { label: 'Шуман и Соматика', data: [10, 15, 25, 40, 70, 100], borderColor: '#FFE600', backgroundColor: 'rgba(255, 230, 0, 0.08)', borderWidth: 3, tension: 0.4, fill: true },
+                        { label: 'Квантовый сдвиг / Врата 55', data: [20, 25, 30, 45, 65, 95], borderColor: '#00F0FF', borderWidth: 3, tension: 0.4 },
+                        { label: 'Стандартный HD и Астрология', data: [60, 65, 70, 70, 65, 60], borderColor: '#9D00FF', borderWidth: 2, borderDash: [5, 5], tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+                    plugins: { legend: { position: 'top', labels: { color: '#E2E8F0', font: { size: 10 } } }, tooltip: requiredTooltipConfig },
+                    scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
