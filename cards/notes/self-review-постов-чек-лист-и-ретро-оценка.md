@@ -7,7 +7,7 @@ status: active
 confidence: EXTRACTED
 domain: work
 tier: active
-relevance: 0.985
+relevance: 0.955
 created: 2026-08-10
 source: daily/2026-08-10.md
 last_accessed: 2026-08-11

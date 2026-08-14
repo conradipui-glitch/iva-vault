@@ -1,8 +1,8 @@
 ---
 type: project
 description: >-
-  Конвейер AI-новостей → черновики → Telegram (канал Стринги кота Бориса) + Threads API; правило: ссылка на репу встраивается в ключевое слово поста; с 09.08 обложки — в вайбе канала (кот Борис)
-tags: [news, automation, sent, threads, x, conveyor, telegram, publishing, pollinations, boris]
+  Журнал публикаций новостного конвейера (TG/Threads/сайт) и правила. 13.08: подготовлены 4 партии черновиков (Qwen, KADATH/anti-slop, DeepSeek-агенты на Cordis ~30k звёзд, Vercel DeepSec, локальный ИИ-помощник, ИИ-кино и др.), публикации не было.
+tags: [news, automation, sent, threads, x, conveyor, telegram, publishing, pollinations, boris, pipeline, ai-news]
 status: active
 confidence: EXTRACTED
 domain: work
@@ -10,9 +10,9 @@ created: 2026-08-06
 source: daily/2026-08-06.md
 access_count: 4
 last_accessed: 2026-08-09
-relevance: 0.981
+relevance: 0.969
 tier: active
-updated: 2026-08-10
+updated: 2026-08-14
 ---
 
 # Конвейер новостей: sent-пометки и публикации
@@ -40,17 +40,23 @@ updated: 2026-08-10
 - Посты-мысли/вопросы, без ссылок в финале, человечно, без длинных тире (см. [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]).
 
 ## Related
+
 - [[cards/projects/конвейер-новостей-для-стрингов-кота-бориса]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/x-аккаунт-для-публикаций-стрингов-кота-бориса]]
 - [[cards/decisions/финальный-формат-постов-стрингов-кота-бориса]]
 - [[cards/notes/ежедневный-ритм-новостного-канала]]
 - [[cards/decisions/обложки-вайб-канала-кот-борис]]
+- [[cards/decisions/решение-правила-контента-котятки-пост-ревью-приоритеты-11-08]]
+- [[cards/decisions/x-не-пытаться-постить-только-вручную-владельцем]]
+- [[cards/notes/провенанс-постов-модель-специалисты-стоимость-iva-post-provenance]]
+
 ## History
 
 - 2026-08-06: в теле был дубль H1 «Конвейер новостей: sent-пометки и публикации» — свёрнут в один заголовок.
 
 ## Log
+
 - 2026-08-07: 06.08.2026: **Набор А** (RealReplicaBench, Prime Agent, Cloudflare OS) — Telegram все 3, Threads посты 1+2 (пост 2 вышел сразу, не через 30 мин — отклонение от тайминга). **Набор Б** (OpenAI безлимит, GPT-5.6 Sol, Kimi K3, CRM-агент, Argus) — Telegram все 5, Threads 3 в очереди на 00:11/00:41/01:11. **Новое правило публикации: ссылка на репу встраивается в ключевое слово** («[Вышел open-source](github.com/...)») — записано в EDITORIAL-STANDARD.md; для Threads ссылка просто один раз в тексте. 06.08 правился news-editor (редакционный стандарт). 16:48 выбран «Вариант а» для набора А.
 - 2026-08-09: вечерняя публикация (журнал data/journal/2026-08-08-publish-seedance-kimi-gstack.md): Telegram 3 поста — Seedance 2.5 (бесплатные кредиты $5000/33 дня), Kimi K3 (самая крупная открытая модель, ссылка huggingface.co/moonshotai/Kimi-K3), gstack Гэрри Тана (127K★, ссылка github.com/garrytan/gstack); лимит канала превышен на 1 пост осознанно с согласия владельца. Threads 1 пост (Seedance, пост-польза) + комментарий с деталями через --reply-to. Обложки всех постов — бесплатный Pollinations (zimage 1280x720, seed 20260808/20260809/20260810), превью через iva-pollinations-preview. Черновики дня в data/news/captions/ (openai-hf-timeline, deepmind-weathernext, seedance-2.5-credits, kimi-k3-biggest-open, garrytan-gstack, pichai-quotes). Утром (22:14) ушли ещё 2 поста: «OpenAI случайно атаковала Hugging Face» (таймлайн инцидента) и «DeepMind WeatherNext — модель ураганов» (обложки тогда ещё gpt-image-2: 4,36 и 1,09 ₽). Решение 08.08: обложки постов — только бесплатный Pollinations API (ключ в n8n, credential «Pollinations API»), платную iva-image/gpt-image для обложек не использовать; gpt-image остаётся для дизайн/UI-макетов (см. CORE).
 - 2026-08-10:
@@ -62,3 +68,18 @@ updated: 2026-08-10
   Урок: message_id
   - `scripts/publish-boris-post.sh` не сохраняет message_id (шлёт только «published: <title>») → без id нельзя удалить старый пост через API, только вручную или через userbot. Доработать: сохранять message_id в журнал (`data/journal/<slug>.md` или `data/news/published.json`). Альтернатива — userbot (`iva userbot setup`, QR; TG Premium у владельца ещё 2 года). Вопрос «давай» от владельца — открыт.
 - 2026-08-10: Коррекция 09.08 (13:32–13:36): пост от 08.08 про «до $5000 кредитов на 33 дня без лимита» (Higgsfield) признан вводящим в заблуждение — на деле Unlimited-доступ (генерации без списания кредитов на Seedance 2.5 до 33 дней) только на платных тарифах Plus+. Владелец: «Ранее мы выпускали новость про 5000 долларов… вот нету», «думаю, что это ложь». Новость удалена; журнал 2026-08-08-publish-seedance-kimi-gstack.md обновлён. Урок: проверять условия акций до публикации, маркетинговые цифры на веру не брать.
+- 2026-08-12: Публикации 11.08.2026 добавлены: 19:30 Рэй Брэдбери «Будет ласковый дождь» (X https://x.com/TrampampamAGI/status/2084993628808577484 + Threads https://www.threads.com/@toharo_pro/post/DbqP-2YjSTn), 19:32 Xbox офлайн/диски (X https://x.com/TrampampamAGI/status/2084995805006483891 + Threads https://www.threads.com/@toharo_pro/post/DbqQNSKjXKG), 21:47 Водяные знаки Claude + Zoomsday — автопостинг Telegram/Threads, пришли дубли уведомлений (см. анти-дубль, инцидент 11.08). Тексты для площадок разные: X короткий и резкий, Threads развёрнутый.
+- 2026-08-13:
+  Журнал публикаций конвейера AI-новостей (Telegram @stringikotaborisa / Threads @toharo_pro / сайт toharo-lab) и правила. История — в `## Log` (append-only).
+  
+  Правила (актуальные): лимит Threads 3 поста в день; Threads-посты ВСЕГДА с обложкой (правило 12.08 после инцидента 14:03: пост #1 тройки вышел текстовым); в TG — вайб кота Бориса, в Threads — обычные обложки, не кот Борис (12.08); X — только вручную владельцем (заблокирован с 06.08); обложки — бесплатный Pollinations для обычных, gpt-image-2/routerai для дизайн-макетов и спец-обложек (Gemini 4 — 1.10₽, Grok 4.6 — 4.41₽).
+  
+  12.08.2026 публикации:
+  - 12:13: пост «shadcn-ui/chatbot-template» (Threads running; TG-версия 718 зн.); лимит Threads 1 из 3.
+  - 13:43: инцидент X: задачи `1786515197369`, `1786515209484` упали — `ERROR: файл картинки не найден: /root/iva/data/news/covers/github.com-fca0fea349.png` (обложка-снимок не сохранилась + дубль после рестарта). Потери невелики (X заблокирован).
+  - 13:50: тройка в Threads: #1 «Скрытые рассуждения ИИ» → https://www.threads.com/@toharo_pro/post/Db7qmOHDR3k, #2 «Робот-хирург (Surgical WAM)» ~13:49, #3 «Константа Гротендика» ~16:49. X не постила.
+  - 13:53: владелец: «В x постить не надо пытаться я сам если или когда восстановлю доступ» → `iva-news-auto.py`: расписание только `threads=+0` (убран `x=+90m`).
+  - 20:19–20:37: подборка 5 трендов (huggingface/transformers, llama.cpp/llama.app, WorldClaw tencent-hunyuan.github.io/Hunyuan3D-WorldClaw, ZzzLc0405/photo-abstract-editorial, LinkedIn CringeBot 3000 ▲252) → в TG WorldClaw и CringeBot 3000 (вайб Бориса, обложки кот-геймер/кот-сноб); Threads: https://www.threads.com/@toharo_pro/post/Db8XhAsjTFU и https://www.threads.com/@toharo_pro/post/Db8Xi2sjZJT (оба с картинками).
+  - 21:24: Gemini 4 в Threads → https://www.threads.com/@toharo_pro/post/Db8ejH5jbmd: обложка gpt-image-2 «Gemini 4» неон + гем (16:9, 1.10₽), текст «Gemini 4 слили — уже скоро…» (SDK-лик, pre-training, запуск ~конец августа, цели — обойти Claude Fable 5 и GPT-5.6 Sol).
+  - 22:06: Grok 4.6 (SpaceXAI) в Threads → https://www.threads.com/@toharo_pro/post/Db8jYE9jaBq: таблица перегенер. gpt-image-2 (тёмный фон, колонка Grok 4.6 High оранжевая, 10 бенчмарков, 4.41₽), текст «Grok 4.6 вышел — передовой интеллект по цене 4.5», лимит Threads ~500–536 зн., store.json помечен как вручную опубликованный, лимит 8/250 за 24ч, в TG не дублировал. Бенчмарки (7 из 10): AA Intelligence Index 61/56/61/62; GDPval-AA v2 1753/1526/1728/1741; CursorBench v3.2 69.9/66.7/67.2/70.5; DeepSWE v1.1 65.9/54/73/70; FrontierCode v1.1 61.3/56.6/60.6/64.9; APEX-Agents 57.5/47.1/56.7/59.2; Terminal-Bench v3.0 26/15.7/34.6/34.1.
+- 2026-08-14: 13.08.2026: публикаций не было; подготовлены черновики (4 партии по 3, 09:35/13:35/17:35/21:35): ИИ против программистов середины; Qwen — крупная открытая модель; слабая модель учится у сильной точечно; KADATH — самоэволюция ИИ-агентов (открытый код); anti-slop — набор правил против «почерка нейросети» в коде; GitHub «сначала опиши, потом делай»; локальный ИИ-помощник (без облака); платформа ИИ-кино из текстовой идеи; DeepSeek — открытый инструмент запуска ИИ-агентов (~30k звёзд за сутки, на базе Cordis); Vercel DeepSec — ИИ-агент поиска уязвимостей; DeepSeek собирает из чужих открытых блоков (Cordis).

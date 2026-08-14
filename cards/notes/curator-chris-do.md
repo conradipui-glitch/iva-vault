@@ -10,7 +10,7 @@ created: 2026-08-01
 source: chris-do-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.88
+relevance: 0.85
 ---
 
 # Chris Do: бренд и ценностная подача
