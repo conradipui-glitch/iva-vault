@@ -1,6 +1,6 @@
 ---
 tier: active
-relevance: 0.955
+relevance: 0.94
 type: project
 description: >-
   Задача 13 (10.08): сайт на GitHub Pages для публикации контента. 12.08: живые адреса — https://conradipui-glitch.github.io/toharo-lab/, репо github.com/conradipui-glitch/toharo-lab, пример поста /blog/shest-modeley-odna-zadacha/.
