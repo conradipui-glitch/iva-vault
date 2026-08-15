@@ -22,3 +22,7 @@ Thumbs.db
 # Note: schema.json is intentionally tracked (the schema IS the source of truth).
 # A local-only override may live in schema.local.json:
 schema.local.json
+
+# unfinished atomic writes (temp files of an interrupted writer)
+*.tmp
+*.tmp-*

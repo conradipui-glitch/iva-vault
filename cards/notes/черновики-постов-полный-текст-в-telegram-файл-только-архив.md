@@ -7,7 +7,7 @@ status: active
 confidence: EXTRACTED
 created: 2026-08-10
 tier: active
-relevance: 0.94
+relevance: 0.925
 source: daily/2026-08-10.md
 domain: knowledge
 last_accessed: 2026-08-11

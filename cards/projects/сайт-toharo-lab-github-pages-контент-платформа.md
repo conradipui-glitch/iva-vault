@@ -1,9 +1,9 @@
 ---
 tier: active
-relevance: 0.94
+relevance: 0.925
 type: project
 description: >-
-  Задача 13 (10.08): сайт на GitHub Pages для публикации контента. 12.08: живые адреса — https://conradipui-glitch.github.io/toharo-lab/, репо github.com/conradipui-glitch/toharo-lab, пример поста /blog/shest-modeley-odna-zadacha/.
+  Задача 13 (10.08): сайт на GitHub Pages для публикации контента. 14.08: задеплоен функционал статей (обсудить в ТГ, поделиться, оглавление от 3 разделов, читать дальше, RSS), кнопка шапки — «Следить в ТГ»; статья-разоблачение Claude AI Ultimate; бенчмарк-статьи на сайте — гипотеза владельца.
 tags: [toharo-lab, github-pages, website, content-platform, pending]
 status: active
 confidence: EXTRACTED
@@ -11,7 +11,7 @@ domain: work
 created: 2026-08-10
 source: daily/2026-08-10.md
 last_accessed: 2026-08-11
-updated: 2026-08-13
+updated: 2026-08-15
 ---
 
 # сайт-toharo-lab-github-pages-контент-платформа
@@ -49,3 +49,10 @@ updated: 2026-08-13
   Адреса (12.08.2026, 15:07): живой сайт https://conradipui-glitch.github.io/toharo-lab/; репозиторий https://github.com/conradipui-glitch/toharo-lab; пример поста https://conradipui-glitch.github.io/toharo-lab/blog/shest-modeley-odna-zadacha/.
   
   Связи: 11.08 опубликован первый интерактивный пост «Шесть моделей, одна задача, ноль иллюзий» (см. [[cards/notes/toharo-lab-деплой-и-обложки-интерактив-16-9-actions]]) — деплой падает при обложке не-16:9, обложки через gpt-image-2/routerai (см. [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]).
+- 2026-08-15:
+  14.08.2026:
+  - Задеплоен функционал статей: «Обсудить в Telegram» + «Поделиться» (TG/X/VK/WhatsApp) + «Скопировать ссылку» в конце статьи; оглавление из h2/h3 (транслит-якоря, от 3 разделов); «Читать дальше» до 3 связанных (рубрика → теги → свежие); RSS feed.xml в head и футере. Коммит 8c5bd3d, HTTP 200.
+  - Кнопка шапки заменена на «Следить в ТГ» → канал Бориса; контакт toha_ro остался в футере (верх = подписка на канал, низ = контакт).
+  - Опубликована статья-разоблачение «Claude AI Ultimate» (https://conradipui-glitch.github.io/toharo-lab/blog/claude-ai-ultimate-scam/), написана через Gemini 3.7 Flash (Antigravity CLI).
+  - Владелец предложил (13:27) делать на сайте бенчмарк-сравнения моделей (Gemini 3.7 Flash и др.) — гипотеза, не реализовано.
+  - Предложено: пост Бориса про бложик + закреп (pinChatMessage) — ожидает ок владельца (текст и ссылка /blog/ vs /).

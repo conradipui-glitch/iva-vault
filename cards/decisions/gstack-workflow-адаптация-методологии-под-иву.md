@@ -10,8 +10,8 @@ created: 2026-08-08
 source: daily/2026-08-08.md
 access_count: 1
 last_accessed: 2026-08-08
-relevance: 0.895
-tier: active
+relevance: 0.88
+tier: warm
 ---
 
 # gstack-workflow — адаптация методологии под Иву

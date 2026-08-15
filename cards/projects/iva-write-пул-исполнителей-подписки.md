@@ -1,7 +1,7 @@
 ---
 type: project
 description: >-
-  Пул моделей по подпискам (iva-write.py) с приоритетом доступности. 13.08: модель каждого поста логируется в data/posts.jsonl (поле model) + write-pool-usage.jsonl; скрипт iva-post-provenance.py дописывает после публикации platform/url/model/perspectives/cost.
+  Пул моделей по подпискам (iva-write.py) с приоритетом доступности. 13.08: модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl; iva-post-provenance.py дописывает platform/url/model/perspectives/cost. 14.08: Antigravity CLI (Gemini 3.7 Flash) использован как исполнитель для статьи разоблачения.
 tags: [codex, antigravity, content-pipeline, iva-write, pool, models, subscriptions, pipeline, provenance]
 status: active
 confidence: EXTRACTED
@@ -10,8 +10,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-11
 tier: active
-relevance: 0.94
-updated: 2026-08-14
+relevance: 0.925
+updated: 2026-08-15
 ---
 
 # iva-write-пул-исполнителей-подписки
@@ -47,3 +47,4 @@ updated: 2026-08-14
 ## Log
 
 - 2026-08-14: 13.08.2026 (разбор в ходе дня): схема постинга — 1 модель по подписке, при недоступности следующая по приоритету (3-я и т.д.). Журналы: `write-pool-usage.jsonl` (пул), `data/posts.jsonl` с полем `model` (заполнялось редко, перспективы не писались). Добавлен `scripts/iva-post-provenance.py`: после каждой публикации дописывает запись (platform, url, model, perspectives, writer, cost); записаны 4 поста от 12.08.
+- 2026-08-15: 14.08.2026: Antigravity CLI (Gemini 3.7 Flash) использован как исполнитель — через него переписана статья-разоблачение Claude AI Ultimate на сайт (deploy success). Подтверждено: пул исполнителей включает не только iva-write.py, но и Antigravity CLI как рабочий инструмент.

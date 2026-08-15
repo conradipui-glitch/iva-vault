@@ -1,19 +1,18 @@
 ---
 type: note
 description: >-
-  Notch (usenotch.ai) — «автономный AI-маркетолог» для Meta Ads + TikTok: агент читает цифры, делает креативы, запускает через официальный Meta API; $299/мес, 50k+ реклам, ROAS 3.8×. 13.08 сделаны черновики поста (Борис + Threads), публикация ждёт ок владельца.
-tags: [ai-ads, agents, meta-ads, ecommerce, trend]
-status: active
+  Notch (usenotch.ai) — «автономный AI-маркетолог» для Meta Ads + TikTok: агент читает цифры, делает креативы, запускает через официальный Meta API; $299/мес, 50k+ реклам, ROAS 3.8×. Исключён владельцем из контентного поля 15.08: дорогой, неинтересно, списать со счётов. Черновики НЕ публиковать.
+tags: [ai-ads, agents, meta-ads, ecommerce, trend, archived]
+status: archived
 confidence: EXTRACTED
 domain: work
 created: 2026-08-13
 source: daily/2026-08-13.md
-updated: 2026-08-14
+updated: 2026-08-15
 last_accessed: 2026-08-14
 tier: active
-relevance: 0.985
+relevance: 0.97
 ---
-
 # Notch — автономный AI-маркетолог (Meta Ads)
 
 Notch (usenotch.ai) — «автономный AI-маркетолог» для платной рекламы Meta Ads + TikTok. Seed-стадия, Burlingame CA, $4.5M (Wing, Patron, Samsung, Balaji); сооснователи Aman Jain и Vinay Jain — бывшие Twitter/Facebook/Instagram/WhatsApp (рекламные продукты).
@@ -24,6 +23,8 @@ Notch (usenotch.ai) — «автономный AI-маркетолог» для 
 
 Нюансы: метрики самоотчётные («best of self-reported»); «90 дней до 100% рекламы через Notch» — маркетинговое обещание. Для нашего конвейера (новости, не e-commerce) — не инструмент, но тренд «агенты-исполнители в рекламе» значимый. Источник: usenotch.ai + LinkedIn (13.08.2026).
 
+Решение владельца от 15.08.2026: Notch исключён из контентного поля — «дорогой, неинтересно, убрать, списать со счётов». Черновики поста (data/news/captions/2026-08-13-notch-boris.txt и 2026-08-13-notch-threads.txt) НЕ публиковать. Задача 21 удалена из tasks.
+
 ## Log
 
 - 2026-08-14: 13.08.2026 по просьбе владельца («заметку и черновики поста», msg 14:34) подготовлены два черновика: версия кота Бориса для Telegram-канала и обычная для Threads; отправлены отчётом, НЕ публиковались — ждут ок владельца. Тренд «агенты-исполнители в рекламе» — значимый сигнал, для нашего новостного конвейера инструмент не подходит (e-commerce/DTC-сегмент).
@@ -31,3 +32,7 @@ Notch (usenotch.ai) — «автономный AI-маркетолог» для 
 ## Related
 
 - [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
+
+## History
+
+- 2026-08-13: Notch (usenotch.ai) — «автономный AI-маркетолог» для платной рекламы Meta Ads + TikTok. Seed-стадия, Burlingame CA, $4.5M (Wing, Patron, Samsung, Balaji).
