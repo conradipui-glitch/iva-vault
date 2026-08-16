@@ -10,7 +10,7 @@ created: 2026-08-01
 source: andrej-karpathy-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.82
+relevance: 0.805
 ---
 
 # Andrej Karpathy: инженерия LLM

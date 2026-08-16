@@ -1,8 +1,8 @@
 ---
 type: note
 description: >-
-  Конвейер работы с YouTube на сервере (транскрипт/пересказ/пост/озвучка iva-yt); с 09.08 добавлен план faceless YouTube-канала (скрипты iva-yt-voice/build, YouTube Data API v3) — владелец согласился, ждём cookies/OAuth
-tags: [youtube, ozvuchka, media, pipeline, pricing, faceless]
+  Озвучка видео через iva-yt-dub: fish-движок рабочий, minimax/qwen пробы 16.08.2026
+tags: [youtube, ozvuchka, media, pipeline, pricing, faceless, озвучка, iva-yt-dub, tts, routerai]
 status: active
 confidence: EXTRACTED
 domain: work
@@ -10,8 +10,8 @@ created: 2026-08-04
 source: daily/2026-08-04.md
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.82
-updated: 2026-08-10
+relevance: 0.805
+updated: 2026-08-16
 ---
 
 # Озвучка YouTube: конвейер iva-yt
@@ -35,13 +35,30 @@ updated: 2026-08-10
 ## Статус
 3 августа 2026 владельцу описан конвейер и план многоголосья; ссылка на ролик ещё не присылалась.
 
+## Related
+
+- [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
+- [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
+
 ## Log
+
 - 2026-08-10:
   Faceless YouTube (12:49–12:59, 09.08.2026):
   - Пост владельца: «барьера камеры больше нет»; работа = писать то, от чего не оторваться. У Ивы ~80% инфраструктуры: `iva-yt-dub.py` (TTS через routerai/fish-audio — аналог ElevenLabs) + whisper.
   - План Ивы: скилл `faceless-youtube` (ниша → скрипт → озвучка → сборка → метаданные → очередь); скрипты `iva-yt-voice.py` (текст→голос, routerai) + `iva-yt-build.py` (ffmpeg-сборка); **YouTube Data API v3** — нужна авторизация канала (подключить один раз); тестовый ролик 2–3 мин.
   - Подводные камни: 20–30 видео до результата (2–3 месяца еженедельного постинга); фасадность ffmpeg-сборки средняя (стоковые кадры) — для ниши «финансы для обычных людей» норм.
   - Владелец: **«Круто. Я не знал, что ты так умеешь. Ну давай, попробуем.»** (12:59). Ива запросила cookies (сессия Google console: YouTube Data API v3, OAuth-клиент Desktop) + совет сменить пароль/завершить сессии. **Статус: ждём cookies/OAuth.**
-
-## Related
-- [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
+- 2026-08-16:
+  Опыт дубляжа ролика из Threads (Сидэнс 2.5, 30с, 16.08.2026):
+  - `iva-yt-dub` отдаёт mkv; Telegram в предпросмотре показывает mkv квадратом (не читает DAR/SAR), хотя файл 1276×720. Решение: собирать mp4 (-c:v copy -c:a aac -movflags +faststart), тогда Telegram видит 1276×720.
+  - Русскую дорожку помечать default (-disposition:a:1 default, у оригинала -disposition:a:0 0), иначе плеер берёт оригинал. Патч внесён в mux() скрипта (бэкап в /root/.config).
+  - Резервная модель озвучки — minimax/speech-2.8-turbo (~3.3₽ за 30с против 0.8₽ fish). Задаётся в data/media/config.json → audio_model (потом вернуть fish). Голоса minimax — свои ID: male-qn-badao (проверен), male-qn-jingying, female-chengshu, audiobook_female_1 и др. (список: iva-media voices). У minimax НЕТ голоса alloy.
+  - После смены модели конфиг вернуть на fish (дешёвые дубляжи), бэкап config в /root/.config.
+- 2026-08-16:
+  Проба 16.08.2026 (ролик «Сидэнс 2.5», 30с):
+  
+  - **qwen/qwen-audio-3.0-tts-plus** (и flash, и microsoft/mai-voice-2*, x-ai/grok-voice-tts-1.0) — на routerai сейчас возвращают HTTP 503 «Provider returned 400» на любой голос. Проблема на стороне провайдера, не голосов. Проверено тестовыми запросами 22:00 +06.
+  - **minimax/speech-2.8-turbo работает** (единственный из проверенных), принимает все мужские голоса: male-qn-badao, male-qn-daxuesheng, presenter_male, Friendly_Person, Determined_Man, Deep_Voice_Man (все OK, ~20-70KB mp3 на тест).
+  - **Итог владельца: остаёмся на fish-audio/s2.1-pro** (версия без артефактов; «отлично получилось»). minimax спотыкался на одном слове (разбил на 2 части) — артефакт синтеза, не перевода.
+  - Конфиг возвращён на fish-audio/s2.1-pro после всех проб.
+  - mp4-рецепт для Telegram: ffmpeg с -disposition:a:0 default, language=ru, faststart, video_track_timescale 90000 (иначе квадрат).

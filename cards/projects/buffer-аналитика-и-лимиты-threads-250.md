@@ -10,7 +10,7 @@ created: 2026-08-15
 source: daily/2026-08-15.md
 last_accessed: 2026-08-16
 tier: active
-relevance: 1.0
+relevance: 0.985
 ---
 
 # buffer-аналитика-и-лимиты-threads-250
