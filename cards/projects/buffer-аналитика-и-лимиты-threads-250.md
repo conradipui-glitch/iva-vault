@@ -1,16 +1,18 @@
 ---
 type: project
 description: >-
-  14.08.2026 подключён Buffer API для аналитики (iva-buffer stats): 10 постов за 14 дней, суммарное вовлечение 0,70%, медиана Threads 6,25%; лимит Buffer 250/мес — это его собственная квота, не лимит Threads; прямые посты через Threads API в счётчик не попадают.
-tags: [buffer, analytics, threads, api, engagement]
+  Buffer API для аналитики Threads: вовлечение, крючки; автоотчёт по статистике на 10:00 с 16.08.2026; лимит 250 — квота Buffer, не Threads.
+tags: [buffer, analytics, threads, api, engagement, morning-report]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-15
 source: daily/2026-08-15.md
-last_accessed: 2026-08-16
+last_accessed: 2026-08-17
 tier: active
 relevance: 0.985
+updated: 2026-08-17
+access_count: 1
 ---
 
 # buffer-аналитика-и-лимиты-threads-250
@@ -24,3 +26,9 @@ relevance: 0.985
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/notes/a-b-тест-обращения-котятки-в-threads-постах]]
 - [[cards/notes/self-review-постов-чек-лист-и-ретро-оценка]]
+- [[cards/projects/_index]]
+- [[cards/projects/buffer-аналитика-и-лимиты-threads-250]]
+
+## Log
+
+- 2026-08-17: 16.08.2026 заведён регулярный автоотчёт по статистике Threads на 10:00 (таймер + задача в списке): каждое утро Ива собирает цифры Buffer (`iva-buffer stats`) и присылает сводку — просмотры, отклики, вовлечение, лучшие крючки. Настроен по просьбе владельца в этот день; первый отчёт выдан 16.08.

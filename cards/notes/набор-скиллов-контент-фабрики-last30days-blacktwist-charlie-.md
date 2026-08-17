@@ -1,6 +1,6 @@
 ---
 tier: active
-relevance: 0.91
+relevance: 0.895
 type: note
 description: >-
   Сборка набора контент-скиллов (10.08.2026): last30days + 7 blacktwist + 6 charlie947 + x-algo-skill = 16 шт. без ключей, скопированы в data/custom/agent/skills/, ждут пересборки+рестарт.

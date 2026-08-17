@@ -1,20 +1,26 @@
 ---
 tier: active
-relevance: 0.91
+relevance: 0.985
 type: project
 description: >-
-  Задача 13 (10.08): сайт на GitHub Pages для публикации контента. 14.08: задеплоен функционал статей (обсудить в ТГ, поделиться, оглавление от 3 разделов, читать дальше, RSS), кнопка шапки — «Следить в ТГ»; статья-разоблачение Claude AI Ultimate; бенчмарк-статьи на сайте — гипотеза владельца.
-tags: [toharo-lab, github-pages, website, content-platform, pending]
+  Публичная контент-платформа toharo-lab на GitHub Pages: 17.08 опубликована статья dsh-vision-router, анонсирована в TG и Threads; сайт-обложка обновлена.
+tags: [toharo-lab, github-pages, website, content-platform, pending, article, vision-router, publishing, covers]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-10
 source: daily/2026-08-10.md
-last_accessed: 2026-08-11
-updated: 2026-08-15
+last_accessed: 2026-08-17
+updated: 2026-08-18
+access_count: 1
 ---
-
 # сайт-toharo-lab-github-pages-контент-платформа
+
+toharo-lab — публичный статический сайт на GitHub Pages для публикации материалов об ИИ.
+
+17.08.2026 по команде владельца опубликована статья «dsh-vision-router» о плагине зрения для агентов; страница и обложка после сборки доступны на сайте. Анонсы статьи вышли в Telegram-канале Бориса и Threads.
+
+В тот же день для уже опубликованной статьи «Генерация обложек нейросетью: почему размер приходится чинить руками» одобрена и заменена более осмысленная сайт-обложка в кремово-лаймовом стиле. Изображение приведено к 1600×900 без искажений; после сборки страница доступна.
 
 ## Сайт toharo-lab на GitHub Pages (задача 13)
 
@@ -32,6 +38,9 @@ updated: 2026-08-15
 
 - [[cards/notes/toharo-lab-деплой-и-обложки-интерактив-16-9-actions]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
+- [[cards/projects/_index]]
+- [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
+- [[cards/decisions/стили-обложек-по-площадкам-разделение-tg-сайт-threads]]
 
 ## Log
 
@@ -56,3 +65,8 @@ updated: 2026-08-15
   - Опубликована статья-разоблачение «Claude AI Ultimate» (https://conradipui-glitch.github.io/toharo-lab/blog/claude-ai-ultimate-scam/), написана через Gemini 3.7 Flash (Antigravity CLI).
   - Владелец предложил (13:27) делать на сайте бенчмарк-сравнения моделей (Gemini 3.7 Flash и др.) — гипотеза, не реализовано.
   - Предложено: пост Бориса про бложик + закреп (pinChatMessage) — ожидает ок владельца (текст и ссылка /blog/ vs /).
+- 2026-08-17: 16.08.2026 подготовлен черновик статьи «dsh-vision-router» для сайта toharo-lab: обзор плагина зрения для агентов (архитектура «зрение по вызову», 11 инструментов: OCR, поиск кнопки, попиксельное сравнение UI, обводка в SVG; цикл «собрал → сравнил → исправил» с финальным расхождением 2,54%; слой устойчивости v1.4.1; сравнение с vision-sidecar и oh-dsh; рынок dsh-market, 800+ плагинов). Факты — только из README/CHANGELOG репозиториев, ссылки на первоисточники стоят, ~8 минут чтения. Статус: ждёт ОК владельца (обложка и статья), после — пуш на сайт (сборка + деплой GitHub Pages) и анонс в TG/Threads.
+
+## History
+
+- 2026-08-16: Черновик статьи dsh-vision-router ожидал одобрения владельца перед публикацией.

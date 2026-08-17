@@ -10,7 +10,7 @@ created: 2026-08-01
 source: simon-willison-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.805
+relevance: 0.79
 ---
 
 # Simon Willison: инструменты и coding agents
