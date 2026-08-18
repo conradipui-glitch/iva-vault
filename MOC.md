@@ -7,4 +7,4 @@
 - [[MOC/MOC-ops]] — карточек: 1
 - [[MOC/MOC-personal]] — карточек: 23
 - [[MOC/MOC-social]] — карточек: 2
-- [[MOC/MOC-work]] — карточек: 56
+- [[MOC/MOC-work]] — карточек: 59

@@ -10,7 +10,7 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-12
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # Добавление модели Solar Pro 4 в веб-панель

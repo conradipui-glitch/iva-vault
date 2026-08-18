@@ -6,8 +6,8 @@ tags: [post-review, self-review, content-pipeline, quality, checklist]
 status: active
 confidence: EXTRACTED
 domain: work
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 created: 2026-08-10
 source: daily/2026-08-10.md
 last_accessed: 2026-08-11

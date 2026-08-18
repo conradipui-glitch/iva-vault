@@ -10,7 +10,7 @@ created: 2026-08-01
 source: roma-wright-neuroprosveshchenie-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.79
+relevance: 0.775
 ---
 
 # Vibe coding: от боли к проверяемому MVP

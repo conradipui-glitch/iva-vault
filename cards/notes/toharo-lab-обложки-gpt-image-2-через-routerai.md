@@ -9,8 +9,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 domain: knowledge
 last_accessed: 2026-08-11
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # toharo-lab обложки: GPT Image 2 через routerai
