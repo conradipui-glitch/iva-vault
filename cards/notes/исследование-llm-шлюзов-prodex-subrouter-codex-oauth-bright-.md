@@ -10,7 +10,7 @@ created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
 tier: active
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Исследование LLM-шлюзов: Prodex, SubRouter, codex-oauth, Bright Data
@@ -29,6 +29,5 @@ relevance: 0.925
 
 ## Related
 
-- [[cards/notes/_index|Knowledge]]
 - [[cards/decisions/пилот-явного-prompt-caching-для-iva]]
 - [[cards/projects/iva-write-пул-исполнителей-подписки]]

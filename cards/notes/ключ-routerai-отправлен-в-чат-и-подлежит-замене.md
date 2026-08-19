@@ -10,7 +10,7 @@ created: 2026-08-18
 source: daily/2026-08-18.md
 last_accessed: 2026-08-18
 tier: active
-relevance: 0.985
+relevance: 0.97
 ---
 
 # Ключ RouterAI отправлен в чат и подлежит замене
@@ -21,7 +21,6 @@ relevance: 0.985
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
 - [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
 - [[cards/notes/curator-ai-security]]

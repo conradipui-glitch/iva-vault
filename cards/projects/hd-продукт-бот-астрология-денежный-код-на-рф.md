@@ -9,8 +9,8 @@ domain: work
 created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-12
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # HD-продукт бот-астрология-денежный-код-на-РФ

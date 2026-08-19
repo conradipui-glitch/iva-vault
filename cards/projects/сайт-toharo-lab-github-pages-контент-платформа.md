@@ -1,6 +1,6 @@
 ---
 tier: active
-relevance: 0.97
+relevance: 0.955
 type: project
 description: >-
   Публичная контент-платформа toharo-lab на GitHub Pages: 17.08 опубликована статья dsh-vision-router, анонсирована в TG и Threads; сайт-обложка обновлена.
@@ -38,7 +38,6 @@ toharo-lab — публичный статический сайт на GitHub Pa
 
 - [[cards/notes/toharo-lab-деплой-и-обложки-интерактив-16-9-actions]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
-- [[cards/projects/_index]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/стили-обложек-по-площадкам-разделение-tg-сайт-threads]]
 

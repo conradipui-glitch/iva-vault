@@ -11,7 +11,7 @@ source: daily/2026-08-16.md
 updated: 2026-08-17
 last_accessed: 2026-08-17
 tier: active
-relevance: 0.97
+relevance: 0.955
 ---
 # Стили обложек по площадкам: разделение TG/сайт/Threads
 
@@ -39,7 +39,6 @@ relevance: 0.97
 
 - [[cards/decisions/обложки-вайб-канала-кот-борис]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
-- [[cards/decisions/_index]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 
 ## Log

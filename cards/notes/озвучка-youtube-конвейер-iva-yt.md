@@ -10,7 +10,7 @@ created: 2026-08-04
 source: daily/2026-08-04.md
 last_accessed: 2026-08-14
 tier: active
-relevance: 0.925
+relevance: 0.91
 updated: 2026-08-18
 access_count: 1
 ---
@@ -45,7 +45,6 @@ access_count: 1
 
 - [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
 - [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
-- [[cards/notes/_index]]
 - [[cards/notes/астро-гороскоп-починка-и-защита-от-повтора]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
 

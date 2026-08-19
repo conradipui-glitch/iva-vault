@@ -10,7 +10,7 @@ created: 2026-08-17
 source: daily/2026-08-17.md
 last_accessed: 2026-08-18
 tier: active
-relevance: 0.985
+relevance: 0.97
 ---
 
 # Ответы на комментарии: humanizer и точный reply-to
@@ -25,7 +25,6 @@ relevance: 0.985
 
 ## Related
 
-- [[cards/decisions/_index]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/решение-правила-контента-котятки-пост-ревью-приоритеты-11-08]]
 - [[cards/notes/self-review-постов-чек-лист-и-ретро-оценка]]

@@ -10,7 +10,7 @@ created: 2026-08-10
 source: daily/2026-08-10.md
 updated: 2026-08-10
 tier: "warm"
-relevance: 0.88
+relevance: 0.865
 last_accessed: 2026-08-11
 ---
 
@@ -38,7 +38,6 @@ last_accessed: 2026-08-11
 - Если владелец захочет «перспективу» для контента или куратора — сначала предложить nuwa-подход, согласовать цену (token-расход) и только потом запускать.
 
 ## Related
-- [[cards/notes/использование-кураторов-при-создании-контента]]
 - [[cards/notes/langchain-social-media-agent-полный-агент-не-для-нас-но-идеи]]
 - [[cards/notes/x-use-репозиторий-браузерная-автоматизация-x-не-для-нас.md]]
 - [[cards/notes/langchain-social-media-agent-полный-агент-не-для-нас-но-идеи.md]]

@@ -10,7 +10,7 @@ created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
 tier: active
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Внедрение harness-примитивов
@@ -25,7 +25,3 @@ relevance: 0.925
 Применять для крупных/долгих задач; для простых — не нужно (урок Agentless: сложность должна соответствовать задаче).
 
 Связанные репозитории: github.com/anthropics/cwc-long-running-agents (641⭐, Apache-2.0, демо-набор примитивов), github.com/MoonshotAI/kimi-code (6.4k⭐, CLI-агент, субагенты plan/explore/coder), github.com/MoonshotAI/Kimi-K3 (8.4k⭐, модель 2.8T MoE, 1M контекст; локально нужен кластер H100/H20 — только API).
-
-## Related
-
-- [[cards/notes/harness-primitives-внедрение]]

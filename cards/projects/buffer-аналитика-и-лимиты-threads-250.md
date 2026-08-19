@@ -10,7 +10,7 @@ created: 2026-08-15
 source: daily/2026-08-15.md
 last_accessed: 2026-08-17
 tier: active
-relevance: 0.97
+relevance: 0.955
 updated: 2026-08-17
 access_count: 1
 ---
@@ -26,7 +26,6 @@ access_count: 1
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/notes/a-b-тест-обращения-котятки-в-threads-постах]]
 - [[cards/notes/self-review-постов-чек-лист-и-ретро-оценка]]
-- [[cards/projects/_index]]
 - [[cards/projects/buffer-аналитика-и-лимиты-threads-250]]
 
 ## Log

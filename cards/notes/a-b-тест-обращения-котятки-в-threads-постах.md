@@ -8,7 +8,7 @@ confidence: EXTRACTED
 domain: work
 created: 2026-08-10
 tier: "warm"
-relevance: 0.88
+relevance: 0.865
 source: daily/2026-08-10.md
 last_accessed: 2026-08-11
 updated: 2026-08-13
