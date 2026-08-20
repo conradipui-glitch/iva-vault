@@ -10,7 +10,7 @@ created: 2026-08-13
 source: daily/2026-08-13.md
 last_accessed: 2026-08-14
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # Deepgram nova-3 — транскрибация голосовых

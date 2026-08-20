@@ -1,6 +1,6 @@
 ---
 tier: active
-relevance: 0.955
+relevance: 0.94
 type: project
 description: >-
   Публичная контент-платформа toharo-lab на GitHub Pages: 17.08 опубликована статья dsh-vision-router, анонсирована в TG и Threads; сайт-обложка обновлена.
