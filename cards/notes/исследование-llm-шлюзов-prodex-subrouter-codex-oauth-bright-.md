@@ -9,8 +9,8 @@ domain: knowledge
 created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Исследование LLM-шлюзов: Prodex, SubRouter, codex-oauth, Bright Data
