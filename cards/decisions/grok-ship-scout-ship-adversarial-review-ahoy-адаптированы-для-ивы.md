@@ -9,7 +9,7 @@ created: "2026-08-22"
 source: "daily/2026-08-22.md"
 last_accessed: "2026-08-22"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 ---
 
 # grok-ship: scout/ship + adversarial review + ahoy адаптированы для Ивы

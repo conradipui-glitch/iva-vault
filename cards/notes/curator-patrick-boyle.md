@@ -10,7 +10,7 @@ created: 2026-08-01
 source: patrick-boyle-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.73
+relevance: 0.715
 ---
 
 # Patrick Boyle: финансовая трезвость
