@@ -10,7 +10,7 @@ created: 2026-08-01
 source: jerry-liu-curated-corpus
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.715
+relevance: 0.7
 ---
 
 # Jerry Liu: контекст и RAG

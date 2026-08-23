@@ -9,7 +9,7 @@ created: 2026-08-01
 source: christian-lempa-corpus-curated
 last_accessed: 2026-08-04
 tier: warm
-relevance: 0.715
+relevance: 0.7
 ---
 
 # Docker Compose без лишней сложности

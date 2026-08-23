@@ -10,7 +10,7 @@ source: daily/2026-08-11.md
 domain: knowledge
 last_accessed: 2026-08-12
 tier: "warm"
-relevance: 0.835
+relevance: 0.82
 updated: 2026-08-12
 ---
 # календарь-рефлексии-бодиграфа-html

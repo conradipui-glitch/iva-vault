@@ -9,7 +9,7 @@ created: "2026-08-22"
 source: "daily/2026-08-22.md"
 last_accessed: "2026-08-22"
 tier: "active"
-relevance: 0.985
+relevance: 0.97
 ---
 
 # predict-before-act: скилл «прогноз результата до действия» — оформить при задаче с дорогой ошибкой

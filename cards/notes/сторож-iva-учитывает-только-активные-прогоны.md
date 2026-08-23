@@ -9,7 +9,7 @@ created: "2026-08-23"
 source: "daily/2026-08-23.md"
 last_accessed: "2026-08-23"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 ---
 
 # Сторож IVA учитывает только активные прогоны
