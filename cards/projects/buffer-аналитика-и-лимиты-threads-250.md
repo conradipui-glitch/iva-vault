@@ -9,8 +9,8 @@ domain: work
 created: 2026-08-15
 source: daily/2026-08-15.md
 last_accessed: 2026-08-17
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 updated: 2026-08-17
 access_count: 1
 ---

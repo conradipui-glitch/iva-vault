@@ -10,7 +10,7 @@ created: 2026-08-18
 source: daily/2026-08-18.md
 last_accessed: 2026-08-18
 tier: active
-relevance: 0.91
+relevance: 0.895
 ---
 
 # Ключ RouterAI отправлен в чат и подлежит замене

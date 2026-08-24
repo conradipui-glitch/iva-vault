@@ -10,7 +10,7 @@ created: 2026-08-15
 source: daily/2026-08-15.md
 last_accessed: 2026-08-16
 tier: "warm"
-relevance: 0.88
+relevance: 0.865
 ---
 
 # telegram-канал-обсуждения-реакции-эмодзипак
