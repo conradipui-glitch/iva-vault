@@ -10,7 +10,7 @@ created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
 tier: "warm"
-relevance: 0.835
+relevance: 0.82
 ---
 
 # Исследование LLM-шлюзов: Prodex, SubRouter, codex-oauth, Bright Data

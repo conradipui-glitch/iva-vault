@@ -9,8 +9,8 @@ domain: work
 created: 2026-08-17
 source: daily/2026-08-17.md
 last_accessed: 2026-08-18
-tier: active
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Ответы на комментарии: humanizer и точный reply-to

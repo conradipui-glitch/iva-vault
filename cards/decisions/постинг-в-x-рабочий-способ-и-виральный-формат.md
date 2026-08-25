@@ -9,8 +9,8 @@ domain: work
 created: 2026-08-01
 source: daily/2026-08-01.md
 last_accessed: 2026-08-04
-tier: warm
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Постинг в X: рабочий способ и виральный формат

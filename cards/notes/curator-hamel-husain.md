@@ -9,8 +9,8 @@ domain: knowledge
 created: 2026-08-01
 source: hamel-husain-curated-corpus
 last_accessed: 2026-08-04
-tier: warm
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Hamel Husain: доказуемое качество агента
