@@ -9,7 +9,7 @@ created: "2026-08-25"
 source: "daily/2026-08-25.md"
 last_accessed: "2026-08-25"
 tier: "active"
-relevance: 0.985
+relevance: 0.97
 ---
 
 # MarkItDown безопаснее встраивать в Иву как локальный CLI а не MCP
