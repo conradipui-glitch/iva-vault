@@ -11,7 +11,7 @@ source: daily/2026-08-07.md
 access_count: 1
 last_accessed: 2026-06-28
 relevance: 0.1
-tier: cold
+tier: "archive"
 ---
 
 # Решение о rerank-2.5-lite в цепочке отбора новостей

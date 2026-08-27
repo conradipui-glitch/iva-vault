@@ -10,7 +10,7 @@ created: 2026-08-01
 source: curated-public-source-profiles
 last_accessed: 2026-08-04
 tier: "cold"
-relevance: 0.655
+relevance: 0.64
 ---
 
 # Маршрутизатор кураторов
