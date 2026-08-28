@@ -9,8 +9,8 @@ domain: social
 created: 2026-08-06
 source: daily/2026-08-06.md
 last_accessed: 2026-08-07
-tier: warm
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Политика кук Threads/X (резерв, без запросов)

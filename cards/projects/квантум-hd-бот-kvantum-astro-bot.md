@@ -9,7 +9,7 @@ source: "daily/2026-08-26.md"
 domain: "work"
 last_accessed: "2026-08-27"
 tier: "active"
-relevance: 0.985
+relevance: 0.97
 ---
 
 # Квантум HD-бот kvantum_astro_bot

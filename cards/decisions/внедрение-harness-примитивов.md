@@ -10,7 +10,7 @@ created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
 tier: "warm"
-relevance: 0.79
+relevance: 0.775
 ---
 
 # Внедрение harness-примитивов

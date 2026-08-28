@@ -10,7 +10,7 @@ source: daily/2026-08-11.md
 domain: knowledge
 last_accessed: 2026-08-11
 tier: "warm"
-relevance: 0.745
+relevance: 0.73
 ---
 
 # toharo-lab: деплой и обложки (интерактив, 16:9, Actions)
