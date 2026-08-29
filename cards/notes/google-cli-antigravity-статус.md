@@ -10,7 +10,7 @@ created: 2026-08-10
 source: "daily/2026-08-10.mdtier: active"
 last_accessed: 2026-08-10
 tier: warm
-relevance: 0.715
+relevance: 0.7
 updated: 2026-08-15
 ---
 

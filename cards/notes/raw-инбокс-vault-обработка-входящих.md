@@ -1,6 +1,6 @@
 ---
 tier: "warm"
-relevance: 0.73
+relevance: 0.715
 type: note
 description: >-
   Внедрено (10.08.2026, 23:06): vault/raw/ — инбокс для ссылок/статей от владельца; команда «обработай raw» — чтение → карточки → MOC → связи/противоречия. Из практики статьи про Obsidian second brain.

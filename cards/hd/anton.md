@@ -10,8 +10,8 @@ created: 2026-08-07
 updated: 2026-08-07
 source: data/hd/anton.json
 last_accessed: 2026-08-08
-tier: warm
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Антон — Манифестирующий Генератор SixTwo
