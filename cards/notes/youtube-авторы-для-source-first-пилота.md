@@ -9,8 +9,8 @@ created: "2026-08-26"
 source: "daily/2026-08-25.md"
 updated: "2026-08-26"
 last_accessed: "2026-08-23"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 access_count: 1
 ---
 

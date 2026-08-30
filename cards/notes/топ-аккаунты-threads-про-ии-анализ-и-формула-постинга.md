@@ -10,7 +10,7 @@ created: 2026-08-01
 source: daily/2026-08-01.md
 last_accessed: 2026-08-04
 tier: "cold"
-relevance: 0.61
+relevance: 0.595
 ---
 
 # Топ-аккаунты Threads про ИИ: анализ и формула постинга

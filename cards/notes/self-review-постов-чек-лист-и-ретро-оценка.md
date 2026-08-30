@@ -7,7 +7,7 @@ status: active
 confidence: EXTRACTED
 domain: work
 tier: "warm"
-relevance: 0.715
+relevance: 0.7
 created: 2026-08-10
 source: daily/2026-08-10.md
 last_accessed: 2026-08-11
