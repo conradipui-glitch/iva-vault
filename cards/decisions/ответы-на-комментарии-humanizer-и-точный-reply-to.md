@@ -10,7 +10,7 @@ created: 2026-08-17
 source: daily/2026-08-17.md
 last_accessed: 2026-08-18
 tier: "warm"
-relevance: 0.79
+relevance: 0.775
 ---
 
 # Ответы на комментарии: humanizer и точный reply-to
