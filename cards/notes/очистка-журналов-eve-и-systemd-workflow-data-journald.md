@@ -10,7 +10,7 @@ created: 2026-08-13
 source: daily/2026-08-13.md
 last_accessed: 2026-08-14
 tier: "warm"
-relevance: 0.715
+relevance: 0.7
 ---
 
 # Очистка журналов eve и systemd (workflow-data, journald)

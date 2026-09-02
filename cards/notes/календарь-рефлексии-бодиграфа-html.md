@@ -9,8 +9,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 domain: knowledge
 last_accessed: 2026-08-12
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 updated: 2026-08-12
 ---
 # календарь-рефлексии-бодиграфа-html
