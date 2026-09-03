@@ -19,4 +19,4 @@
 - HD: лендинг без waitlist.
 
 ## Указатели
-- Последний день: vault/summaries/daily/2026-08-31 · Индекс: vault/MOC.md
+- Последний день: vault/summaries/daily/2026-09-03 · Индекс: vault/MOC.md

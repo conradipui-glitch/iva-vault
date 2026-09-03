@@ -10,7 +10,7 @@ source: daily/2026-08-06.md
 domain: knowledge
 last_accessed: 2026-08-06
 tier: "cold"
-relevance: 0.58
+relevance: 0.565
 ---
 
 # Личная система памяти владельца RIG OpenMemory LightRag
