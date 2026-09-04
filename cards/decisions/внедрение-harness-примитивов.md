@@ -9,8 +9,8 @@ domain: work
 created: 2026-08-12
 source: daily/2026-08-12.md
 last_accessed: 2026-08-14
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Внедрение harness-примитивов

@@ -11,7 +11,7 @@ source: daily/2026-08-16.md
 updated: 2026-08-17
 last_accessed: 2026-08-17
 tier: "warm"
-relevance: 0.73
+relevance: 0.715
 ---
 # Стили обложек по площадкам: разделение TG/сайт/Threads
 

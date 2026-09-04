@@ -10,7 +10,7 @@ created: 2026-08-01
 source: steve-schoger-curated-corpus
 last_accessed: 2026-08-04
 tier: "cold"
-relevance: 0.535
+relevance: 0.52
 ---
 
 # Steve Schoger: интерфейсы и карточки

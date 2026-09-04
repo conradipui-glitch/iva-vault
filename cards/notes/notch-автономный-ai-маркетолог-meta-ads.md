@@ -10,8 +10,8 @@ created: 2026-08-13
 source: daily/2026-08-13.md
 updated: 2026-08-15
 last_accessed: 2026-08-14
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 # Notch — автономный AI-маркетолог (Meta Ads)
 
