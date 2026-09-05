@@ -9,7 +9,7 @@ created: "2026-08-23"
 source: "daily/2026-08-23.md"
 last_accessed: "2026-08-24"
 tier: "warm"
-relevance: 0.82
+relevance: 0.805
 updated: "2026-08-24"
 ---
 # Оптимизация Iva: 7 этапов снижения токенов
