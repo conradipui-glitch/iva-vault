@@ -10,7 +10,7 @@ created: 2026-08-16
 source: daily/2026-08-16.md
 last_accessed: 2026-08-17
 tier: "warm"
-relevance: 0.7
+relevance: 0.685
 ---
 
 # Таймеры публикации: сервер в Europe/Amsterdam, указывать UTC

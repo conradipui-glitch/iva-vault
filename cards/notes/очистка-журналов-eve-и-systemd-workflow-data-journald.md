@@ -1,7 +1,6 @@
 ---
 type: note
-description: >-
-  12.08.2026 диск 57%→50%: journald без лимитов (~870M), workflow-data eve никогда не чистился (3G/339k файлов, ~0.5G/день). Настроено: journald лимит 300M + ротация 7 дней, cron-чистка workflow-data старше 7 дней по понедельникам 5:00, равновесие ~3.5G; vault (память) не трогается.
+description: "12.08.2026 диск 57%→50%: journald лимит 300M + ротация 7 дней, cron-чистка workflow-data по понедельникам. 06.09.2026 снова диск 90%→79%: syslog раздулся на 3.4G из-за ошибок route/dial от Docker-прокси."
 tags: [disk, journald, workflow-data, cron, eve, cleanup]
 status: active
 confidence: EXTRACTED
@@ -10,7 +9,8 @@ created: 2026-08-13
 source: daily/2026-08-13.md
 last_accessed: 2026-08-14
 tier: "cold"
-relevance: 0.655
+relevance: 0.64
+updated: "2026-09-07"
 ---
 
 # Очистка журналов eve и systemd (workflow-data, journald)
@@ -30,3 +30,7 @@ relevance: 0.655
 ## Related
 
 - [[cards/notes/raw-инбокс-vault-обработка-входящих]]
+
+## Log
+
+- 2026-09-07: 06.09.2026 (диск снова забит: 90%, 4.1G свободно): освобождено ~4G, диск 79% (8.0G). /var/log/syslog + syslog.1 — 3.4G, раздулись до 7 млн строк из-за постоянных ошибок «route/dial» от прокси в Docker; усечены до нуля. Также удалены apt-кэш 383M, Docker build cache 215M, мусор в /tmp ~230M. Осталось нетронутым как данные (не мусор): /home/hermes-pilot 2.8G (сосед), /root/iva/repos 276M, /root/backups ~100M, неиспользуемые Docker-образы 215M. Причина раздувания syslog не устранена: ошибки «route/dial» от Docker-прокси будут спамить снова, нужна настройка ротации/диагностика источника. Это отдельный эпизод; см. также первоначальную настройку журналов от 12.08.2026.

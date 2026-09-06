@@ -1,6 +1,6 @@
 ---
 type: "project"
-description: "Второй агент на том же VPS («сосед», появился недавно): dashboard на порту 9119, gateway как systemd-сервис, модель gpt-5.6-luna (Codex) как у Ивы; Telegram-бот подключается отдельно."
+description: "Второй агент на том же VPS («сосед», glmbot): dashboard на порту 9119, gateway как systemd-сервис, модель gpt-5.6-luna (Codex) как у Ивы; Telegram-бот подключается отдельно. Панель соседа открывается по /glmbot/ в nginx (не как n8n)."
 tags: ["agent","vps","systemd","telegram","infra"]
 status: "active"
 confidence: "EXTRACTED"
@@ -9,7 +9,8 @@ created: "2026-08-31"
 source: "daily/2026-08-31.md"
 last_accessed: "2026-08-31"
 tier: "active"
-relevance: 0.91
+relevance: 0.895
+updated: "2026-09-07"
 ---
 
 # Гермес — агент-сосед на VPS
@@ -25,3 +26,7 @@ relevance: 0.91
 - [[cards/projects/_index]]
 - [[cards/projects/черновики-openbot-mcp-roadmap-и-локальной-llm-вечер-23-08]]
 - [[cards/projects/iva-write-пул-исполнителей-подписки]]
+
+## Log
+
+- 2026-09-07: 06.09.2026 сосед (glmbot) через инбокс /home/hermes-pilot/iva-inbox/ поставил задачу: добавить location /glmbot/ в nginx, чтобы панель соседа открывалась как отдельный ресурс, а не как n8n. Выполнено: бэкенд на 127.0.0.1:8731 живой (200), сделан бэкап /etc/nginx/conf.d/n8n.conf.bak-20260906-glmbot, вставлен блок location /glmbot/ → proxy_pass 127.0.0.1:8731 (выше location /, по образцу /app/), nginx -t валиден, перезагружен. Проверка: /glmbot/ → 200 (HTML панели glmbot), / (n8n) → 200, /app/ → 200 — не сломано. Ранее в тот же день выполнена ещё одна задача glmbot: перезапуск hermes-gateway.service (перечитал свежий конфиг) и добавлено sudoers-правило /etc/sudoers.d/iva-glmbot-restart (hermes-pilot может перезапускать шлюз без пароля).

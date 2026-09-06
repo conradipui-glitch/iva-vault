@@ -9,8 +9,8 @@ domain: knowledge
 created: 2026-08-15
 source: daily/2026-08-15.md
 last_accessed: 2026-08-16
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # claude-ai-ultimate-фейковый-репозиторий-разбор
