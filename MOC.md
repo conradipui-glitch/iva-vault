@@ -5,6 +5,6 @@
 
 - [[MOC/MOC-knowledge]] — карточек: 50
 - [[MOC/MOC-ops]] — карточек: 1
-- [[MOC/MOC-personal]] — карточек: 41
+- [[MOC/MOC-personal]] — карточек: 42
 - [[MOC/MOC-social]] — карточек: 2
-- [[MOC/MOC-work]] — карточек: 86
+- [[MOC/MOC-work]] — карточек: 87

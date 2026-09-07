@@ -10,7 +10,7 @@ created: 2026-08-14
 source: daily/2026-08-14.md
 last_accessed: 2026-08-14
 tier: "cold"
-relevance: 0.64
+relevance: 0.625
 ---
 
 # Провенанс постов — модель, специалисты, стоимость (iva-post-provenance)

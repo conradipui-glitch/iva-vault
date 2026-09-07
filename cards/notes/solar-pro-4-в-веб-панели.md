@@ -10,7 +10,7 @@ source: daily/2026-08-11.md
 domain: knowledge
 last_accessed: 2026-08-12
 tier: "cold"
-relevance: 0.61
+relevance: 0.595
 updated: 2026-08-12
 ---
 # solar-pro-4-в-веб-панели

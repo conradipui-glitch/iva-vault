@@ -1,16 +1,17 @@
 ---
 type: "note"
-description: "B.AI провайдер подключён к Иве (OpenAI-совместимый, 48 моделей). Установка 06.09.2026, требует рестарта. Вечером 06.09 — баг панели: B.AI не появлялся в меню после рестарта, чат замолкал при выборе модели."
+description: "B.AI провайдер подключён к Иве (OpenAI-совместимый, 48 моделей). Патчи bai-provider и group-ingress применены начисто и закоммичены в local-ветку 07.09; MODEL_PROVIDER остался deepseek."
 tags: ["bai","provider","api","model","integration"]
 status: "active"
 confidence: "EXTRACTED"
 created: "2026-09-06"
 source: "daily/2026-09-06.md"
-updated: "2026-09-07"
+updated: "2026-09-08"
 domain: "knowledge"
-last_accessed: "2026-09-07"
+last_accessed: "2026-09-08"
 tier: "active"
 relevance: 1.0
+access_count: 1
 ---
 
 # Провайдер B.AI (Ива)
@@ -37,3 +38,15 @@ relevance: 1.0
 ## Log
 
 - 2026-09-07: Дополнение (вечер 06.09.2026): после рестарта панель не показывала B.AI — веб-панель (iva-webapp) запускалась старой версией (процесс от 24 августа), хотя код с bai лежал в webapp/server.py с 05.09; рестарт сервиса исправил отображение. Но при выборе провайдера B.AI и модели в веб-меню модель не выбиралась, а чат переставал отвечать. Разбор обработчика /api/agent: target = prov or provider_now(), и если модель кликается до смены провайдера, каталог берётся текущего контура → 400 «модели нет в списке». При смене модели вызывается только `systemctl restart iva.service`, а iva-telegram-poll.service — нет, поэтому при зависании агента на старте канал молчит. Пара glm-5.3-flash + max валидна (API отвечает, tool calling работает), но по usage.jsonl ни одной рабочей записи на bai — фактически B.AI ни разу не отработал. Статическая причина падения iva.service не найдена — нужно живое воспроизведение. Слабые места: рестарт поллинга при смене модели + валидация модели по каталогу текущего контура.
+- 2026-09-08:
+  07.09.2026 (утро) — применён патч bai-provider (7 файлов) и group-ingress (9 файлов) от glmbot. Снял всё к чистому HEAD, наложил патчи начисто, вернул 13 неконфликтующих локальных файлов из бэкапа. 7 файлов, где владелец тоже работал (provider.ts, model-provider.ts, model-catalog.ts, webapp/server.py, doctor.test.ts, model-summary.ts, version-update.test.ts), оставлены версией glmbot. Ключевой момент: glmbot делал патч поверх рабочей версии владельца, поэтому правки на RouterAI/DeepSeek/Gemini сохранились внутри; возвращать их не нужно. MODEL_PROVIDER остался deepseek, B.AI добавлен как опция в /model и веб-панель.
+  
+  Закоммичено в local-ветку: bd22aad — B.AI провайдер (15 файлов), ce8889b — group-ingress (5 файлов), c011677 — авторские скрипты (17 файлов, в т.ч. tva-*.py, webapp/server.py, context7.ts, workflow-clean.sh). В tree-allowlist.json добавлено 6 записей с причинами для апстримовских файлов, правит живая фича (telegram-inbound, telegram-queue, model-summary, version-update.test и тесты); .state/ маркер добавлен в .gitignore. Полное дерево в бэкапе data/custom/backup-cleanup-20260907-011645/ (36 файлов). Проверки: build exit 0, telegram-inbound 27/27, telegram-queue 31/31, model-provider 26/26, model-catalog 12/12, version-update 67/67, doctor 22/22.
+  
+  Замечание на будущее: фичи живут в апстримовских файлах (B.AI, group-ingress), поэтому при следующем iva update на них будут конфликты — но предсказуемые, через allowlist.
+
+## Related
+
+- [[cards/projects/гермес-агент-сосед-на-vps]]
+- [[cards/projects/_index]]
+- [[cards/notes/провайдер-b-ai-ива]]
