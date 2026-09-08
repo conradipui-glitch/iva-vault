@@ -9,7 +9,7 @@ created: "2026-08-31"
 source: "daily/2026-08-31.md"
 last_accessed: "2026-08-31"
 tier: "warm"
-relevance: 0.88
+relevance: 0.865
 updated: "2026-09-07"
 ---
 
