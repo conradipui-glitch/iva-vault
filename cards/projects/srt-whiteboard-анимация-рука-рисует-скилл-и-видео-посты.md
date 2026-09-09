@@ -11,7 +11,7 @@ updated: "2026-08-22"
 access_count: 1
 last_accessed: "2026-07-11"
 relevance: 0.1
-tier: "cold"
+tier: "archive"
 ---
 
 # srt-whiteboard анимация «рука рисует» — скилл и видео-посты

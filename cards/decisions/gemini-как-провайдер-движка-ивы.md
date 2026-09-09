@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-09-01"
 source: "daily/2026-09-01.md"
 last_accessed: "2026-09-02"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Gemini как провайдер движка Ивы
