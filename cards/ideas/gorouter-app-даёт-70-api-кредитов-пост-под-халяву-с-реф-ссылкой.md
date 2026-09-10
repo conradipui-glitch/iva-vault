@@ -9,7 +9,7 @@ created: "2026-09-07"
 source: "daily/2026-09-07.md"
 last_accessed: "2026-09-07"
 tier: "active"
-relevance: 0.955
+relevance: 0.94
 ---
 
 # gorouter.app даёт $70 API-кредитов — пост под халяву с реф-ссылкой
