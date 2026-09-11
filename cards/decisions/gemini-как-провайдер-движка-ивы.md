@@ -9,7 +9,7 @@ created: "2026-09-01"
 source: "daily/2026-09-01.md"
 last_accessed: "2026-09-02"
 tier: "warm"
-relevance: 0.865
+relevance: 0.85
 ---
 
 # Gemini как провайдер движка Ивы

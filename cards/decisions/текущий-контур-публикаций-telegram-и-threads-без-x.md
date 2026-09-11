@@ -9,7 +9,7 @@ created: "2026-08-30"
 source: "daily/2026-08-30.md"
 last_accessed: "2026-08-30"
 tier: "warm"
-relevance: 0.82
+relevance: 0.805
 ---
 
 # Текущий контур публикаций: Telegram и Threads без X

@@ -10,7 +10,7 @@ created: 2026-08-01
 source: owner-approved-test-sources
 last_accessed: 2026-08-04
 tier: "cold"
-relevance: 0.43
+relevance: 0.415
 ---
 
 # X-источники: веб, AI-инструменты, SaaS
