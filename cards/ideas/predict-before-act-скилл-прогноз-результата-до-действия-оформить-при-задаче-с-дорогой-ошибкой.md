@@ -8,8 +8,8 @@ domain: "knowledge"
 created: "2026-08-22"
 source: "daily/2026-08-22.md"
 last_accessed: "2026-08-22"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # predict-before-act: скилл «прогноз результата до действия» — оформить при задаче с дорогой ошибкой

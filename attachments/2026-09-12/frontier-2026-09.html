@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фронтир · Сентябрь 2026 — большой разбор</title>
+<style>
+:root{
+  --bg:#07080d; --bg2:#0c0e16; --card:#12141f; --card2:#171a27;
+  --line:#242838; --line2:#31364c;
+  --tx:#e8ebf5; --tx2:#aab3c9; --tx3:#818ba6;
+  --an:#e0805f; --oa:#22c55e; --go:#5b8dff; --me:#5b6cff; --xa:#c9d1e6;
+  --ds:#4d6bfe; --qw:#ff7a2f; --gl:#14b8a6; --ki:#b06bff; --mi:#ff5f8f;
+  --acc:#6ea8ff; --warn:#ffb84d; --good:#3ddc97;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+   radial-gradient(900px 600px at 12% -5%,rgba(110,168,255,.13),transparent 60%),
+   radial-gradient(700px 500px at 88% 8%,rgba(176,107,255,.10),transparent 60%),
+   radial-gradient(900px 700px at 50% 105%,rgba(20,184,166,.07),transparent 60%);}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
+  background:linear-gradient(90deg,var(--acc),var(--ki),var(--gl));box-shadow:0 0 14px rgba(110,168,255,.6)}
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(7,8,13,.78);border-bottom:1px solid var(--line)}
+nav .in{max-width:1600px;margin:0 auto;padding:10px 28px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+nav .brand{font:700 13px/1 var(--mono);letter-spacing:.14em;color:var(--acc);margin-right:14px;white-space:nowrap}
+nav a{color:var(--tx2);text-decoration:none;font-size:12.5px;padding:6px 11px;border-radius:8px;white-space:nowrap;
+  border:1px solid transparent;transition:.18s}
+nav a:hover{color:var(--tx);background:var(--card2);border-color:var(--line2)}
+main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:0 28px 120px}
+section{padding:74px 0 10px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+h1{font-size:clamp(38px,6.4vw,92px);line-height:.98;letter-spacing:-.035em;font-weight:800}
+h2{font-size:clamp(24px,3.1vw,40px);letter-spacing:-.02em;line-height:1.12;font-weight:750;margin-bottom:8px}
+h3{font-size:17px;font-weight:650;letter-spacing:-.01em}
+.eyebrow{font:600 11.5px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:18px}
+.lead{font-size:clamp(16px,1.55vw,20px);color:var(--tx2);max-width:105ch}
+p{color:var(--tx2)}
+p+p{margin-top:14px}
+b,strong{color:var(--tx);font-weight:650}
+em{color:var(--acc);font-style:normal}
+a.ref{color:var(--acc);text-decoration:none;border-bottom:1px solid rgba(110,168,255,.35)}
+a.ref:hover{border-bottom-color:var(--acc)}
+/* HERO */
+#hero{padding-top:44px;border-top:0}
+.hero-kicker{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.pill{font:600 11.5px/1 var(--mono);letter-spacing:.08em;padding:7px 12px;border-radius:999px;
+  background:var(--card2);border:1px solid var(--line2);color:var(--tx2)}
+.pill.hot{color:#ffd9a8;border-color:#5a3d16;background:#2a1d0c}
+.pill.live{color:#b6f5d8;border-color:#17452f;background:#0d2a1d}
+.pill.live i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--good);margin-right:6px;
+  animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.sub{font-size:clamp(17px,1.9vw,23px);color:var(--tx2);max-width:78ch;margin-top:20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:38px}
+.kpi{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px}
+.kpi .v{font:750 34px/1.05 var(--sans);letter-spacing:-.03em}
+.kpi .k{font-size:12.5px;color:var(--tx3);margin-top:7px;letter-spacing:.01em}
+.kpi .tag{font:600 10.5px/1 var(--mono);letter-spacing:.12em;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+/* CARDS */
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:22px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+/* TIMELINE */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:0;margin-top:30px;position:relative}
+.tl:before{content:"";position:absolute;left:0;right:0;top:13px;height:2px;background:linear-gradient(90deg,transparent,var(--line2),var(--line2),transparent)}
+.ev{position:relative;padding:36px 16px 0 0}
+.ev .dot{position:absolute;top:5px;left:0;width:17px;height:17px;border-radius:50%;border:3px solid var(--bg);
+  box-shadow:0 0 0 2px var(--line2)}
+.ev .d{font:600 12.5px/1 var(--mono);color:var(--tx3);letter-spacing:.06em}
+.ev .n{font-weight:700;font-size:16px;margin-top:7px;letter-spacing:-.01em}
+.ev .t{font-size:13.5px;color:var(--tx2);margin-top:6px;line-height:1.55}
+/* CHARTS */
+.chart{position:relative;margin-top:22px}
+svg{display:block;width:100%;overflow:visible}
+.tip{position:absolute;pointer-events:none;z-index:20;opacity:0;transform:translate(-50%,-125%);
+  background:#0a0c14;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;min-width:190px;
+  box-shadow:0 18px 40px rgba(0,0,0,.65);transition:opacity .12s}
+.tip.on{opacity:1}
+.tip .tt{font-weight:700;font-size:13.5px;margin-bottom:7px;letter-spacing:-.01em}
+.tip .tr{display:flex;justify-content:space-between;gap:16px;font-size:12.5px;color:var(--tx2);padding:1.5px 0}
+.tip .tr b{font-family:var(--mono);font-size:12px;color:var(--tx)}
+.tip .lab{display:flex;align-items:center;gap:6px}
+.tip .sw{width:9px;height:9px;border-radius:3px;flex:none}
+.bar{transition:.9s cubic-bezier(.2,.8,.2,1)}
+.bar.grow{animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.axis{stroke:var(--line);stroke-width:1}
+.gl{stroke:var(--line);stroke-width:1;stroke-dasharray:2 5;opacity:.65}
+.tick{fill:var(--tx3);font:500 11px var(--mono)}
+.lbl{fill:var(--tx);font:600 12.5px var(--sans)}
+.lbl2{fill:var(--tx3);font:500 11px var(--mono)}
+.doton{cursor:pointer}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.btn{background:var(--card2);border:1px solid var(--line2);color:var(--tx2);font:600 12.5px var(--sans);
+  padding:7px 13px;border-radius:9px;cursor:pointer;transition:.16s}
+.btn:hover{color:var(--tx);border-color:var(--acc)}
+.btn.on{background:rgba(110,168,255,.15);border-color:var(--acc);color:#cfe3ff}
+/* TABLE */
+.tw{overflow-x:auto;margin-top:20px;border:1px solid var(--line);border-radius:16px;background:var(--bg2)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px;min-width:660px}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{position:sticky;top:0;background:#101321;font:650 12px var(--sans);color:var(--tx2);z-index:2;
+  letter-spacing:.01em}
+th.s,td.s{text-align:left}
+tbody tr:hover{background:rgba(110,168,255,.055)}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-size:12.5px}
+td.mut{color:var(--tx3)}
+.rank{display:inline-block;min-width:24px;font:700 11px var(--mono);color:var(--tx3)}
+.lab{display:inline-flex;align-items:center;gap:7px}
+.lab .sw{width:9px;height:9px;border-radius:3px;flex:none}
+.nm{font-weight:600;color:var(--tx)}
+.bdg{font:600 10px/1 var(--mono);padding:4px 7px;border-radius:6px;background:var(--card2);
+  border:1px solid var(--line2);color:var(--tx3);letter-spacing:.05em}
+.bdg.open{color:#b6f5d8;border-color:#17452f;background:#0d2a1d}
+.bdg.vendor{color:#ffd9a8;border-color:#5a3d16;background:#2a1d0c}
+/* HEAT */
+.hm td{cursor:default;text-align:center;font-family:var(--mono);font-size:12px;border-right:1px solid var(--line)}
+.hm th{cursor:pointer;user-select:none}
+.hm th:hover{color:var(--tx);background:#141a2c}
+.hm td.s,.hm th.s{text-align:left;position:sticky;left:0;background:#0f1220;z-index:1}
+.hm td.s{background:#101420}
+.hm .cellk{position:relative}
+.legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--tx3)}
+.scl{height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,#1b2233,#2f5d8c,#4b8fe0,#8fd0a0,#e6d36a)}
+/* CALC */
+.cal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:end;margin-top:16px}
+.f label{display:block;font:600 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px}
+.f input{width:100%;background:#0b0d15;border:1px solid var(--line2);border-radius:11px;color:var(--tx);
+  font:600 17px var(--mono);padding:12px 14px;outline:none}
+.f input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(110,168,255,.14)}
+.range{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.range button{background:var(--card2);border:1px solid var(--line2);color:var(--tx3);font:600 11.5px var(--mono);
+  padding:6px 10px;border-radius:8px;cursor:pointer}
+.range button:hover{color:var(--tx);border-color:var(--acc)}
+.res{margin-top:22px}
+.rrow{display:grid;grid-template-columns:230px 1fr 130px;gap:14px;align-items:center;padding:9px 0;
+  border-bottom:1px solid var(--line)}
+.rrow:last-child{border-bottom:0}
+.rbar{height:22px;border-radius:6px;background:linear-gradient(90deg,rgba(110,168,255,.55),rgba(110,168,255,.22));
+  transition:.5s;min-width:3px}
+.rcost{font:700 14px var(--mono);text-align:right}
+.rnote{font-size:12px;color:var(--tx3);text-align:right}
+/* CALLOUTS */
+.note-block{border-left:3px solid var(--acc);background:linear-gradient(90deg,rgba(110,168,255,.08),transparent 70%);
+  padding:14px 18px;border-radius:0 12px 12px 0;margin-top:18px}
+.note-block.w{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(255,184,77,.09),transparent 70%)}
+.note-block.g{border-left-color:var(--good);background:linear-gradient(90deg,rgba(61,220,151,.09),transparent 70%)}
+.note-block .h{font:700 12.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+.note-block.w .h{color:var(--warn)}
+.note-block.g .h{color:var(--good)}
+.pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:22px}
+.pick .card{position:relative;overflow:hidden}
+.pick .card.first{border-color:#2f5d8c;background:linear-gradient(180deg,#141a2b,#0c0e16)}
+.pick .card.first:before{content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  background:linear-gradient(90deg,var(--acc),var(--gl))}
+.pk-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.pk-n{font-size:19px;font-weight:750;letter-spacing:-.02em}
+.pk-s{font:600 11px var(--mono);color:var(--tx3);letter-spacing:.08em;margin-top:5px}
+ul{list-style:none;margin-top:8px}
+li{color:var(--tx2);font-size:14px;padding:5px 0 5px 22px;position:relative}
+li:before{content:"▸";position:absolute;left:4px;color:var(--acc)}
+li.plus:before{content:"✓";color:var(--good)}
+li.minus:before{content:"✕";color:#ff7a7a}
+.src{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:2px 26px;margin-top:18px}
+.src a{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);
+  text-decoration:none;color:var(--tx2);font-size:13.5px}
+.src a:hover{color:var(--tx)}
+.src .dt{font:600 11px var(--mono);color:var(--tx3);flex:none;width:62px}
+footer{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);color:var(--tx3);font-size:13px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(16px);transition:.7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:640px){
+  main{padding:0 14px 80px}nav .in{padding:9px 14px}
+  .rrow{grid-template-columns:120px 1fr 92px;gap:8px}
+  .kpi .v{font-size:27px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav><div class="in">
+  <span class="brand">FRONTIER / 09·2026</span>
+  <a href="#rank">Рейтинг</a><a href="#price">Цена ума</a><a href="#matrix">Матрица</a>
+  <a href="#speed">Скорость</a><a href="#vendors">Вендоры vs независимые</a><a href="#eff">Эффективность</a>
+  <a href="#crowd">Голоса людей</a><a href="#calc">Калькулятор</a><a href="#open">Открытые веса</a><a href="#verdict">Выводы</a>
+</div></nav>
+
+<main>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-kicker">
+    <span class="pill live"><i></i>данные собраны 12 сентября 2026, 14:00 UTC+6</span>
+    <span class="pill hot">3 релиза фронтира за 3 дня</span>
+    <span class="pill">источник метрик: Artificial Analysis API · Arena · tbench.ai</span>
+  </div>
+  <h1>Фронтир<br>сентября 2026</h1>
+  <p class="sub">Anthropic, OpenAI, Google и Meta выкатили четыре флагмана за две недели. Разбираю по живым метрикам:
+  кто вправду умнее, кто дешевле за ту же работу, где вендорские таблицы расходятся с независимыми — и почему
+  китайская открытая модель за $0.30 теперь стоит в одном ряду с топами.</p>
+  <div class="kpis" id="kpis"></div>
+
+  <h3 style="margin:44px 0 0">Хроника двух недель</h3>
+  <div class="tl" id="tl"></div>
+  <div class="note-block w" style="margin-top:26px">
+    <div class="h">Осторожно с датами</div>
+    <p>Релизы шли волной: 1 сентября — Fable 5.1 и Mythos 5.1, 2-го — Muse Spark 1.3 и Gemini 3.8 Flash, 3-го — GPT-6 Astra,
+    10-го — DeepSeek V4.1 Flash. Цифры в этом разборе — на 12 сентября; у свежих моделей часть оценок ещё «предварительная»
+    (в Arena у Gemini 3.8 и Astra меньше 3 тыс. голосов).</p>
+  </div>
+</section>
+
+<!-- RANK -->
+<section id="rank">
+  <div class="eyebrow">01 · Табель о рангах</div>
+  <h2>Индекс интеллекта: Anthropic и OpenAI идут ноздря в ноздрю</h2>
+  <p class="lead">Artificial Analysis Intelligence Index — независимая сводная оценка агентных задач, кода и рассуждений.
+  Беру лучший вариант каждой модели (max/xhigh effort, где он есть). Разрыв между первым и десятым местом — меньше 14 пунктов,
+  а десятое место стоит в 60 раз дешевле первого.</p>
+  <div class="chart" id="chart-rank"><div class="tip" id="tip-rank"></div></div>
+  <div class="tools">
+    <button class="btn on" data-f="all">Все модели</button>
+    <button class="btn" data-f="lab">Лучшая на лабораторию</button>
+    <button class="btn" data-f="open">Только открытые веса</button>
+    <button class="btn" data-f="value">Цена ≤ $5 за 1M выхода</button>
+  </div>
+  <div class="note-block">
+    <div class="h">Что тут видно</div>
+    <p>Claude Fable 5.1 (max) — 53.4, GPT-6 Astra (max) — 52.8, Claude Opus 5 (max) — 50.7. Дальше начинается
+    «дешёвый интеллект»: Meta Muse Spark 1.3 (max) даёт 48.2 при цене $1.25/$4.25 за миллион токенов — это <b>в 8 раз дешевле
+    Fable 5.1 по входу и почти в 12 раз по выходу</b>, а по индексу — всего на 5 пунктов ниже. А GLM-5.3-Flash с 41.9 стоит $0.15/$0.50,
+    то есть дешевле флагмана Anthropic примерно в 100 раз.</p>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price">
+  <div class="eyebrow">02 · Цена ума</div>
+  <h2>Парето-фронт: за что реально стоит платить</h2>
+  <p class="lead">По горизонтали — индекс (правее = умнее), по вертикали — цена (выше = дороже). Линия — Парето-фронт:
+  модели, которые никто не обходит одновременно и по уму, и по цене. Всё, что висит в левом верхнем углу, — плохая сделка.</p>
+  <div class="chart" id="chart-price"><div class="tip" id="tip-price"></div></div>
+  <div class="note-block g">
+    <div class="h">Три точки, которые меняют картину</div>
+    <p><b>Muse Spark 1.3</b> — самый умный не-флагман и при этом на фронте; <b>GLM-5.3-Flash</b> (41.9) и <b>Qwen3.8-Flash-Next</b>
+    (39.9) держат индекс около 40 при цене $0.47–$0.50 за миллион выхода; <b>DeepSeek V4.1 Flash</b> при $0.30/$1.20 по своим
+    агентным бенчмаркам идёт вровень с Opus 5 (разбор — в разделе 09). Верхний левый угол (дорого и неумно) пуст: цены флагманов
+    выровнялись — Fable 5.1 и Astra стоят ровно $10/$50, а GPT-5.6 Sol держит $4/$20.</p>
+  </div>
+</section>
+
+<!-- MATRIX -->
+<section id="matrix">
+  <div class="eyebrow">03 · Матрица способностей</div>
+  <h2>Кто в чём силён: одна таблица вместо десяти бенчмарков</h2>
+  <p class="lead">Все числа — из независимых прогонов Artificial Analysis, не из вендорских пресс-релизов. Кликни по заголовку
+  столбца, чтобы отсортировать. Пустые клетки — «нет данных», а не ноль. Цвет — относительная сила внутри столбца.</p>
+  <div class="tw"><table class="hm" id="hm-table"></table></div>
+  <div class="legend"><span>слабее</span><span class="scl"></span><span>сильнее</span>
+    <span style="margin-left:auto">TB 2.1 — terminal-bench v2.1 · HLE — Humanity's Last Exam · LCR — long-context reasoning · τ-bank — τ-banking</span></div>
+  <div class="note-block">
+    <div class="h">Читаем по столбцам</div>
+    <p><b>Terminal-Bench 2.1:</b> Fable 5.1 — 91.4%, Opus 5 — 89.1%, Astra — 88.4%: терминал остаётся территорией дорогих моделей.
+    <b>GPQA Diamond</b> (наука): Astra 96.1% и Gemini 3.8 Flash 95.3% обгоняют Fable 5.1 (93.7%) — то есть у Google «дешёвая»
+    flash-модель уже на уровне флагманов в науке. <b>Длинный контекст (LCR):</b> лучше всех Kimi K3 — 88.7%,
+    за ним Fable 5.1 — 85.3% и Sol — 84.0%. <b>τ-banking</b> (инструменты по банковским операциям) — самая честная оценка
+    «агент в реальной рутине»: здесь вперёд выходят открытые и дешёвые — Qwen3.8 Max 51.3%, Grok 4.6 50.7%,
+    Muse Spark 1.3 50.5% против 47.2% у Fable 5.1.</p>
+  </div>
+</section>
+
+<!-- SPEED -->
+<section id="speed">
+  <div class="eyebrow">04 · Скорость</div>
+  <h2>Скорость вывода: где 400 токенов в секунду</h2>
+  <p class="lead">Скорость генерации важна не сама по себе, а в связке с ценой и умом: агент с 400 ток/с закрывает
+  ту же задачу в разы быстрее, а «медленный умный» упирается в таймауты. Размер круга — цена за миллион смешанных токенов.</p>
+  <div class="chart" id="chart-speed"><div class="tip" id="tip-speed"></div></div>
+  <div class="note-block">
+    <div class="h">Кто быстрее</div>
+    <p>Muse Spark 1.3 — <b>418 ток/с</b>, Gemini 3.8 Flash — 339, DeepSeek V4.1 Flash — 247, GPT-5.6 Terra — 116.
+    При этом Gemini 3.8 Flash при 339 ток/с и цене $0.75/$3.75 обгоняет по индексу половину дорогих моделей прошлого квартала.
+    Задержка до первого токена у Astra высокая (медиана 210 с при max effort — это «думающая» модель), а у GLM-5.3-Flash
+    первый токен приходит через 2 секунды при 114 ток/с — идеальный профиль для интерактива.</p>
+  </div>
+</section>
+
+<!-- VENDORS -->
+<section id="vendors">
+  <div class="eyebrow">05 · Вендорские цифры против независимых</div>
+  <h2>Один и тот же сентябрь в двух разных вселенных</h2>
+  <p class="lead">OpenAI публикует таблицы, где Astra обходит Fable 5.1 почти везде. Artificial Analysis на своих индексах
+  ставит Fable 5.1 выше — 66 против 61. Обе таблицы ниже настоящие, разница в том, кто их составлял.</p>
+  <div class="grid g2" style="margin-top:20px">
+    <div class="card">
+      <div class="pk-h"><div><div class="pk-n">Вендорские прогоны</div><div class="pk-s">ОТЧЁТЫ OPENAI И ANTHROPIC, СЕНТЯБРЬ 2026</div></div>
+      <span class="bdg vendor">self-reported</span></div>
+      <div id="vendor-table"></div>
+    </div>
+    <div class="card">
+      <div class="pk-h"><div><div class="pk-n">Независимые прогоны</div><div class="pk-s">ARTIFICIAL ANALYSIS · TBENCH.AI · ARENA</div></div>
+      <span class="bdg open">third-party</span></div>
+      <div id="indep-table"></div>
+    </div>
+  </div>
+  <div class="note-block w">
+    <div class="h">Где таблицы расходятся</div>
+    <p><b>DeepSWE v1.1:</b> в таблице OpenAI Astra берёт 74.1% против 67.4% у Fable 5.1 — но Meta в тот же день отчиталась
+    о 75.4% для Muse Spark 1.3, а публичный лидерборд уже держал Gemini 3.8 Flash и Opus 5 около 74% с перекрывающимися интервалами.
+    <b>Terminal-Bench 4.0:</b> Astra 57.7% против 55.8% у Fable 5.1 — и здесь Anthropic публикует те же 55.8%, строка бесспорна.
+    <b>HLE с инструментами:</b> 65.0% у Fable 5.1 против 57.2% у Astra — единственная академическая строка, которую OpenAI
+    проигрывает, и в её тексте анонса она не упомянута. <b>FrontierMath Tier 4:</b> 97.6% против 87.8% — красиво, но Epoch AI,
+    который эту математику и ведёт, отмечает: OpenAI финансировала разработку набора и имеет эксклюзивный доступ к части заданий.</p>
+  </div>
+</section>
+
+<!-- EFF -->
+<section id="eff">
+  <div class="eyebrow">06 · Эффективность агента</div>
+  <h2>Тариф одинаковый, счёт — в два с лишним раза разный</h2>
+  <p class="lead">Fable 5.1 и Astra стоят ровно $10 вход / $50 выход. Но платят не за токены, а за сделанную работу:
+  при равном индексе агента (62) Astra тратит <b>27 тысяч</b> выходных токенов на задачу против <b>78 тысяч</b>
+  у Fable 5.1 — это $1.67 против $3.76 за одну и ту же задачу. Цвет полос — лаборатория;
+  «индекс агента» — AA Coding Agent Index (сколько задач набора решает агент, 0–100).</p>
+  <div class="chart" id="chart-eff"></div>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card"><div class="kpi"><div class="tag">токенов на задачу</div>
+      <div class="v" style="color:var(--oa)">27k</div><div class="k">GPT-6 Astra, max effort</div></div></div>
+    <div class="card"><div class="kpi"><div class="tag">токенов на задачу</div>
+      <div class="v" style="color:var(--an)">78k</div><div class="k">Claude Fable 5.1, max + fallback</div></div></div>
+    <div class="card"><div class="kpi"><div class="tag">стоимость задачи</div>
+      <div class="v" style="color:var(--acc)">$1.67</div><div class="k">Astra против $3.76 у Fable 5.1 при равном индексе</div></div></div>
+  </div>
+  <div class="note-block g">
+    <div class="h">Практический вывод</div>
+    <p>На агентных задачах Astra дешевле Fable 5.1 примерно на 40–60% при сопоставимом результате — просто потому,
+    что меньше болтает. Обратная сторона: там, где счёт формируют <em>чтения из кэша</em> (длинные агентные циклы с
+    постоянным контекстом), Fable 5.1 выгоднее — Anthropic срезал цену кэш-чтения на 75%, до $0.25 за миллион,
+    а у Astra кэш стоит $1.00 и удваивается выше 272K токенов.</p>
+  </div>
+</section>
+
+<!-- CROWD -->
+<section id="crowd">
+  <div class="eyebrow">07 · Голоса людей</div>
+  <h2>Arena: 8 миллионов слепых голосов против бенчмарков</h2>
+  <p class="lead">Text Arena ранжирует модели по слепым сравнениям — это то, что люди выбирают вживую, а не то,
+  что модель показала на экзамене. Спойлер: свежие флагманы там ещё не отыграли своё.</p>
+  <div class="tw"><table id="arena-table"></table></div>
+  <div class="note-block w">
+    <div class="h">Почему это важно</div>
+    <p>GPT-6 Astra (max) на 12 сентября стоит лишь <b>24-м</b> с 2059 голосами: новинке нужно время набрать статистику,
+    а её доверительный интервал ±13 пунктов втрое шире, чем у привычных лидеров. Зато <b>GLM-5.3-Flash</b> с MIT-лицензией
+    и ценой $0.07/$0.25 на 28-м месте с 1475 пунктами — то есть модель, которая обходится на два порядка дешевле, в слепом
+    сравнении проигрывает флагманам около 30 пунктов. Ровно тот разрыв, который на практике не замечаешь.</p>
+  </div>
+</section>
+
+<!-- CALC -->
+<section id="calc">
+  <div class="eyebrow">08 · Калькулятор</div>
+  <h2>Сколько это стоит в вашем сценарии</h2>
+  <p class="lead">Введи объём входных и выходных токенов в месяц — посчитаю счёт по прайсу каждой модели
+  (цены за миллион токенов, без кэш-скидок и надбавок за длинный контекст).</p>
+  <div class="cal">
+    <div class="f"><label>вход, млн токенов / мес</label><input id="cin" type="number" min="0" step="1" value="50"></div>
+    <div class="f"><label>выход, млн токенов / мес</label><input id="cout" type="number" min="0" step="1" value="10"></div>
+    <div class="f"><label>быстрые пресеты</label>
+      <div class="range">
+        <button data-in="5" data-out="1">чат-бот, 5/1</button>
+        <button data-in="50" data-out="10">ассистент, 50/10</button>
+        <button data-in="400" data-out="60">агент-ферма, 400/60</button>
+        <button data-in="2000" data-out="300">пайплайн, 2000/300</button>
+      </div>
+    </div>
+    <div class="f"><label>через сколько дороже флагмана</label>
+      <div id="ratio" style="font:750 27px var(--mono);color:var(--acc)">—</div></div>
+  </div>
+  <div class="res" id="calc-res"></div>
+  <p style="margin-top:14px;font-size:13px;color:var(--tx3)">Считаю по прайс-листу Artificial Analysis:
+  Muse Spark 1.3 — $1.25/$4.25, GLM-5.3-Flash — $0.15/$0.50, Qwen3.8-Flash-Next — $0.15/$0.47, DeepSeek V4.1 Flash — $0.30/$1.20,
+  Gemini 3.8 Flash — $0.75/$3.75, Kimi K3 — $3/$15, Fable 5.1 и Astra — $10/$50. На пропускной способности пула моделей
+  скидки у провайдеров (b.ai, OpenRouter, off-peak DeepSeek) могут отличаться в разы.</p>
+</section>
+
+<!-- OPEN -->
+<section id="open">
+  <div class="eyebrow">09 · Открытые веса</div>
+  <h2>DeepSeek V4.1 Flash: 552B параметров под MIT</h2>
+  <p class="lead">Десятого сентября DeepSeek выложила веса, а 14-го числа отключает свою же более дорогую V4 Pro,
+  объяснив это тем, что «V4.1 Flash превзошла её по всем ключевым метрикам». Для рынка это значит: пара «дорогая закрытая
+  модель» больше не единственный способ получить агентный фронтир.</p>
+  <div class="grid g4" style="margin-top:20px">
+    <div class="card"><div class="kpi"><div class="tag">веса</div><div class="v">552B</div>
+      <div class="k">backbone + 196B Engram, активно 8B на prefill и 16B на decode</div></div></div>
+    <div class="card"><div class="kpi"><div class="tag">лицензия</div><div class="v" style="color:var(--good)">MIT</div>
+      <div class="k">любое коммерческое использование, самохостинг и дообучение</div></div></div>
+    <div class="card"><div class="kpi"><div class="tag">загрузки на HF</div><div class="v">75 774</div>
+      <div class="k">1864 лайка, 10 сентября 2026, fp8</div></div></div>
+    <div class="card"><div class="kpi"><div class="tag">цена API</div><div class="v" style="color:var(--acc)">$0.30<span style="font-size:17px">/$1.20</span></div>
+      <div class="k">за 1M токенов, off-peak ниже</div></div></div>
+  </div>
+  <div class="tw"><table id="ds-table"></table></div>
+  <div class="note-block">
+    <div class="h">Инженерная часть, из-за которой это стало возможно</div>
+    <p>Архитектура Causal Encoder-Decoder: 40 слоёв (20 энкодер + 20 декодер), глобальный KV-кэш проецируется из скрытых
+    состояний энкодера, а не пересобирается послойно. Вместе с Compressed Sparse Attention 2 и FP4-кэшем это даёт
+    <b>890 байт KV на токен</b> — вчетверо меньше, чем у предыдущей V4-Flash, и в 437 раз меньше, чем у V1.
+    Плюс модуль условной памяти Engram на 196B параметров, который читается разреженно. Именно поэтому модель на 552B
+    вообще имеет смысл пытаться запускать локально: активных параметров на токен — 8–16 миллиардов, а не полтриллиона.</p>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <div class="eyebrow">10 · Выводы</div>
+  <h2>Что из этого следует практически</h2>
+  <p class="lead">Между топ-5 списка и дешёвыми моделями — от 5 до 14 пунктов индекса, а цены за тот же выход отличаются
+  в десятки раз. Хорошая новость: платить $50 за миллион выходных токенов, чтобы получить 53 пункта, больше не нужно —
+  нужный вам уровень интеллекта теперь есть в трёх ценовых категориях.</p>
+  <div class="pick">
+    <div class="card first">
+      <div class="pk-h"><div><div class="pk-n">Muse Spark 1.3</div><div class="pk-s">META · $1.25/$4.25 · 418 ТОК/С</div></div>
+        <span class="bdg">рекомендую</span></div>
+      <ul>
+        <li class="plus">48.2 против 53.4 у флагмана Anthropic — при цене в 8 раз ниже по входу и в 12 раз по выходу</li>
+        <li class="plus">418 токенов в секунду: самая быстрая модель выборки, агент не упирается в таймауты</li>
+        <li class="plus">−20% вызовов инструментов и −25% токенов к версии 1.2 — прямо экономит счёт</li>
+        <li class="minus">цифры эффективности — внутренние прогоны Meta, независимой проверки ещё нет</li>
+        <li class="minus">в Arena сильна, но по слепым голосам всё равно ниже привычных лидеров</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="pk-h"><div><div class="pk-n">GPT-6 Astra (max)</div><div class="pk-s">OPENAI · $10/$50 · 52.8</div></div>
+        <span class="bdg vendor">для агентов</span></div>
+      <ul>
+        <li class="plus">лидер Terminal-Bench 4.0 (57.7%) и AutomationBench (41.4% против 31.4% у Fable 5.1)</li>
+        <li class="plus">самая дешёвая задача на индекс: $1.67 против $3.76 — меньше токенов на ту же работу</li>
+        <li class="plus">сильнейшая кибербезопасность в истории таблиц: ExploitBench 100%</li>
+        <li class="minus">на независимом индексе AA проигрывает Fable 5.1 (61 против 66)</li>
+        <li class="minus">надбавка выше 272K входных токенов и дорогое кэш-чтение $1.00</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="pk-h"><div><div class="pk-n">Claude Fable 5.1 (max)</div><div class="pk-s">ANTHROPIC · $10/$50 · 53.4</div></div>
+        <span class="bdg">для рассуждений</span></div>
+      <ul>
+        <li class="plus">первое место по обоим индексам Artificial Analysis (66 / 70 в Claude Code)</li>
+        <li class="plus">HLE с инструментами 65.0% против 57.2% — глубина рассуждений вне конкуренции</li>
+        <li class="plus">кэш-чтение $0.25 — дешевле Astra вчетверо, для длинных циклов это решающее</li>
+        <li class="minus">дороже в пересчёте на задачу: 78k токенов там, где Astra тратит 27k</li>
+        <li class="minus">медленнее по времени до первого ответа (медиана ~145 с на max effort)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="pk-h"><div><div class="pk-n">Альтернатива-эконом</div><div class="pk-s">GLM-5.3-FLASH / DEEPSEEK V4.1 FLASH</div></div>
+        <span class="bdg open">$0.15–$0.30 ВХОД</span></div>
+      <ul>
+        <li class="plus">GLM-5.3-Flash: индекс 41.9 при $0.15/$0.50 и 114 ток/с, MIT-лицензия, Arena 1475</li>
+        <li class="plus">DeepSeek V4.1 Flash: агентные бенчи выше GPT-5.6 Sol, веса открыты, $0.30/$1.20</li>
+        <li class="plus">оба варианта влезают в бюджет, где один прогон флагмана съедает дневную норму</li>
+        <li class="minus">на сложных многошаговых задачах разрыв в качестве виден: τ-banking 39.9 против 47.2</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin:38px 0 0">Источники</h3>
+  <div class="src" id="sources"></div>
+  <footer>
+    <span>Собрано 12 сентября 2026 · метрики — Artificial Analysis Data API, прогнано программно</span>
+    <span>Цифры вендорских таблиц помечены отдельно и не смешаны с независимыми</span>
+  </footer>
+</section>
+</main>
+
+<script>
+const DATA = [{"idx": 53.4, "cod": 81.6, "tb": 0.913857677902622, "hle": 0.591, "gpqa": 0.937, "scicode": 0.631, "lcr": 0.853333333333333, "tau": 0.472164948453608, "pin": 10, "pout": 50, "tps": 68.162, "ttft": 145.482, "key": "fable51", "name": "Claude Fable 5.1", "short": "Fable 5.1", "lab": "Anthropic", "color": "#e0805f", "date": "1 сен", "open": false, "dx": -14, "dy": -16, "dy2": null}, {"idx": 52.8, "cod": 76.9, "tb": 0.883895131086142, "hle": 0.547, "gpqa": 0.961, "scicode": 0.565, "lcr": 0.806666666666667, "tau": 0.414432989690722, "pin": 10, "pout": 50, "tps": 64.188, "ttft": 210.056, "key": "astra", "name": "GPT-6 Astra", "short": "GPT-6 Astra", "lab": "OpenAI", "color": "#22c55e", "date": "3 сен", "open": false, "dx": 14, "dy": -14, "dy2": null}, {"idx": 50.7, "cod": 78, "tb": 0.891385767790262, "hle": 0.549, "gpqa": 0.932, "scicode": 0.564, "lcr": 0.793333333333333, "tau": 0.420618556701031, "pin": 5, "pout": 25, "tps": 59.57, "ttft": 36.027, "key": "opus5", "name": "Claude Opus 5", "short": "Opus 5", "lab": "Anthropic", "color": "#c96a4a", "date": "12 авг", "open": false, "dx": 14, "dy": 14, "dy2": null}, {"idx": 48.2, "cod": 75.8, "tb": 0.842696629213483, "hle": 0.487, "gpqa": 0.935, "scicode": 0.588, "lcr": 0.83, "tau": 0.505154639175258, "pin": 1.25, "pout": 4.25, "tps": 418.422, "ttft": 28.713, "key": "muse13", "name": "Muse Spark 1.3", "short": "Muse Spark 1.3", "lab": "Meta", "color": "#5b6cff", "date": "2 сен", "open": false, "dx": 16, "dy": -12, "dy2": null}, {"idx": 47.1, "cod": 77.4, "tb": 0.880149812734082, "hle": 0.495, "gpqa": 0.941, "scicode": 0.571, "lcr": 0.84, "tau": 0.443298969072165, "pin": 4, "pout": 20, "tps": 69.197, "ttft": 116.474, "key": "sol56", "name": "GPT-5.6 Sol", "short": "GPT-5.6 Sol", "lab": "OpenAI", "color": "#15803d", "date": "2 июл", "open": false, "dx": -14, "dy": 16, "dy2": null}, {"idx": 44.9, "cod": 74.8, "tb": 0.838951310861423, "hle": 0.423, "gpqa": 0.917, "scicode": 0.59, "lcr": 0.796666666666667, "tau": 0.503092783505155, "pin": 1.4, "pout": 4.4, "tps": 60.295, "ttft": 3.198, "key": "glm53", "name": "GLM-5.3", "short": "GLM-5.3", "lab": "Z.ai", "color": "#2dd4bf", "date": "19 авг", "open": true, "dx": -14, "dy": 15, "dy2": null}, {"idx": 44.4, "cod": 76.8, "tb": 0.883895131086142, "hle": 0.429, "gpqa": 0.949, "scicode": 0.565, "lcr": 0.803333333333333, "tau": 0.507216494845361, "pin": 2, "pout": 6, "tps": 71.363, "ttft": 38.098, "key": "grok46", "name": "Grok 4.6", "short": "Grok 4.6", "lab": "SpaceXAI", "color": "#cbd5e1", "date": "14 авг", "open": false, "dx": 14, "dy": -12, "dy2": null}, {"idx": 43.8, "cod": 76.2, "tb": 0.850187265917603, "hle": 0.469, "gpqa": 0.935, "scicode": 0.595, "lcr": 0.886666666666667, "tau": 0.45979381443299, "pin": 3, "pout": 15, "tps": 37.201, "ttft": 3.175, "key": "kimi", "name": "Kimi K3", "short": "Kimi K3", "lab": "Moonshot", "color": "#a855f7", "date": "24 авг", "open": false, "dx": -14, "dy": -14, "dy2": null}, {"idx": 42.3, "cod": 76.7, "tb": 0.880149812734082, "hle": 0.429, "gpqa": 0.925, "scicode": 0.55, "lcr": 0.83, "tau": 0.402061855670103, "pin": 2, "pout": 12, "tps": 115.525, "ttft": 107.928, "key": "terra", "name": "GPT-5.6 Terra", "short": "Terra", "lab": "OpenAI", "color": "#0ea5e9", "date": "2 июл", "open": false, "dx": 14, "dy": 13, "dy2": -20}, {"idx": 41.9, "cod": 71.5, "tb": 0.842696629213483, "hle": 0.399, "gpqa": 0.912, "scicode": 0.516, "lcr": 0.8, "tau": 0.472164948453608, "pin": 0.15, "pout": 0.5, "tps": 113.923, "ttft": 2.037, "key": "glm53f", "name": "GLM-5.3-Flash", "short": "GLM-5.3-Flash", "lab": "Z.ai", "color": "#5eead4", "date": "19 авг", "open": true, "dx": -16, "dy": -8, "dy2": 26}, {"idx": 41.2, "cod": 76.3, "tb": 0.876404494382023, "hle": 0.478, "gpqa": 0.953, "scicode": 0.566, "lcr": 0.813333333333333, "tau": 0.449484536082474, "pin": 0.75, "pout": 3.75, "tps": 339.002, "ttft": 14.865, "key": "g38", "name": "Gemini 3.8 Flash", "short": "Gemini 3.8 Flash", "lab": "Google", "color": "#4285f4", "date": "2 сен", "open": false, "dx": 16, "dy": -12, "dy2": -12}, {"idx": 40.3, "cod": 71.8, "tb": 0.812734082397004, "hle": 0.43, "gpqa": 0.927, "scicode": 0.532, "lcr": 0.783333333333333, "tau": 0.51340206185567, "pin": 2, "pout": 6, "tps": 41.593, "ttft": 1.831, "key": "qwenmax", "name": "Qwen3.8 Max", "short": "Qwen3.8 Max", "lab": "Alibaba", "color": "#f97316", "date": "20 авг", "open": false, "dx": -16, "dy": -12, "dy2": null}, {"idx": 39.9, "cod": 73.1, "tb": 0.861423220973783, "hle": 0.38, "gpqa": 0.923, "scicode": 0.506, "lcr": 0.796666666666667, "tau": 0.45360824742268, "pin": 0.15, "pout": 0.47, "tps": 50.992, "ttft": 1.424, "key": "qwenn", "name": "Qwen3.8-Flash-Next", "short": "Qwen3.8-Next", "lab": "Alibaba", "color": "#fb923c", "date": "26 авг", "open": true, "dx": 14, "dy": 12, "dy2": null}, {"idx": 39.5, "cod": null, "tb": null, "hle": 0.392, "gpqa": null, "scicode": 0.519, "lcr": 0.84, "tau": null, "pin": 0.3, "pout": 1.2, "tps": 246.794, "ttft": 0.921, "key": "ds41", "name": "DeepSeek V4.1 Flash", "short": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "color": "#4d6bfe", "date": "10 сен", "open": true, "dx": 15, "dy": 16, "dy2": null}, {"idx": 39.4, "cod": 76.1, "tb": 0.857677902621723, "hle": 0.479, "gpqa": 0.945, "scicode": 0.572, "lcr": 0.816666666666667, "tau": 0.327835051546392, "pin": 0.75, "pout": 3.75, "tps": 330.545, "ttft": 8.925, "key": "g37", "name": "Gemini 3.7 Flash", "short": "Gemini 3.7", "lab": "Google", "color": "#1d4ed8", "date": "10 июл", "open": false, "dx": -16, "dy": 8, "dy2": 22}];
+const VENDOR = [["Terminal-Bench 4.0", "57.7", "55.8", "52.3", "42.0", "37.3"], ["AutomationBench", "41.4", "31.4", "—", "—", "18.1"], ["FrontierMath Tier 4 (v2)", "97.6", "87.8", "73.2", "87.8", "—"], ["HLE с инструментами", "57.2", "65.0", "63.6", "63.8", "—"], ["GPQA Diamond", "96.0", "93.7", "—", "—", "—"], ["Terminal-Bench Science 0.1", "64.6", "52.6", "—", "—", "—"], ["DeepSWE v1.1", "74.1", "67.4", "74.0", "—", "73.0"], ["ARC-AGI-3", "99.9", "—", "30.2", "—", "7.8"], ["ExploitBench (кибербез)", "100.0", "70.0", "—", "—", "78.5"], ["SRE-Bench, реверс бинарей", "88.0", "12.5", "—", "—", "55.9"], ["ScreenSpot-Pro (экран)", "92.7", "87.3", "—", "—", "—"], ["ExploitGym honeypot ↓", "0.0", "—", "—", "—", "48.2"]];
+const ARENA = [["1", "claude-fable-5", "Anthropic", "1506 ±5", "29 683", "$10 / $50", "1M"], ["2", "claude-opus-4-6-high", "Anthropic", "1505 ±4", "71 992", "$5 / $25", "1M"], ["3", "claude-opus-4-7-high", "Anthropic", "1502 ±4", "59 992", "$5 / $25", "1M"], ["4", "claude-fable-5.1-max", "Anthropic", "1501 ±8", "5 447", "$10 / $50", "1M"], ["5", "muse-spark-1.2 (xHigh)", "Meta", "1499 ±11", "3 229", "$1.25 / $4.25", "N/A"], ["6", "claude-opus-4-6", "Anthropic", "1497 ±3", "75 898", "$5 / $25", "1M"], ["9", "claude-opus-5-high", "Anthropic", "1493 ±4", "41 777", "$5 / $25", "1M"], ["10", "gemini-3.8-flash-high", "Google", "1493 ±9", "5 094 <span class='mut'>предв.</span>", "$0.75 / $3.75", "1M"], ["11", "gemini-3.7-flash-high", "Google", "1490 ±8", "5 645 <span class='mut'>предв.</span>", "$0.75 / $3.75", "1M"], ["15", "glm-5.3-max", "Z.ai (MIT)", "1486 ±7", "10 559", "$1.40 / $4.40", "1M"], ["17", "kimi-k3-max", "Moonshot", "1485 ±5", "20 911", "N/A", "N/A"], ["19", "gpt-5.6-sol-xhigh", "OpenAI", "1482 ±5", "26 611", "$4 / $20", "N/A"], ["21", "qwen3.8-max", "Alibaba", "1481 ±6", "16 263", "$2 / $6", "1M"], ["24", "gpt-6-astra-max", "OpenAI", "1478 ±13", "2 059 <span class='mut'>набирает</span>", "N/A", "N/A"], ["28", "glm-5.3-flash", "Z.ai (MIT)", "1475 ±7", "9 479", "$0.07 / $0.25", "1M"], ["43", "mimo-v2.5-pro", "Xiaomi (MIT)", "1468 ±4", "60 523", "$0.43 / $0.87", "1.1M"], ["56", "deepseek-v4-pro", "DeepSeek (MIT)", "1457 ±4", "54 142", "$1.32 / $3.96", "1M"]];
+const INDEP = [["AA Intelligence Index (max)", "66", "61", "—", "—"], ["AA Coding Agent Index", "70 (Claude Code)", "67 (Codex)", "60", "55"], ["AA стоимость задачи индекса", "$3.76", "$1.67", "$5.42", "$6.16"], ["Токенов на задачу (AA)", "78k", "27k", "52k", "82k"], ["Arena Elo, 11 сен", "1501 (5 447 голосов)", "1478 (2 059)", "1493 (41 777)", "1482 (26 611)"], ["TB 2.1, независимый прогон", "91.4%", "88.4%", "89.1%", "88.8%"], ["LCR, длинный контекст (AA)", "85.3%", "80.7%", "79.3%", "84.0%"], ["τ-banking, агент-платежи", "47.2%", "41.4%", "42.1%", "44.3%"], ["SciCode (AA)", "63.1%", "56.5%", "56.4%", "57.1%"], ["Цена $/1M вх / вых", "$10 / $50", "$10 / $50", "$5 / $25", "$4 / $20"]];
+const DSBENCH = [["DeepSWE v1.1 — реальные issues", "74.2 ★", "73.0", "74.0"], ["Terminal-Bench 2.1", "90.6 ★", "88.8", "89.1"], ["AutomationBench — автоматизация", "54.8 ★", "45.8", "50.3"], ["Agent's Last Exam — агентное рассуждение", "31.8 ★", "26.7", "28.6"], ["CyberGym — кибербезопасность", "88.1 ★", "84.5", "—"], ["HLE с инструментами", "63.9 ★", "—", "63.6"], ["Terminal-Bench 4.0 — длинный горизонт", "31.2", "39.9", "51.8 ★"], ["NL2Repo-Bench — работа с репозиторием", "64.0", "56.8", "75.3 ★"], ["ProgramBench (Almost@1)", "20.3", "23.0", "37.0 ★"]];
+const SOURCES = [{"u": "https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra", "d": "9 сентября", "t": "Artificial Analysis о GPT-6 Astra", "h": "Независимые индексы: интеллект 61 против 66 у Fable 5.1, Terminal-Bench 4.0 — 59%, дороже всех по стоимости задачи"}, {"u": "https://openai.com/index/gpt-6-astra/", "d": "3 сентября", "t": "Анонс GPT-6 Astra", "h": "Вендорские таблицы, кибер-бенчмарки и первый статус Critical по Preparedness Framework"}, {"u": "https://www.anthropic.com/claude-fable-and-mythos-5-1", "d": "1 сентября", "t": "Claude Fable 5.1 и Mythos 5.1", "h": "Кэш-чтение подешевело на 75% до $0.25; Mythos — та же модель с другими сейфгардами, по приглашению"}, {"u": "https://www.vellum.ai/blog/gpt-6-astra-benchmarks-explained", "d": "12 сентября", "t": "Разбор всех таблиц Astra", "h": "Где цифры вендора не сходятся с независимыми: HLE, DeepSWE, программа Daybreak для кибер-доступа"}, {"u": "https://www.datacamp.com/blog/gpt-6-astra-vs-claude-fable-5-1", "d": "5 сентября", "t": "Astra против Fable 5.1: прямое сравнение", "h": "Цены, контекст, стоимость задачи: $1.67 против $3.76 при одинаковом тарифе $10/$50"}, {"u": "https://www.tbench.ai/", "d": "сентябрь 2026", "t": "Лидерборд Terminal-Bench", "h": "Публичные прогоны агентных терминальных задач — версия 4.0 добавила длинный горизонт"}, {"u": "https://lmarena.ai/leaderboard/text", "d": "11 сентября", "t": "Text Arena: 8 126 041 голос", "h": "Слепые сравнения 401 модели; свежие флагманы ещё набирают статистику (у Astra 2 059 голосов, ±13)"}, {"u": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash", "d": "10 сентября", "t": "Веса DeepSeek V4.1 Flash", "h": "552B backbone + 196B Engram, лицензия MIT, 890 байт KV-кэша на токен"}, {"u": "https://flowtivity.ai/blog/deepseek-v4-1-flash-benchmarks/", "d": "10 сентября", "t": "Бенчмарки и экономика V4.1 Flash", "h": "Как сжатие KV-кэша делает агентные прогоны дешёвыми: кэш-хит $0.003–$0.006 за миллион"}, {"u": "https://api-docs.deepseek.com/quick_start/pricing", "d": "12 сентября", "t": "Прайс DeepSeek", "h": "$0.30/$1.20 в пик и $0.15/$0.60 вне пика; V4 Pro выключают 14 сентября"}, {"u": "https://llm-stats.com/models/muse-spark-1.3", "d": "11 сентября", "t": "Muse Spark 1.3", "h": "75.4% DeepSWE, 98.5% MRCR на длинном контексте, на 20% меньше вызовов инструментов"}, {"u": "https://news.ycombinator.com/item?id=45221883", "d": "10 сентября", "t": "Hacker News о запуске V4.1 Flash", "h": "409 очков, 214 комментариев — спор в основном про сжатие KV-кэша и цену конкурентов"}];
+const TIMELINE = [{"date": "1 сентября", "name": "Claude Fable 5.1 + Mythos 5.1", "note": "Anthropic. Кэш-чтение −75%, 52.6% Terminal-Bench на запуске", "color": "#e0805f"}, {"date": "2 сентября", "name": "Muse Spark 1.3", "note": "Meta. Четвёртая Muse за пять месяцев: 75.4% DeepSWE, −25% токенов", "color": "#5b6cff"}, {"date": "2 сентября", "name": "Gemini 3.8 Flash (+ Cyber)", "note": "Google. Та же цена $0.75/$3.75, отдельная кибер-версия по заявке", "color": "#4285f4"}, {"date": "3 сентября", "name": "GPT-6 Astra", "note": "OpenAI. Первый флагман со статусом Critical по кибербезопасности", "color": "#22c55e"}, {"date": "10 сентября", "name": "DeepSeek V4.1 Flash", "note": "Веса открыты под MIT, $0.30/$1.20, вытесняет собственную V4 Pro", "color": "#4d6bfe"}];
+
+const fmt=(n,d=1)=>n==null?'—':Number(n).toFixed(d);
+const money=n=>n==null?'—':'$'+(n>=1?Number(n).toFixed(2).replace(/\.00$/,''):Number(n).toFixed(2));
+const C=DATA.map(d=>d.color);
+function svg(w,h){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  s.setAttribute('viewBox',`0 0 ${w} ${h}`);s.setAttribute('preserveAspectRatio','xMidYMid meet');return s;}
+
+/* ---------- scroll UI ---------- */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.body.scrollHeight-innerHeight;
+  prog.style.width=(scrollY/h*100)+'%';},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.06});
+document.querySelectorAll('section').forEach(s=>s.classList.add('reveal'));
+
+/* ---------- KPI ---------- */
+const best=[...DATA].sort((a,b)=>b.idx-a.idx)[0];
+const cheap=[...DATA].filter(d=>d.idx>=39).sort((a,b)=>a.pout-b.pout)[0];
+const fast=[...DATA].sort((a,b)=>b.tps-a.tps)[0];
+const open=[...DATA].filter(d=>d.open).sort((a,b)=>b.idx-a.idx)[0];
+document.getElementById('kpis').innerHTML=[
+ ['топ индекса',fmt(best.idx),best.name+' · '+money(best.pin)+'/'+money(best.pout)+' за 1M'],
+ ['лучший дешёвый',fmt(cheap.idx),cheap.name+' · '+money(cheap.pin)+'/'+money(cheap.pout)+' за 1M'],
+ ['макс. скорость',Math.round(fast.tps)+' ток/с',fast.name+' · индекс '+fmt(fast.idx)],
+ ['открытые веса',fmt(open.idx),open.name+' · MIT, веса скачиваемы']
+].map(k=>`<div class="kpi"><div class="tag">${k[0]}</div><div class="v">${k[1]}</div><div class="k">${k[2]}</div></div>`).join('');
+
+/* ---------- TIMELINE ---------- */
+document.getElementById('tl').innerHTML=TIMELINE.map(t=>
+ `<div class="ev"><span class="dot" style="background:${t.color}"></span>
+   <div class="d">${t.date}</div><div class="n">${t.name}</div><div class="t">${t.note}</div></div>`).join('');
+
+/* ---------- generic tooltip ---------- */
+function bindTip(host,tipEl){
+  return {
+    show(html,x,y){tipEl.innerHTML=html;tipEl.classList.add('on');
+      tipEl.style.left=x+'px';tipEl.style.top=y+'px';},
+    hide(){tipEl.classList.remove('on');}
+  };
+}
+function row(c,k,v){return `<div class="tr"><span class="lab"><span class="sw" style="background:${c}"></span>${k}</span><b>${v}</b></div>`;}
+
+/* ---------- CHART 1: rank bars ---------- */
+let rankFilter='all';
+function drawRank(){
+  const host=document.getElementById('chart-rank');
+  const tip=bindTip(host,document.getElementById('tip-rank'));
+  let rows=[...DATA].sort((a,b)=>b.idx-a.idx);
+  if(rankFilter==='lab'){const seen={};rows=rows.filter(d=>{if(seen[d.lab])return false;seen[d.lab]=1;return true});}
+  if(rankFilter==='open')rows=rows.filter(d=>d.open);
+  if(rankFilter==='value')rows=rows.filter(d=>d.pout<=5);
+  const W=1560,rowH=30,padL=300,padR=70,H=rows.length*rowH+30;
+  const maxIdx=Math.ceil(Math.max(...DATA.map(d=>d.idx))/10)*10;
+  const s=svg(W,H);let g='';
+  [10,20,30,40,50,60].filter(v=>v<=maxIdx).forEach(v=>{const x=padL+(v/maxIdx)*(W-padL-padR);
+    g+=`<line class="gl" x1="${x}" y1="0" x2="${x}" y2="${H-24}"/>
+        <text class="tick" x="${x}" y="${H-7}" text-anchor="middle">${v}</text>`;});
+  rows.forEach((d,i)=>{
+    const y=i*rowH+6,w=Math.max(2,(d.idx/maxIdx)*(W-padL-padR));
+    g+=`<text class="lbl" x="${padL-12}" y="${y+14}" text-anchor="end">${d.name}</text>
+        <rect class="bar grow" style="transform-origin:${padL}px 0;animation-delay:${i*45}ms" x="${padL}" y="${y}" width="${w}" height="${rowH-11}"
+              rx="4" fill="${d.color}" fill-opacity=".82" stroke="${d.color}" stroke-opacity=".35"/>
+        <text class="lbl2" x="${padL+w+10}" y="${y+14}" fill="${d.color}">${fmt(d.idx)}</text>
+        <rect class="hit" x="0" y="${y-4}" width="${W}" height="${rowH-3}" fill="transparent" data-i="${i}"/>`;
+  });
+  s.innerHTML=g;
+  s.querySelectorAll('.hit').forEach(r=>{
+    const d=rows[+r.dataset.i];
+    r.classList.add('doton');
+    r.addEventListener('mousemove',e=>{
+      const b=host.getBoundingClientRect();
+      tip.show(`<div class="tt">${d.name}</div>
+        ${row(d.color,'индекс',fmt(d.idx))}${row(d.color,'индекс кода',fmt(d.cod))}
+        ${row(d.color,'цена за 1M',money(d.pin)+' / '+money(d.pout))}
+        ${row(d.color,'скорость',Math.round(d.tps)+' ток/с')}
+        ${row(d.color,'релиз',d.date)}`,e.clientX-b.left,e.clientY-b.top);});
+    r.addEventListener('mouseleave',()=>tip.hide());
+  });
+  host.appendChild(s);
+}
+drawRank();
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  rankFilter=b.dataset.f;
+  const host=document.getElementById('chart-rank');host.querySelector('svg')?.remove();drawRank();}));
+
+/* ---------- CHART 2: price scatter ---------- */
+function pareto(rows){
+  const pts=rows.filter(d=>d.pin!=null).sort((a,b)=>a.blend-b.blend);
+  const out=[];let bestIdx=-1;
+  for(const p of pts){if(p.idx>bestIdx){out.push(p);bestIdx=p.idx;}}
+  return out;
+}
+function scatter(hostId,tipId,{xOf,yOf,yLabel,xLabel,yLog=true,xLog=false,rOf=null,paretoF=false,idOf}){
+  const host=document.getElementById(hostId);host.querySelector('svg')?.remove();
+  const tip=bindTip(host,document.getElementById(tipId));
+  const W=1560,H=620,padL=86,padR=210,padT=34,padB=64;
+  const xs=DATA.map(xOf),ys=DATA.map(yOf).filter(v=>v!=null);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const X=v=>{const a=xLog?Math.log10(v)-Math.log10(x0):v-x0,b=xLog?Math.log10(x1)-Math.log10(x0):x1-x0;
+    return padL+(a/b)*(W-padL-padR);};
+  const Y=v=>{const a=yLog?Math.log10(v)-Math.log10(y0):v-y0,b=yLog?Math.log10(y1)-Math.log10(y0):y1-y0;
+    return H-padB-(a/b)*(H-padT-padB);};
+  let g='';
+  const niceStep=(span)=>{const raw=span/6;return raw>=10?Math.ceil(raw/10)*10:raw>=2?Math.ceil(raw/2)*2:Math.ceil(raw*2)/2;};
+  let yticks2;
+  if(yLog){yticks2=[0.1,0.15,0.25,0.5,1,2,5,10,20,50].filter(v=>v>=y0*0.95&&v<=y1*1.05);}
+  else{const st=niceStep(y1-y0);yticks2=[];for(let v=Math.ceil(y0/st)*st;v<=y1*1.02;v+=st)yticks2.push(+v.toFixed(3));}
+  yticks2.forEach(v=>{
+    g+=`<line class="gl" x1="${padL}" y1="${Y(v)}" x2="${W-padR}" y2="${Y(v)}"/>
+        <text class="tick" x="${padL-12}" y="${Y(v)+4}" text-anchor="end">${yLog?'$'+v:v}</text>`;});
+  let xticks2;
+  if(xLog){xticks2=[20,50,100,200,400].filter(v=>v>=x0*0.85&&v<=x1*1.15);}
+  else{const st=niceStep(x1-x0);xticks2=[];for(let v=Math.ceil(x0/st)*st;v<=x1*1.02;v+=st)xticks2.push(+v.toFixed(3));}
+  xticks2.forEach(v=>{
+    g+=`<line class="gl" x1="${X(v)}" y1="${padT}" x2="${X(v)}" y2="${H-padB}"/>
+        <text class="tick" x="${X(v)}" y="${H-padB+22}" text-anchor="middle">${v}</text>`;});
+  if(paretoF){
+    const p=pareto(DATA),pts=p.map(d=>`${X(d.idx)},${Y(d.blend)}`).join(' ');
+    g+=`<polyline points="${pts}" fill="none" stroke="${'#3ddc97'}" stroke-width="2" stroke-dasharray="6 5" opacity=".8"/>`;
+  }
+  const rmax=Math.max(...DATA.map(d=>rOf?rOf(d):1));
+  DATA.forEach(d=>{
+    const x=X(xOf(d)),y=Y(yOf(d));
+    if(yOf(d)==null)return;
+    const r=rOf?18+34*Math.sqrt(rOf(d)/rmax):8;
+    g+=`<circle class="doton" data-k="${d.key}" cx="${x}" cy="${y}" r="${r}" fill="${d.color}" fill-opacity=".30" stroke="${d.color}" stroke-width="1.6"/>`;
+  });
+  DATA.forEach(d=>{
+    if(yOf(d)==null)return;
+    const x=X(xOf(d)),y=Y(yOf(d));
+    const anch=d.dx<0?'end':'start';
+    const ly=y+(d.dy2!=null?d.dy2:d.dy);
+    g+=`<text class="lbl" x="${x+d.dx}" y="${ly}" text-anchor="${anch}" fill="${d.color}">${d.short||d.name}</text>`;
+  });
+  if(rOf){
+    const lx=padL+330, ly=H-padB-4;
+    [[0.5,'$0,5'],[3,'$3'],[20,'$20']].forEach(([v,t],i)=>{
+      const r=18+34*Math.sqrt(v/rmax);
+      g+=`<circle cx="${lx+i*90}" cy="${ly-r}" r="${r}" fill="#8b93a7" fill-opacity=".14" stroke="#8b93a7" stroke-width="1.2"/>`
+        +`<text class="tick" x="${lx+i*90}" y="${ly+18}" text-anchor="middle">${t}</text>`;
+    });
+    g+=`<text class="tick" x="${lx+230}" y="${ly+18}">← цена за 1M смешанных</text>`;
+  }
+  g+=`<text class="tick" x="${(W-padR+padL)/2}" y="${H-16}" text-anchor="middle">${xLabel}</text>`;
+  g+=`<text class="tick" transform="translate(22,${(H-padT+padB)/2}) rotate(-90)" text-anchor="middle">${yLabel}</text>`;
+  const s=svg(W,H);s.innerHTML=g;
+  s.querySelectorAll('circle').forEach(c=>{
+    const d=DATA.find(x=>x.key===c.dataset.k);
+    c.addEventListener('mousemove',e=>{const b=host.getBoundingClientRect();
+      tip.show(`<div class="tt">${d.name}</div>
+        ${row(d.color,'индекс',fmt(d.idx))}${row(d.color,'цена 1M',money(d.pin)+' / '+money(d.pout))}
+        ${row(d.color,'смешанная',money(d.blend))}${row(d.color,'скорость',Math.round(d.tps)+' ток/с')}
+        ${row(d.color,'ttft',fmt(d.ttft,1)+' с')}`,e.clientX-b.left,e.clientY-b.top);});
+    c.addEventListener('mouseleave',()=>tip.hide());
+  });
+  host.appendChild(s);
+}
+DATA.forEach(d=>d.blend=+(d.pin*0.75+d.pout*0.25).toFixed(3));
+scatter('chart-price','tip-price',{
+  xOf:d=>d.idx,yOf:d=>d.blend,lx:null,
+  xLabel:'Artificial Analysis Intelligence Index →',yLabel:'цена за 1M смешанных токенов (75/25), лог-шкала, $',
+  paretoF:true});
+scatter('chart-speed','tip-speed',{
+  xOf:d=>d.tps,yOf:d=>d.idx,xLog:true,yLog:false,rOf:d=>d.blend,
+  xLabel:'скорость вывода, токенов/с (лог-шкала) →',yLabel:'индекс интеллекта →'});
+
+/* ---------- CHART: efficiency ---------- */
+(function(){
+  const host=document.getElementById('chart-eff');
+  const items=[
+    {n:'GPT-6 Astra (max)',c:'#22c55e',tok:27,cost:1.67,ci:62},
+    {n:'Claude Fable 5.1 (max + fallback)',c:'#e0805f',tok:78,cost:3.76,ci:62},
+    {n:'Claude Opus 5 (max)',c:'#c96a4a',tok:52,cost:5.42,ci:60},
+    {n:'GPT-5.6 Sol (max)',c:'#15803d',tok:82,cost:6.16,ci:55},
+    {n:'Muse Spark 1.3 (Muse Code)',c:'#5b6cff',tok:60,cost:2.1,ci:54}
+  ];
+  const W=1560,rowH=78,H=items.length*rowH+40,mid=W/2+40;
+  let g=`<line class="gl" x1="${mid}" y1="10" x2="${mid}" y2="${H-26}"/>`;
+  items.forEach((it,i)=>{
+    const y=i*rowH+18;
+    const wt=(it.tok/90)*520,wc=(it.cost/7)*520;
+    g+=`<text class="lbl" x="${mid-560}" y="${y+16}" text-anchor="start">${it.n}</text>
+        <text class="lbl2" x="${mid-560}" y="${y+36}">индекс агента: ${it.ci}</text>
+        <rect class="bar grow" style="transform-origin:${mid}px 0;animation-delay:${i*70}ms" x="${mid}" y="${y}" width="${wt}" height="20" rx="4" fill="${it.c}" fill-opacity=".8"/>
+        <text class="lbl2" x="${mid+wt+10}" y="${y+15}" fill="${it.c}">${it.tok}k токенов на задачу</text>
+        <rect class="bar grow" style="transform-origin:${mid}px 0;animation-delay:${i*70+120}ms" x="${mid-wc}" y="${y+30}" width="${wc}" height="20" rx="4" fill="#6ea8ff" fill-opacity=".5"/>
+        <text class="lbl2" x="${mid-wc-10}" y="${y+45}" text-anchor="end" fill="#8fc0ff">$${it.cost.toFixed(2)} за задачу</text>`;
+  });
+  g+=`<text class="tick" x="${mid+520}" y="${H-6}" text-anchor="end">→ дороже/больше</text>
+      <text class="tick" x="${mid-520}" y="${H-6}" text-anchor="start">← дешевле/меньше</text>`;
+  const s=svg(W,H);s.innerHTML=g;host.appendChild(s);
+})();
+
+/* ---------- HEATMAP ---------- */
+const HCOLS=[['tb','Terminal-Bench 2.1'],['hle','HLE'],['gpqa','GPQA Diamond'],['scicode','SciCode'],['lcr','LCR (long ctx)'],['tau','τ-banking']];
+let hmSort='idx',hmDir=-1;
+function drawHeat(){
+  const rows=[...DATA].sort((a,b)=>hmDir*((a[hmSort]??-1)-(b[hmSort]??-1)));
+  const norm={};HCOLS.forEach(([k])=>{const v=DATA.map(d=>d[k]).filter(x=>x!=null);norm[k]=[Math.min(...v),Math.max(...v)];});
+  let h='<thead><tr><th class="s" data-k="idx">модель</th><th data-k="idx">индекс</th>'+
+    HCOLS.map(([k,t])=>`<th data-k="${k}">${t}</th>`).join('')+'<th data-k="tps">ток/с</th><th data-k="pout">$/1M вых</th></tr></thead><tbody>';
+  rows.forEach(d=>{
+    h+=`<tr><td class="s"><span class="lab"><span class="sw" style="background:${d.color}"></span><span class="nm">${d.name}</span></span>
+        ${d.open?' <span class="bdg open">OPEN</span>':''}</td>
+        <td class="num">${fmt(d.idx)}</td>`;
+    HCOLS.forEach(([k])=>{
+      const v=d[k];
+      if(v==null){h+=`<td class="mut">—</td>`;return;}
+      const [a,b]=norm[k],t=(v-a)/(b-a||1);
+      const col=`hsl(${210-140*t} 62% ${9+19*t}%)`;
+      h+=`<td style="background:${col};color:#f2f6ff">${(v*100).toFixed(1)}</td>`;
+    });
+    h+=`<td class="num">${Math.round(d.tps)}</td><td class="num">${money(d.pout)}</td></tr>`;
+  });
+  const t=document.getElementById('hm-table');t.innerHTML=h+'</tbody>';
+  t.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{
+    const k=th.dataset.k;if(!k)return;
+    if(hmSort===k)hmDir*=-1;else{hmSort=k;hmDir=-1;}
+    drawHeat();
+  }));
+}
+drawHeat();
+
+/* ---------- vendor / independent tables ---------- */
+function mkTable(host,cols,rows){
+  const el=document.getElementById(host);
+  const t=el.tagName==='TABLE'?el:el.appendChild(document.createElement('table'));
+  t.innerHTML=
+   '<thead><tr>'+cols.map((c,i)=>`<th class="${i===0?'s':''}">${c}</th>`).join('')+'</tr></thead><tbody>'+
+   rows.map(r=>'<tr>'+r.map((c,i)=>`<td class="${i===0?'s':'num'}">${c}</td>`).join('')+'</tr>').join('')+'</tbody>';
+}
+mkTable('vendor-table',['бенчмарк','Astra','Fable 5.1','Opus 5','Fable 5','Sol'],VENDOR);
+mkTable('indep-table',['метрика','Fable 5.1','Astra','Opus 5','Sol'],INDEP);
+mkTable('arena-table',['#','модель','лаборатория','Elo','голоса','$/1M','контекст'],ARENA);
+mkTable('ds-table',['бенчмарк','V4.1 Flash','GPT-5.6 Sol','Opus 5'],DSBENCH);
+
+/* ---------- calculator ---------- */
+function bright(c,k){const a=c.match(/[0-9a-f]{2}/gi).map(h=>parseInt(h,16));
+  return '#'+a.map(v=>Math.round(v+(255-v)*k).toString(16).padStart(2,'0')).join('');}
+function calc(){
+  const i=Math.max(0,+document.getElementById('cin').value||0);
+  const o=Math.max(0,+document.getElementById('cout').value||0);
+  const rows=DATA.map(d=>({d,c:i*d.pin+o*d.pout})).sort((a,b)=>a.c-b.c);
+  const max=Math.max(...rows.map(r=>r.c))||1;
+  const top=rows[rows.length-1],cheap=rows[0];
+  document.getElementById('ratio').textContent=(top.c/Math.max(cheap.c,0.01)).toFixed(0)+'×';
+  document.getElementById('calc-res').innerHTML=rows.map(r=>{
+    const w=Math.max(2,(r.c/max)*100);
+    return `<div class="rrow"><div class="nm" style="display:flex;align-items:center;gap:8px">
+      <span class="sw" style="background:${r.d.color};width:9px;height:9px;border-radius:3px"></span>${r.d.name}</div>
+      <div><div class="rbar" style="width:${w}%;background:linear-gradient(90deg,${r.d.color}cc,${r.d.color}33)"></div></div>
+      <div><div class="rcost" style="color:${bright(r.d.color,0.5)}">$${r.c.toFixed(r.c<100?2:0)}</div>
+      <div class="rnote">${money(r.d.pin)}/${money(r.d.pout)}</div></div></div>`;}).join('');
+}
+['cin','cout'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+document.querySelectorAll('.range button').forEach(b=>b.addEventListener('click',()=>{
+  document.getElementById('cin').value=b.dataset.in;document.getElementById('cout').value=b.dataset.out;calc();}));
+calc();
+
+/* ---------- sources ---------- */
+document.getElementById('sources').innerHTML=SOURCES.map(s=>
+ `<a href="${s.u}" target="_blank" rel="noopener"><span class="dt">${s.d}</span><span>${s.t}<br><span style="color:var(--tx3);font-size:12.5px">${s.h}</span></span></a>`).join('');
+
+/* reveal on scroll */
+document.querySelectorAll('section').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>

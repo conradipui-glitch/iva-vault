@@ -9,7 +9,7 @@ source: "daily/2026-08-23.md"
 domain: "work"
 last_accessed: "2026-08-25"
 tier: "warm"
-relevance: 0.73
+relevance: 0.715
 ---
 
 # Promptbook: промпты как код во внедрении

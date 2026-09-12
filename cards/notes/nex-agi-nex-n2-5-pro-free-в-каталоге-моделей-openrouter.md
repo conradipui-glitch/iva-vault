@@ -9,7 +9,7 @@ source: "daily/2026-09-10.md"
 domain: "knowledge"
 last_accessed: "2026-09-10"
 tier: "active"
-relevance: 0.97
+relevance: 0.955
 ---
 
 # nex-agi/nex-n2.5-pro:free в каталоге моделей OpenRouter
