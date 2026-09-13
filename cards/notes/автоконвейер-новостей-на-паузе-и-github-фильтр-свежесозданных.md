@@ -9,7 +9,7 @@ source: "daily/2026-09-10.md"
 domain: "knowledge"
 last_accessed: "2026-09-10"
 tier: "active"
-relevance: 0.955
+relevance: 0.94
 ---
 
 # Автоконвейер новостей на паузе и GitHub-фильтр свежесозданных
