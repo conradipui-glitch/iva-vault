@@ -9,7 +9,7 @@ created: "2026-09-14"
 source: "daily/2026-09-14.md"
 last_accessed: "2026-09-14"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 ---
 
 # Сбой ночного прохода и истёкший Codex-токен

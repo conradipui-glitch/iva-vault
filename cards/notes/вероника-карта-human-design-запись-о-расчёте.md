@@ -9,7 +9,7 @@ created: "2026-09-13"
 source: "daily/2026-09-13.md"
 last_accessed: "2026-09-13"
 tier: "active"
-relevance: 0.985
+relevance: 0.97
 ---
 
 # Вероника — карта Human Design (запись о расчёте)

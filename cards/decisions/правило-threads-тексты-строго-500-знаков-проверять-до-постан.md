@@ -10,7 +10,7 @@ created: 2026-08-16
 source: daily/2026-08-16.md
 last_accessed: 2026-08-17
 tier: "cold"
-relevance: 0.58
+relevance: 0.565
 ---
 
 # Правило: Threads-тексты строго ≤500 знаков, проверять до постановки в очередь
