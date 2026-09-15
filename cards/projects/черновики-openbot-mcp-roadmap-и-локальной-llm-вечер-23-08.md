@@ -8,8 +8,8 @@ created: "2026-08-24"
 source: "daily/2026-08-23.md"
 domain: "work"
 last_accessed: "2026-08-25"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Черновики OpenBot, MCP Roadmap и локальной LLM (вечер 23.08)

@@ -1,17 +1,16 @@
 ---
-tier: "cold"
-relevance: 0.565
+tier: "active"
+relevance: 1.0
 type: project
-description: >-
-  Публичная контент-платформа toharo-lab на GitHub Pages: 17.08 опубликована статья dsh-vision-router, анонсирована в TG и Threads; сайт-обложка обновлена.
-tags: [toharo-lab, github-pages, website, content-platform, pending, article, vision-router, publishing, covers]
+description: "Сайт toharo-lab: 15.09 — верификация Google Search Console и проверка sitemap; черновик статьи DeepSeek по SEO-брифу готов (не опубликован), ждёт ответы для «Мой опыт»."
+tags: ["toharo-lab","github-pages","website","content-platform","pending","article","vision-router","publishing","covers","seo","search-console","deepseek"]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-10
 source: daily/2026-08-10.md
-last_accessed: 2026-08-17
-updated: 2026-08-18
+last_accessed: 2026-09-16
+updated: "2026-09-16"
 access_count: 1
 ---
 # сайт-toharo-lab-github-pages-контент-платформа
@@ -40,6 +39,11 @@ toharo-lab — публичный статический сайт на GitHub Pa
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/стили-обложек-по-площадкам-разделение-tg-сайт-threads]]
+- [[cards/notes/фронтир-сентябрь-2026-четыре-тезиса-разбора]]
+
+## History
+
+- 2026-08-16: Черновик статьи dsh-vision-router ожидал одобрения владельца перед публикацией.
 
 ## Log
 
@@ -65,7 +69,14 @@ toharo-lab — публичный статический сайт на GitHub Pa
   - Владелец предложил (13:27) делать на сайте бенчмарк-сравнения моделей (Gemini 3.7 Flash и др.) — гипотеза, не реализовано.
   - Предложено: пост Бориса про бложик + закреп (pinChatMessage) — ожидает ок владельца (текст и ссылка /blog/ vs /).
 - 2026-08-17: 16.08.2026 подготовлен черновик статьи «dsh-vision-router» для сайта toharo-lab: обзор плагина зрения для агентов (архитектура «зрение по вызову», 11 инструментов: OCR, поиск кнопки, попиксельное сравнение UI, обводка в SVG; цикл «собрал → сравнил → исправил» с финальным расхождением 2,54%; слой устойчивости v1.4.1; сравнение с vision-sidecar и oh-dsh; рынок dsh-market, 800+ плагинов). Факты — только из README/CHANGELOG репозиториев, ссылки на первоисточники стоят, ~8 минут чтения. Статус: ждёт ОК владельца (обложка и статья), после — пуш на сайт (сборка + деплой GitHub Pages) и анонс в TG/Threads.
-
-## History
-
-- 2026-08-16: Черновик статьи dsh-vision-router ожидал одобрения владельца перед публикацией.
+- 2026-09-16:
+  toharo-lab — публичный статический сайт (Next.js, GitHub Pages) для публикации материалов об ИИ: https://conradipui-glitch.github.io/toharo-lab/, репозиторий /root/toharo-lab (https://github.com/conradipui-glitch/toharo-lab).
+  
+  15.09.2026 (вечер, по записи транскрипта 16:53–16:58) — SEO-работа по Search Console:
+  - Владелец прислал HTML-файл верификации Google Search Console (google3703b5f4f6653c0c.html) и попросил встроить его в сайт. Файл положен в public/ репозитория (Next.js отдаёт public/ в корень), закоммичен и запушен; сборка GitHub Pages прошла, URL отдаёт 200 с нужной строкой. В репозитории также подтянулся коммит владельца «gcs» с тем же файлом.
+  - Владелец попросил создать sitemap, если её нет — карта уже есть: sitemap.xml (15 URL) генерируется при сборке из src/app/sitemap.ts, robots.txt ссылается на неё. Для индексации владельцу осталось отправить https://conradipui-glitch.github.io/toharo-lab/sitemap.xml в разделе Sitemap Search Console.
+  
+  19:27–19:45 — статья DeepSeek по SEO-брифу:
+  - Владелец дал ТЗ: git pull (появилась research/ — контур спроса; бриф research/briefs/deepseek.md, контекст research/page-plan/2026-09-15.md), черновик по правилам сайта (AGENTS.md + docs/editorial.md), категория «Статья», slug deepseek, published: false; обложка в сайтовом стиле (крем/лайм, 16:9); показать черновик и обложку на утверждение, не публиковать; раздел «Мой опыт» — под ответы владельца.
+  - Сделано: черновик ~10,5 тыс. знаков, проверка сайта прошла, обложка отправлена владельцу, всё закоммичено, не публикуется. Структура по брифу: Answer-блок (DeepSeek — открытые модели из Ханчжоу; chat.deepseek.com без VPN и бесплатно; platform.deepseek.com с OpenAI/Anthropic-совместимым API), актуальные версии V4.1-Flash (10.09.2026, 552B MoE, контекст 1M, зрение) и V4-Pro (маршрутизация v4-pro на Flash с 14.09), инструкция для русского, границы бесплатного тарифа, цензура (политика фильтруется, техника нет, фильтр в шлюзе чата), таблица сравнения и цены API, cURL и env для Claude Code, FAQ, перелинковка на «Шесть моделей, одна задача».
+  - Открыто: «Мой опыт» — заглушка [ОПЫТ: …], ждём ответы владельца; убранная жёсткая вводная («платить по $20 не имеет смысла») — вернуть по желанию владельца; обложка — кит из геометрии, перегенерация по просьбе.

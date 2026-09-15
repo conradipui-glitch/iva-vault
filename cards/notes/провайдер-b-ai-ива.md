@@ -9,8 +9,8 @@ source: "daily/2026-09-06.md"
 updated: "2026-09-08"
 domain: "knowledge"
 last_accessed: "2026-09-08"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 access_count: 1
 ---
 
