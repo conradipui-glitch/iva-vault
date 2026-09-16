@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-09-08"
 source: "daily/2026-09-08.md"
 last_accessed: "2026-09-09"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # iva-write и agy: думающие модели отдают преамбулу вместо текста

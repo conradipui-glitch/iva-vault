@@ -10,7 +10,7 @@ updated: "2026-09-08"
 domain: "knowledge"
 last_accessed: "2026-09-08"
 tier: "warm"
-relevance: 0.88
+relevance: 0.865
 access_count: 1
 ---
 
