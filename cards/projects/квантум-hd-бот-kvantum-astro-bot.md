@@ -8,8 +8,8 @@ created: "2026-08-26"
 source: "daily/2026-08-26.md"
 domain: "work"
 last_accessed: "2026-08-27"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Квантум HD-бот kvantum_astro_bot

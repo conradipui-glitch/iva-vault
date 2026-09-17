@@ -1,6 +1,6 @@
 ---
 tier: "active"
-relevance: 1.0
+relevance: 0.991
 type: project
 description: "Сайт toharo-lab: 16.09 — опубликованы статьи DeepSeek и «Бесплатные модели», расширена статья Gemini (2719→7656 знаков), обложки черновиков одобрены (сиды 41002–41005)."
 tags: ["toharo-lab","github-pages","website","content-platform","pending","article","vision-router","publishing","covers","seo","search-console","deepseek"]
