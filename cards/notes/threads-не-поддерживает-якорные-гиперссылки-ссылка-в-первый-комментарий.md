@@ -9,7 +9,7 @@ created: "2026-09-07"
 source: "daily/2026-09-07.md"
 last_accessed: "2026-09-07"
 tier: "warm"
-relevance: 0.835
+relevance: 0.82
 ---
 
 # Threads не поддерживает якорные гиперссылки — ссылка в первый комментарий

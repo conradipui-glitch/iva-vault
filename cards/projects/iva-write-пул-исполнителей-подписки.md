@@ -1,7 +1,6 @@
 ---
 type: project
-description: >-
-  Пул моделей по подпискам (iva-write.py) с приоритетом доступности. 13.08: модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl; iva-post-provenance.py дописывает platform/url/model/perspectives/cost. 14.08: Antigravity CLI (Gemini 3.7 Flash) использован как исполнитель для статьи разоблачения.
+description: "Пул iva-write по подпискам. 18.09 вставал целиком: Antigravity отрезан по региону, codex-токен протух, RouterAI −0.45 ₽; после ре-логина codex подписка снова работает."
 tags: [codex, antigravity, content-pipeline, iva-write, pool, models, subscriptions, pipeline, provenance]
 status: active
 confidence: EXTRACTED
@@ -10,8 +9,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-11
 tier: "cold"
-relevance: 0.43
-updated: 2026-08-15
+relevance: 0.415
+updated: "2026-09-19"
 ---
 
 # iva-write-пул-исполнителей-подписки
@@ -43,8 +42,15 @@ updated: 2026-08-15
 
 - [[cards/decisions/контент-через-кодекс-и-перегон-персон-nuwa]]
 - [[cards/notes/провенанс-постов-модель-специалисты-стоимость-iva-post-provenance]]
+- [[cards/projects/_index]]
+- [[cards/notes/сбой-ночного-прохода-и-истёкший-codex-токен]]
+- [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]
 
 ## Log
 
 - 2026-08-14: 13.08.2026 (разбор в ходе дня): схема постинга — 1 модель по подписке, при недоступности следующая по приоритету (3-я и т.д.). Журналы: `write-pool-usage.jsonl` (пул), `data/posts.jsonl` с полем `model` (заполнялось редко, перспективы не писались). Добавлен `scripts/iva-post-provenance.py`: после каждой публикации дописывает запись (platform, url, model, perspectives, writer, cost); записаны 4 поста от 12.08.
 - 2026-08-15: 14.08.2026: Antigravity CLI (Gemini 3.7 Flash) использован как исполнитель — через него переписана статья-разоблачение Claude AI Ultimate на сайт (deploy success). Подтверждено: пул исполнителей включает не только iva-write.py, но и Antigravity CLI как рабочий инструмент.
+- 2026-09-19:
+  Пул моделей по подпискам (iva-write.py): Antigravity (Opus 4.6 Thinking → Sonnet 4.6 → Gemini 3.6) → ChatGPT-подписка через codex (terra → luna) → RouterAI (платный резерв). Модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl.
+  
+  18.09.2026 пул встал целиком: Antigravity — «account is not eligible… not available in your location» (все три модели мертвы), Codex — токен подписки протух, RouterAI — баланс −0.45 ₽. После device-auth ре-логина владельца в codex (17:39, «Logged in using ChatGPT») подписочный путь terra/luna снова работает; Antigravity и RouterAI остаются недоступны.

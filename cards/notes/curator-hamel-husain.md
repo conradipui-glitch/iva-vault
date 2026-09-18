@@ -10,7 +10,7 @@ created: 2026-08-01
 source: hamel-husain-curated-corpus
 last_accessed: 2026-08-04
 tier: "cold"
-relevance: 0.325
+relevance: 0.31
 ---
 
 # Hamel Husain: доказуемое качество агента

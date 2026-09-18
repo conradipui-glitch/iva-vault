@@ -1,8 +1,8 @@
 ---
 tier: "active"
-relevance: 0.991
+relevance: 0.982
 type: project
-description: "Сайт toharo-lab: 16.09 — опубликованы статьи DeepSeek и «Бесплатные модели», расширена статья Gemini (2719→7656 знаков), обложки черновиков одобрены (сиды 41002–41005)."
+description: "Сайт toharo-lab: 18.09 опубликованы 5 статей-вайбкодинг с обложками (сиды 41002–41005, Pollinations напрямую — n8n-webhook деградировал), коммит 613546d, всего 16 постов."
 tags: ["toharo-lab","github-pages","website","content-platform","pending","article","vision-router","publishing","covers","seo","search-console","deepseek"]
 status: active
 confidence: EXTRACTED
@@ -10,7 +10,7 @@ domain: work
 created: 2026-08-10
 source: daily/2026-08-10.md
 last_accessed: "2026-09-17"
-updated: "2026-09-17"
+updated: "2026-09-19"
 access_count: 2
 ---
 # сайт-toharo-lab-github-pages-контент-платформа
@@ -87,3 +87,9 @@ toharo-lab — публичный статический сайт на GitHub Pa
   - Статья Gemini: EXPAND content/posts/gemini-3-7-flash-bench.mdx, 2 719 → 7 656 знаков; новые разделы: версии на сентябрь 2026 (Flash 3.7 GA 13.08, Pro 3.1 preview, Omni/Omni 1.1 Flash, Flash-Lite), доступ из России (VPN с выделенным IP — geo-check ужесточили в августе, посредники, AI Studio), мобильные приложения, чек-лист «гемини не работает» (спрос 759 тыс./мес). published не тронут, updated: 2026-09-16. Факты сверены с первоисточниками (blog.google, changelog, карточки DeepMind, Хабр).
   - Статья «Бесплатные модели» (CREATE, кластер MD09): /blog/besplatnye-modeli/, текст по брифу research/briefs/besplatnye-modeli.md, обложка сид 41006, коммит 9c69878, npm run check 0 ошибок (16 постов, 11 опубликовано), деплой GitHub Pages прошёл. Задание пришло от канала ассистента Hermes («[ассистент]») после подтверждения канала владельцем; публикация и push санкционированы заданием.
   - Обложки пяти черновиков (вайб-кодинг, контекст, первый агент, демки, файл правил): превью в сайт-стиле одобрены, владелец делегировал выбор, утверждены сиды 41002–41005 (у вайб-кодинга обложка уже есть). Владелец уточнил голосом: сайт-стиль — сугубо для toharo-lab, TG и Threads задевать нельзя.
+- 2026-09-18:
+  По команде владельца («подтверждаю черновики статей — можно в прод, не забудь изображения») опубликованы все 5 черновиков: chto-takoe-vayb-koding (обложка была), kontekst-glavnyy-resurs (сид 41002), pervyy-ai-agent-za-vecher (41003), pochemu-ya-perestal-doveryat-demkam (41004), pravila-proekta-dlya-agenta (41005). Обложки 1600×900 по одобренным 16.09 сидам и сюжетам. Нюанс: n8n-webhook iva-pollinations-preview перестал отдавать картинку (HTTP 200 с пустым телом), 4 обложки сделаны прямым вызовом pollinations flux с теми же сидами — возможны незначительные отличия от превью 16.09. Коммит 613546d, npm run check 0 ошибок (5 предупреждений о коротком тексте — черновики такими и были), деплой success, все 5 страниц и обложки HTTP 200, og:image корректный. Итого 16 постов, все опубликованы.
+- 2026-09-19:
+  toharo-lab — публичный статический сайт на GitHub Pages для публикации материалов об ИИ.
+  
+  18.09.2026 владелец подтвердил черновики («можно в прод — главное не забудь изображения»), и 5 статей опубликованы с обложками: /blog/chto-takoe-vayb-koding/ (обложка была), /blog/kontekst-glavnyy-resurs/ (сид 41002), /blog/pervyy-ai-agent-za-vecher/ (41003), /blog/pochemu-ya-perestal-doveryat-demkam/ (41004), /blog/pravila-proekta-dlya-agenta/ (41005). npm run check — 0 ошибок и секретов; коммит 613546d запушен, деплой GitHub Pages прошёл; все страницы и og:image 1600×900 отдают HTTP 200. Всего на сайте 16 постов. Обложки делались прямым вызовом Pollinations по тем же сидам: n8n-webhook для бесплатных обложек деградировал (отдаёт пустой ответ).

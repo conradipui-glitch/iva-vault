@@ -1,8 +1,7 @@
 ---
 type: note
-description: >-
-  Транскрибация голосовых владельца: Deepgram модель nova-3, язык multi, punctuate+smart_format; вызывается из agent/transcribe.ts; не верифицирует говорящего (только диаризация).
-tags: [deepgram, transcription, voice, inbound, infra]
+description: "Транскрибация голосовых владельца: Deepgram nova-3, language=multi. 18.09 проверено API: русского TTS в Deepgram нет и моделей ElevenLabs нет — русский только в STT."
+tags: ["deepgram","transcription","voice","inbound","infra","tts","stt"]
 status: active
 confidence: EXTRACTED
 domain: work
@@ -10,7 +9,8 @@ created: 2026-08-13
 source: daily/2026-08-13.md
 last_accessed: 2026-08-14
 tier: "cold"
-relevance: 0.475
+relevance: 0.46
+updated: "2026-09-19"
 ---
 
 # Deepgram nova-3 — транскрибация голосовых
@@ -26,3 +26,13 @@ relevance: 0.475
 ## Related
 
 - [[cards/notes/raw-инбокс-vault-обработка-входящих]]
+- [[cards/notes/_index]]
+- [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
+- [[cards/decisions/2026-09-18-deploychan-mcp-постоянное-соединение]]
+
+## Log
+
+- 2026-09-19:
+  Голосовые владельца транскрибируются Deepgram nova-3 (language=multi, punctuate=true, smart_format=true), вызов из agent/transcribe.ts; это ASR с диаризацией, не speaker verification.
+  
+  Проверено по живому API ключа владельца 18.09.2026: моделей ElevenLabs в Deepgram нет — все 102 TTS-модели собственные (Aura и Aura-2). Русского в TTS нет: «мультиязыковые» у них — это два региональных варианта одного языка (напр. fr + fr-FR), а не настоящая полилингвальность; языки всех голосов — en, de, es, fr, it, ja, nl, фильтр Russian в TTS пустой. Русский есть только в STT — 18 моделей, включая nova-3 и nova-2. Для русской озвучки (дубляж) Deepgram не подходит: синтез на русском — Fish Audio, ElevenLabs или Groq (последние два подтверждаются базой знаний deploychan).
