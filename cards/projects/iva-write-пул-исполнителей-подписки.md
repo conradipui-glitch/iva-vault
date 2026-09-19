@@ -1,6 +1,6 @@
 ---
 type: project
-description: "Пул iva-write по подпискам. 18.09 вставал целиком: Antigravity отрезан по региону, codex-токен протух, RouterAI −0.45 ₽; после ре-логина codex подписка снова работает."
+description: "Пул iva-write: на 19.09 работает только подписка Codex; iva-write упал на парсинге ответа, тексты писались через Codex напрямую — парсер чинить."
 tags: [codex, antigravity, content-pipeline, iva-write, pool, models, subscriptions, pipeline, provenance]
 status: active
 confidence: EXTRACTED
@@ -9,8 +9,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-11
 tier: "cold"
-relevance: 0.415
-updated: "2026-09-19"
+relevance: 0.4
+updated: "2026-09-20"
 ---
 
 # iva-write-пул-исполнителей-подписки
@@ -45,6 +45,7 @@ updated: "2026-09-19"
 - [[cards/projects/_index]]
 - [[cards/notes/сбой-ночного-прохода-и-истёкший-codex-токен]]
 - [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]
+- [[cards/notes/iva-write-и-agy-думающие-модели-отдают-преамбулу-вместо-текста]]
 
 ## Log
 
@@ -54,3 +55,7 @@ updated: "2026-09-19"
   Пул моделей по подпискам (iva-write.py): Antigravity (Opus 4.6 Thinking → Sonnet 4.6 → Gemini 3.6) → ChatGPT-подписка через codex (terra → luna) → RouterAI (платный резерв). Модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl.
   
   18.09.2026 пул встал целиком: Antigravity — «account is not eligible… not available in your location» (все три модели мертвы), Codex — токен подписки протух, RouterAI — баланс −0.45 ₽. После device-auth ре-логина владельца в codex (17:39, «Logged in using ChatGPT») подписочный путь terra/luna снова работает; Antigravity и RouterAI остаются недоступны.
+- 2026-09-20:
+  Пул исполнителей iva-write: Antigravity (Opus 4.6 Thinking → Sonnet 4.6 → Gemini 3.6) → ChatGPT-подписка через codex (terra → luna) → RouterAI (платный резерв). Модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl. На 19.09: Antigravity мёртв по региону, подписка codex (terra/luna) работает после ре-логина 18.09, RouterAI недоступен.
+  
+  2026-09-19: при выпуске трёх утренних постов канала iva-write упал на парсинге ответа — тексты в итоге написаны gpt-5.6-terra через Codex напрямую (0 ₽). Парсер ответа в iva-write надо починить.

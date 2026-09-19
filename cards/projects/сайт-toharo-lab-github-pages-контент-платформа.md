@@ -1,6 +1,6 @@
 ---
 tier: "active"
-relevance: 0.982
+relevance: 0.973
 type: project
 description: "Сайт toharo-lab: 18.09 опубликованы 5 статей-вайбкодинг с обложками (сиды 41002–41005, Pollinations напрямую — n8n-webhook деградировал), коммит 613546d, всего 16 постов."
 tags: ["toharo-lab","github-pages","website","content-platform","pending","article","vision-router","publishing","covers","seo","search-console","deepseek"]

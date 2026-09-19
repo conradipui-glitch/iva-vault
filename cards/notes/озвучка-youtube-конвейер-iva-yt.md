@@ -1,8 +1,7 @@
 ---
 type: note
-description: >-
-  Конвейер русской озвучки YouTube: для Telegram выдаёт MP4 с исходным вертикальным кадром и единственной русской дорожкой; после ошибки 17.08 это обязательный формат.
-tags: [youtube, ozvuchka, media, pipeline, pricing, faceless, озвучка, iva-yt-dub, tts, routerai, clan, voiceover, telegram]
+description: "Конвейер озвучки: 19.09 перевод интервью Альтмана доделан через Codex, дубляж всё ещё блокирован пустыми балансами TTS."
+tags: ["youtube","ozvuchka","media","pipeline","pricing","faceless","озвучка","iva-yt-dub","tts","routerai","clan","voiceover","telegram","перевод"]
 status: active
 confidence: EXTRACTED
 domain: knowledge
@@ -10,8 +9,8 @@ created: 2026-08-04
 source: daily/2026-08-04.md
 last_accessed: 2026-08-14
 tier: "cold"
-relevance: 0.46
-updated: 2026-08-18
+relevance: 0.445
+updated: "2026-09-20"
 access_count: 1
 ---
 # озвучка-youtube-конвейер-iva-yt
@@ -48,6 +47,10 @@ access_count: 1
 - [[cards/notes/астро-гороскоп-починка-и-защита-от-повтора]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
 
+## History
+
+- 2026-08-03: Дубляж с видео выдавался в MKV с оригинальной первой дорожкой и русским переводом второй.
+
 ## Log
 
 - 2026-08-10:
@@ -71,7 +74,7 @@ access_count: 1
   - Конфиг возвращён на fish-audio/s2.1-pro после всех проб.
   - mp4-рецепт для Telegram: ffmpeg с -disposition:a:0 default, language=ru, faststart, video_track_timescale 90000 (иначе квадрат).
 - 2026-08-17: 16.08.2026 проба озвучки ролика «Сидэнс 2.5» через iva-yt-dub: fish-движок — рабочий, но слово разбилось; minimax-движок — дорогой и не понравился владельцу. В этот же день исследованы цены TTS: minimax (turbo 0.0066₽/символ) в ~4 раза дороже fish; qwen-audio-3.0-tts-plus ~0.0024₽, mai-voice-2 0.0024₽, grok-voice-tts-1.0 0.0016₽, gemini-3.1-flash-tts-preview ~0.0001+0.0022₽. Предложено переозвучить свежей qwen-audio-3.0-tts-plus или mai-voice-2 (~1₽ за ролик вместо ~4₽ minimax). Владелец выбрал «попробовать через CLAN-аудио» — следующий шаг.
-
-## History
-
-- 2026-08-03: Дубляж с видео выдавался в MKV с оригинальной первой дорожкой и русским переводом второй.
+- 2026-09-20:
+  Конвейер русской озвучки YouTube: для Telegram выдаёт MP4 с исходным вертикальным кадром и единственной русской дорожкой.
+  
+  2026-09-19: интервью Альтмана (Dreamforce), присланное 18.09, переведено полностью после ре-логина в Codex — 14 фрагментов, ~55 КБ связного русского текста (data/transcripts/2100183524171251712-ru.md). Оговорка честности: модель пару раз «додумывала» детали (например, сумму выручки Hugging Face), в остальном перевод близок к тексту. Дубляж по-прежнему упирается в TTS: балансы синтеза речи пустые (Fish Audio — пополнить; ElevenLabs free tier — проверить русский; локальные Silero/XTTS — бесплатно, но качество ниже). Решения владельца по дубляжу пока нет.

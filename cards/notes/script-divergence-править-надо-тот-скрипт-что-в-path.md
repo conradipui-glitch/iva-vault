@@ -10,7 +10,7 @@ updated: "2026-09-10"
 domain: "knowledge"
 last_accessed: "2026-09-10"
 tier: "warm"
-relevance: 0.865
+relevance: 0.85
 ---
 
 # Script divergence: править надо тот скрипт, что в PATH
