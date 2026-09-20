@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-09-12"
 source: "daily/2026-09-12.md"
 last_accessed: "2026-09-13"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Задача: модель DeepSeek 4.1 Flash всем провайдерам

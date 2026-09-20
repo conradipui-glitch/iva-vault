@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-08-30"
 source: "daily/2026-08-30.md"
 last_accessed: "2026-08-30"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Текущий контур публикаций: Telegram и Threads без X

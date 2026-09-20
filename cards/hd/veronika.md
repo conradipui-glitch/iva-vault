@@ -10,8 +10,8 @@ created: 2026-09-12
 updated: 2026-09-12
 source: data/hd/veronika.json
 last_accessed: "2026-09-13"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Вероника — Манифестирующий Генератор ThreeFive
