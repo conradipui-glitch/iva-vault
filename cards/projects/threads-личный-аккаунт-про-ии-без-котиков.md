@@ -1,16 +1,16 @@
 ---
 type: project
-description: "Threads @toharo_pro: 18.09 — постов с 10.09 нет, публикация остановилась; последние посты ~400 просмотров суммарно, ER ~0.3%."
-tags: ["threads","personal","ai-news","analysis","meta","monitoring","api","publishing","replies","limit","ops","video","analytics","metrics"]
+description: "Threads @toharo_pro: публикация возобновилась после паузы — 2 поста 20.09, 88 просмотров, 0 лайков, ER ~3,4% за счёт ответов."
+tags: ["threads","personal","ai-news","analysis","meta","monitoring","api","publishing","replies","limit","ops","video","analytics","metrics","engagement"]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-01
 source: daily/2026-08-01.md
-updated: "2026-09-19"
+updated: "2026-09-22"
 last_accessed: "2026-09-03"
 tier: "warm"
-relevance: 0.908
+relevance: 0.903
 access_count: 7
 ---
 
@@ -103,6 +103,7 @@ access_count: 7
 - [[cards/decisions/текущий-контур-публикаций-telegram-и-threads-без-x]]
 - [[cards/notes/метрики-threads-10-09-2026-слабый-отклик-девяти-постов]]
 - [[cards/projects/buffer-аналитика-и-лимиты-threads-250]]
+- [[cards/notes/куратор-threads-формула-постинга-и-x-алгоритм]]
 
 ## History
 
@@ -135,3 +136,4 @@ access_count: 7
   Threads @toharo_pro (Anton Ro) — личный аккаунт про ИИ, без котиков и нарратива Бориса; постинг через официальный API (iva-threads-api-post.py).
   
   18.09.2026 проверка метрик: свежих постов с 10.09 нет — публикация остановилась на 8 дней. Последние посты 10.09 суммарно ~400 просмотров и 1 лайк, ER ~0.3% — низкий; метрики стоят на месте.
+- 2026-09-22: Отчёт 21.09.2026 (10:01): после паузы с 10.09 снова вышли 2 поста (оба ночью 20.09): «GPT-6 Astra „взломала" ADFGVX-радиограмму 1918-го» — 20 просмотров, 1 ответ; «Copilot обрушил клики NYT на 93%» — 68 просмотров, 2 ответа. Итог 88 просмотров, 0 лайков, 3 ответа, ER ≈ 3,4% — весь за счёт ответов. Посты опубликованы накануне ночью, охват ещё не раскрутился — перепроверить ближе к вечеру. В хранилище 114 публикаций, метрики обновлены у 47.

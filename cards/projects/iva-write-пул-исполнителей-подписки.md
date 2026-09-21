@@ -1,7 +1,7 @@
 ---
 type: project
-description: "Пул iva-write: на 19.09 работает только подписка Codex; iva-write упал на парсинге ответа, тексты писались через Codex напрямую — парсер чинить."
-tags: [codex, antigravity, content-pipeline, iva-write, pool, models, subscriptions, pipeline, provenance]
+description: "Пул iva-write: 21.09 не ответил — все модели вернули пусто; тексты постов Ива написала сама по загруженному нарративу."
+tags: ["codex","antigravity","content-pipeline","iva-write","pool","models","subscriptions","pipeline","provenance","fallback"]
 status: active
 confidence: EXTRACTED
 domain: work
@@ -9,8 +9,8 @@ created: 2026-08-11
 source: daily/2026-08-11.md
 last_accessed: 2026-08-11
 tier: "cold"
-relevance: 0.385
-updated: "2026-09-20"
+relevance: 0.37
+updated: "2026-09-22"
 ---
 
 # iva-write-пул-исполнителей-подписки
@@ -59,3 +59,4 @@ updated: "2026-09-20"
   Пул исполнителей iva-write: Antigravity (Opus 4.6 Thinking → Sonnet 4.6 → Gemini 3.6) → ChatGPT-подписка через codex (terra → luna) → RouterAI (платный резерв). Модель каждого поста логируется в data/posts.jsonl + write-pool-usage.jsonl. На 19.09: Antigravity мёртв по региону, подписка codex (terra/luna) работает после ре-логина 18.09, RouterAI недоступен.
   
   2026-09-19: при выпуске трёх утренних постов канала iva-write упал на парсинге ответа — тексты в итоге написаны gpt-5.6-terra через Codex напрямую (0 ₽). Парсер ответа в iva-write надо починить.
+- 2026-09-22: 21.09.2026 (15:37): iva-write не ответил — все модели пула вернули пусто. Тексты трёх постов (по статьям про выгорание сильного инженера, оплату открытого кода и ИИ-агентов-потребителей кода) написала сама Ива по загруженному нарративу. Днём ранее (11:36) пул вёл себя так же: посты про приватность ChatGPT, CodeMidas и передачу решений ИИ-агентам написаны самой Ивой, iva-write не упоминается как ответивший.

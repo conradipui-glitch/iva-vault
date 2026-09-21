@@ -11,8 +11,8 @@ domain: personal
 updated: 2026-08-08
 access_count: 2
 last_accessed: 2026-07-23
-relevance: 0.468
-tier: cold
+relevance: 0.46
+tier: "archive"
 ---
 
 # Astrology Engine — установлен

@@ -11,8 +11,8 @@ source: daily/2026-08-05.md
 updated: 2026-08-06
 access_count: 2
 last_accessed: 2026-07-23
-relevance: 0.468
-tier: cold
+relevance: 0.46
+tier: "archive"
 ---
 
 # Volmarr Wyrd (hrabanazviking)
