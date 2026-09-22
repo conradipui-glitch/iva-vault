@@ -48,5 +48,4 @@ access_count: 1
 ## Related
 
 - [[cards/projects/гермес-агент-сосед-на-vps]]
-- [[cards/projects/_index]]
 - [[cards/notes/провайдер-b-ai-ива]]

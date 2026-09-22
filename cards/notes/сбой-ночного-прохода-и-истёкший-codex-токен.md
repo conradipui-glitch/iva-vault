@@ -26,7 +26,6 @@ updated: "2026-09-19"
 - [[cards/projects/iva-write-пул-исполнителей-подписки]]
 - [[cards/notes/исследование-llm-шлюзов-prodex-subrouter-codex-oauth-bright-]]
 - [[cards/notes/ключ-tokenharbor-передан-в-чат-и-подлежит-замене]]
-- [[cards/notes/_index]]
 
 ## Log
 

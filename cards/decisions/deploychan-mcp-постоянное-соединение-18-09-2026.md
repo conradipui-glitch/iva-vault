@@ -20,6 +20,5 @@ deploychan — публичная read-only база знаний KISA по ва
 
 ## Related
 
-- [[cards/decisions/_index]]
 - [[cards/notes/deepgram-nova-3-транскрибация-голосовых]]
 - [[cards/notes/озвучка-youtube-конвейер-iva-yt]]

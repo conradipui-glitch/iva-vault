@@ -26,5 +26,5 @@ Adversarial review шёл несколькими раундами: fixes_needed 
 ## Related
 
 - [[cards/decisions/gstack-workflow-адаптация-методологии-под-иву]]
-- [[cards/projects/оптимизация-ива-7-этапов-снижения-токенов]]
+- [[cards/projects/оптимизация-iva-7-этапов-снижения-токенов]]
 - [[cards/ideas/самообучающаяся-контент-система]]

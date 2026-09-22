@@ -36,7 +36,6 @@ Reach-порог золота: reach_floor = max(250, P75 просмотров �
 - [[cards/ideas/самообучающаяся-контент-система]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/projects/buffer-аналитика-и-лимиты-threads-250]]
-- [[cards/decisions/_index|Решения]]
 
 ## Log
 

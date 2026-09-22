@@ -19,6 +19,5 @@ access_count: 1
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]

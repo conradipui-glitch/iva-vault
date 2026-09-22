@@ -23,7 +23,6 @@ relevance: 0.955
 
 - [[cards/notes/астро-гороскоп-починка-и-защита-от-повтора]]
 - [[cards/projects/iva-write-пул-исполнителей-подписки]]
-- [[cards/notes/_index]]
 
 ## Log
 

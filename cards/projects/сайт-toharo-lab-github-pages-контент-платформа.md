@@ -40,7 +40,6 @@ toharo-lab — публичный статический сайт на GitHub Pa
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 - [[cards/decisions/стили-обложек-по-площадкам-разделение-tg-сайт-threads]]
 - [[cards/notes/фронтир-сентябрь-2026-четыре-тезиса-разбора]]
-- [[cards/projects/_index]]
 
 ## History
 

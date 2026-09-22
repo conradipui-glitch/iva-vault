@@ -19,5 +19,4 @@ relevance: 0.76
 ## Related
 
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
-- [[cards/notes/_index]]
 - [[cards/decisions/правило-threads-тексты-строго-500-знаков-проверять-до-постан]]

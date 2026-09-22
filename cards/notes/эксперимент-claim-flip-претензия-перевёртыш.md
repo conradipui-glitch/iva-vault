@@ -27,7 +27,7 @@ updated: "2026-09-20"
 
 ## Related
 
-- [[claim-flip]]
+- 
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков|Threads: личный аккаунт про ИИ]]
 - [[cards/notes/метрики-threads-10-09-2026-слабый-отклик-девяти-постов|Метрики Threads 10.09.2026]]
 - [[cards/notes/self-review-постов-чек-лист-и-ретро-оценка|Self-review постов]]

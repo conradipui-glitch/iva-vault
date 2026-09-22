@@ -40,7 +40,7 @@ access_count: 1
 - [[cards/decisions/обложки-вайб-канала-кот-борис]]
 - [[cards/notes/toharo-lab-обложки-gpt-image-2-через-routerai]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
-- [[cards/decisions/2026-09-20-генератор-обложек-chatgpt-подписка-codex]]
+- [[cards/decisions/генератор-обложек-строго-chatgpt-подписка-codex]]
 - [[cards/decisions/генератор-обложек-строго-chatgpt-подписка-codex]]
 
 ## History

@@ -98,7 +98,6 @@ access_count: 7
 - [[cards/contacts/антон-владелец]]
 - [[MOC/MOC-work|Projects hub]]
 - [[cards/projects/srt-whiteboard-анимация-рука-рисует-скилл-и-видео-посты]]
-- [[cards/projects/_index]]
 - [[cards/decisions/политика-кук-threads-x-резерв-без-запросов]]
 - [[cards/decisions/текущий-контур-публикаций-telegram-и-threads-без-x]]
 - [[cards/notes/метрики-threads-10-09-2026-слабый-отклик-девяти-постов]]

@@ -19,6 +19,5 @@ access_count: 1
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/notes/добавление-модели-solar-pro-4-в-веб-панель]]
 - [[cards/notes/исследование-llm-шлюзов-prodex-subrouter-codex-oauth-bright-]]

@@ -25,7 +25,7 @@ relevance: 0.85
 - [[cards/notes/ключ-routerai-отправлен-в-чат-и-подлежит-замене|Ключ RouterAI отправлен в чат]]
 - [[cards/notes/исследование-llm-шлюзов-prodex-subrouter-codex-oauth-bright-|Исследование LLM-шлюзов]]
 - [[cards/projects/iva-write-пул-исполнителей-подписки|iva-write: пул исполнителей подписки]]
-- [[cards/notes/_index|Knowledge]]
+
 - [[cards/notes/задача-модель-deepseek-4-1-flash-всем-провайдерам|Задача: DeepSeek 4.1 Flash всем провайдерам]]
 
 ## History

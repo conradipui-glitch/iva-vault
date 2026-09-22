@@ -24,10 +24,9 @@ updated: "2026-08-24"
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/notes/curator-infra-iva-systemd]]
 - [[cards/decisions/анти-дубль-при-публикации-в-telegram-канал]]
-- [[cards/projects/оптимизация-ива-7-этапов-снижения-токенов]]
+- [[cards/projects/оптимизация-iva-7-этапов-снижения-токенов]]
 - [[cards/decisions/grok-ship-scout-ship-adversarial-review-ahoy-адаптированы-для-ивы]]
 
 ## History

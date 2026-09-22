@@ -22,7 +22,6 @@ updated: "2026-09-16"
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/projects/гермес-агент-сосед-на-vps]]
 - [[cards/projects/hd-продукт-бот-астрология-денежный-код-на-рф]]
 

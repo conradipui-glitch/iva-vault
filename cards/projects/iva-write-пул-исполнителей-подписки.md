@@ -42,7 +42,6 @@ updated: "2026-09-22"
 
 - [[cards/decisions/контент-через-кодекс-и-перегон-персон-nuwa]]
 - [[cards/notes/провенанс-постов-модель-специалисты-стоимость-iva-post-provenance]]
-- [[cards/projects/_index]]
 - [[cards/notes/сбой-ночного-прохода-и-истёкший-codex-токен]]
 - [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]
 - [[cards/notes/iva-write-и-agy-думающие-модели-отдают-преамбулу-вместо-текста]]

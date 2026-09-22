@@ -25,6 +25,5 @@ Hummingbot — open-source Python-фреймворк для крипто-мар�
 
 ## Related
 
-- [[cards/ideas/_index]]
 - [[cards/projects/hd-продукт-бот-астрология-денежный-код-на-рф]]
 - [[cards/contacts/антон-владелец]]

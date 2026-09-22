@@ -35,7 +35,6 @@ updated: "2026-08-24"
 - [[cards/decisions/gstack-workflow-адаптация-методологии-под-иву]]
 - [[cards/decisions/пилот-явного-prompt-caching-для-iva]]
 - [[cards/notes/curator-hamel-husain]]
-- [[cards/decisions/_index|Решения]]
 
 ## Log
 

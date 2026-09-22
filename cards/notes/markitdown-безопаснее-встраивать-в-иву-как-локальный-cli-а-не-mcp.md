@@ -18,7 +18,6 @@ relevance: 0.565
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/notes/curator-ai-security]]
 - [[cards/notes/raw-инбокс-vault-обработка-входящих]]
 - [[cards/decisions/context7-mcp-подключение-и-приватный-прокси]]

@@ -32,7 +32,6 @@ updated: "2026-08-24"
 
 - [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
-- [[cards/ideas/_index|Идеи]]
 
 ## Log
 

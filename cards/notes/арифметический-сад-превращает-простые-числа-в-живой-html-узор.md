@@ -18,7 +18,6 @@ relevance: 0.565
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/projects/сайт-toharo-lab-github-pages-контент-платформа]]
 - [[cards/notes/toharo-lab-деплой-и-обложки-интерактив-16-9-actions]]
 - [[cards/notes/curator-vibe-product]]

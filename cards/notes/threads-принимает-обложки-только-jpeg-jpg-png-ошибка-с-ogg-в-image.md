@@ -19,6 +19,5 @@ access_count: 1
 
 ## Related
 
-- [[cards/notes/_index]]
 - [[cards/decisions/стили-обложек-по-площадкам-разделение-tg-сайт-threads]]
 - [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]

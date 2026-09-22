@@ -26,9 +26,8 @@ updated: "2026-09-19"
 ## Related
 
 - [[cards/notes/raw-инбокс-vault-обработка-входящих]]
-- [[cards/notes/_index]]
 - [[cards/notes/озвучка-youtube-конвейер-iva-yt]]
-- [[cards/decisions/2026-09-18-deploychan-mcp-постоянное-соединение]]
+- [[cards/decisions/deploychan-mcp-постоянное-соединение-18-09-2026]]
 
 ## Log
 

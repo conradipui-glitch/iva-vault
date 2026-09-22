@@ -20,6 +20,5 @@ relevance: 0.835
 
 ## Related
 
-- [[cards/notes/_index|Knowledge]]
 - [[cards/notes/ключ-routerai-отправлен-в-чат-и-подлежит-замене|Exposed RouterAI key]]
 - [[cards/notes/curator-ai-security|AI security]]

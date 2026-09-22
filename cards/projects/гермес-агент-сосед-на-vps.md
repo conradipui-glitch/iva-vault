@@ -24,7 +24,6 @@ access_count: 1
 
 ## Related
 
-- [[cards/projects/_index]]
 - [[cards/projects/черновики-openbot-mcp-roadmap-и-локальной-llm-вечер-23-08]]
 - [[cards/projects/iva-write-пул-исполнителей-подписки]]
 - [[cards/contacts/антон-владелец]]

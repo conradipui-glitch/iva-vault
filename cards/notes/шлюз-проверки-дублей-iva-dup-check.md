@@ -23,9 +23,8 @@ last_accessed: "2026-09-21"
 
 ## Related
 
-- [[cover-styles]] — правило генератора картинок (ChatGPT, англ. промпты)
-- [[iva-news-auto]] — конвейер, в который встроен шлюз
-- [[cards/decisions/2026-09-20-генератор-обложек-chatgpt-подписка-codex]]
+- [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]] — конвейер, в который встроен шлюз
+- [[cards/decisions/генератор-обложек-строго-chatgpt-подписка-codex]]
 - [[MOC/MOC-work|Work]]
 - [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
 - [[cards/decisions/генератор-обложек-строго-chatgpt-подписка-codex]]
