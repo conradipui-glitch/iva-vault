@@ -10,7 +10,7 @@ source: "daily/2026-09-12.md"
 updated: "2026-09-12"
 last_accessed: "2026-09-13"
 tier: "warm"
-relevance: 0.85
+relevance: 0.835
 ---
 # Ключ TokenHarbor передан в чат и подлежит замене
 

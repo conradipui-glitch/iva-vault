@@ -7,7 +7,7 @@ confidence: "EXTRACTED"
 created: "2026-09-20"
 source: "daily/2026-09-20.md"
 updated: "2026-09-21"
-relevance: 0.97
+relevance: 0.955
 tier: "active"
 domain: "knowledge"
 last_accessed: "2026-09-21"
