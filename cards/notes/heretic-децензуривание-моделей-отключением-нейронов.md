@@ -6,7 +6,7 @@ status: "active"
 confidence: "EXTRACTED"
 created: "2026-09-21"
 source: "daily/2026-09-21.md"
-relevance: 0.955
+relevance: 0.94
 tier: "active"
 domain: "knowledge"
 last_accessed: "2026-09-21"

@@ -9,7 +9,7 @@ created: "2026-08-25"
 source: "daily/2026-08-25.md"
 last_accessed: "2026-08-25"
 tier: "cold"
-relevance: 0.55
+relevance: 0.535
 ---
 
 # Арифметический сад превращает простые числа в живой HTML-узор

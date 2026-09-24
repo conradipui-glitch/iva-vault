@@ -9,7 +9,7 @@ created: "2026-09-24"
 source: "daily/2026-09-24.md"
 last_accessed: "2026-09-24"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 ---
 
 # paragon-JEV: недоделанный репозиторий, для нас пользы нет

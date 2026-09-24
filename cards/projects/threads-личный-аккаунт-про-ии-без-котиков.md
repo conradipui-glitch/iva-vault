@@ -1,16 +1,16 @@
 ---
 type: project
-description: "Threads @toharo_pro: 23.09 вечером опубликованы 3 поста-мысли (Claude Code/AGENTS.md, Jev в 25 строк, Grammarly), все прошли проверку дублей, провенанс записан."
-tags: ["threads","personal","ai-news","analysis","meta","monitoring","api","publishing","replies","limit","ops","video","analytics","metrics","engagement"]
+description: "Threads @toharo_pro, 24.09: опубликованы Claude/ART и ZCode (1:1 обложки), метрики 23–24.09 слабые (701 просмотр, ER 0.14%), черновик по механике триггеров ждёт решения."
+tags: ["threads","personal","ai-news","analysis","meta","monitoring","api","publishing","replies","limit","ops","video","analytics","metrics","engagement","covers"]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-01
 source: daily/2026-08-01.md
-updated: "2026-09-24"
+updated: "2026-09-25"
 last_accessed: "2026-09-03"
-tier: "warm"
-relevance: 0.893
+tier: "cold"
+relevance: 0.888
 access_count: 7
 ---
 
@@ -147,3 +147,4 @@ access_count: 7
   Алгоритм Threads (разбор MomentumHive): главные сигналы — reply rate, hook strength, конкретность; лайки слабый сигнал, внешние ссылки подавляются, AI-слова типа «delve» — саппресс.
 - 2026-09-24: Проект: Threads @toharo_pro — личный аккаунт Антона про ИИ (без котиков и нарратива Бориса); постинг через официальный API.
 - 2026-09-24: 23.09.2026 вечером опубликованы три поста-мысли в Threads @toharo_pro: 1) Claude Code не видел AGENTS.md без телеметрии (уже починили) — конфликт приватности и удобства; 2) Jev в 25 строк Python — громкое имя ≠ сложная технология; 3) Grammarly давит на пользователей при отмене подписки — автоматизация не должна подменять согласие. Все прошли проверку дублей (по первому было ложное срабатывание на слово «claude» — тема уникальная, публикация осознанная); провенанс записан. Тексты написаны самой Ивой: пул iva-write вернул отказ.
+- 2026-09-25: 2026-09-24: опубликованы два Threads-поста — Claude/ART (DdqLzwyjWlk) и ZCode (DdqL5yhjTw9), источник первым комментарием, плюс пост в TG-канал Бориса (boris_dna) — по «отлично, такое можно и в прод». Метрики за 23–24.09 (собрано 10:01, обновлено 41 запись): 5 постов, 701 просмотр, 1 лайк, 0 ответов и репостов, ER ~0.14% — вечерняя партия 23.09 зашла слабо; лучший — пост про Jev в 25 строк (237 просмотров). Вечером разобран reel о триггерах контента, по его механике сделан черновик второго захода на новость Claude/ART (живая цитата агента первой строкой, цифры второй); dup-check зафлаговал совпадение URL и темы — подача другая, решение владельца не получено.
