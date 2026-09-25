@@ -9,7 +9,7 @@ created: "2026-08-22"
 source: "daily/2026-08-22.md"
 last_accessed: "2026-08-22"
 tier: "cold"
-relevance: 0.49
+relevance: 0.475
 ---
 
 # deepseek-v4-flash-vision-exp подключена как vision-модель Ивы

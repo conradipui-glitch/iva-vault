@@ -10,7 +10,7 @@ domain: "work"
 updated: "2026-09-20"
 last_accessed: "2026-09-20"
 tier: "active"
-relevance: 0.925
+relevance: 0.91
 ---
 
 # Астро-интерпретация: fallback agy → codex (19.09.2026)

@@ -9,7 +9,7 @@ created: "2026-09-25"
 source: "daily/2026-09-25.md"
 last_accessed: "2026-09-25"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 ---
 
 # P0 Reliability Spine: аудит реализуемости на текущем коде

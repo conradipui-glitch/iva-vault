@@ -1,7 +1,6 @@
 ---
 type: decision
-description: >-
-  Аккаунт X @TrampampamAGI забанен за inauthentic behaviors 06.08.2026; владелец подал апелляцию; постинг вручную; куки X не использовать
+description: "X @TrampampamAGI suspended (бан с 06.08.2026 за inauthentic behaviors, апелляция подана); 25.09 подтверждено: 403 code 64, профиль 404, сессия жива."
 tags: [x, suspension, account, social]
 status: active
 confidence: EXTRACTED
@@ -10,7 +9,8 @@ created: 2026-08-06
 source: daily/2026-08-06.md
 last_accessed: 2026-08-07
 tier: "cold"
-relevance: 0.265
+relevance: 0.25
+updated: "2026-09-26"
 ---
 
 # X-аккаунт TrampampamAGI заблокирован (апелляция подана)
@@ -42,4 +42,9 @@ relevance: 0.265
 - При разблокировке: вернуть cron-записи X из бэкапа /etc/crontab.bak-20260806-xfreeze.
 
 ## Related
+
 - [[cards/contacts/антон-владелец.md]]
+
+## Log
+
+- 2026-09-26: 25.09.2026: две X-задачи очереди упали — upload_media вернул HTTP 403, код 64 «Your account is suspended and is not permitted to access this feature». Публичный профиль x.com/TrampampamAGI отдаёт 404 (забаненные так исчезают), при этом сессия жива: fetch_me по сохранённым кукам возвращает профиль — значит, не протухший логин, а именно suspended. Серверно чинить нечего: разблокировка только через апелляцию на help.x.com («Appeal an account suspension»), которую подаёт сам владелец — от бота апелляции не принимаются. Тексты двух несостоявшихся постов сохранились в задачах очереди; Threads-версии этих новостей ушли штатно, дублировать в X нечего.
