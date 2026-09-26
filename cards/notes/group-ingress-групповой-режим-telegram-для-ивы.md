@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-09-08"
 source: "daily/2026-09-08.md"
 last_accessed: "2026-09-05"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 access_count: 1
 ---
 

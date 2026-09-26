@@ -1,17 +1,17 @@
 ---
 type: project
-description: "Журнал публикаций конвейера: 25.09 — метрики Threads (476 просмотров, engagement 0.4%), X-ветка отключена, 3 черновика сохранены в drafts."
-tags: ["news","automation","sent","threads","x","conveyor","telegram","publishing","pollinations","boris","pipeline","ai-news","metrics"]
+description: "Журнал публикаций конвейера: 26.09 — автопосты ушли в TG-канал с CTA-строкой «/go/th2» в CTA-дни (механизм «8 шагов»), dry-run чистый."
+tags: ["news","automation","sent","threads","x","conveyor","telegram","publishing","pollinations","boris","pipeline","ai-news","metrics","cta"]
 status: active
 confidence: EXTRACTED
 domain: work
 created: 2026-08-06
 source: daily/2026-08-06.md
-access_count: 4
-last_accessed: 2026-08-09
-relevance: 0.698
-tier: "cold"
-updated: "2026-09-26"
+access_count: 5
+last_accessed: "2026-09-13"
+relevance: 0.92
+tier: "warm"
+updated: "2026-09-27"
 ---
 
 # Конвейер новостей: sent-пометки и публикации
@@ -49,6 +49,7 @@ updated: "2026-09-26"
 - [[cards/decisions/решение-правила-контента-котятки-пост-ревью-приоритеты-11-08]]
 - [[cards/decisions/x-не-пытаться-постить-только-вручную-владельцем]]
 - [[cards/notes/провенанс-постов-модель-специалисты-стоимость-iva-post-provenance]]
+- [[cards/notes/threads-стратегия-8-шагов-адаптированная]]
 
 ## History
 
@@ -95,3 +96,4 @@ updated: "2026-09-26"
   - Если в посте упоминается продукт/репозиторий без введения в контекст — обязательна ссылка: прямая или встроенная в слово, чтобы читатель получил пользу, а не «красивые слова».
 - 2026-08-21: 2026-08-20: из 8 черновиков дня (DeepSeek Harness, SondeHub, terminal-code, OpenRouter→Stripe, SPADE, ADEPT, Orchard, GC-OPD) владелец выбрал для Threads №6 ADEPT (с whiteboard-видео), №5 SPADE и №3 terminal-code; три поста встали в очередь на вечернее окно 20:00/21:00/22:00 (пауза ~1 ч, схема 16.08), тексты ≤500 зн. (241/210/221).
 - 2026-09-26: 2026-09-25: метрики Threads за 24–25.09 — 3 поста (контейнер-опрос Ddoz0hAiDle 150👁, Claude/ферментная система вирусов DdqLzwyjWlk 168👁, Z.ai кодинг-агент DdqL5yhjTw9 158👁), всего 476 просмотров, 0 лайков, 2 ответа, engagement ~0.4%: охваты ровные, вовлечение нулевое — вывод: нужны вопросы/полемика в хвосте поста. Две X-задачи очереди упали (аккаунт @TrampampamAGI suspended, 403 code 64) — тексты сохранились в задачах, Threads-версии этих новостей ушли, дублировать нечего; X-ветка конвейера окончательно отключена. Вечером подготовлены и сохранены 3 черновика с обложками (data/drafts/2026-09-25-*): Threads «Meta Muse открыла файлушку», Threads «Google Suncatcher (ИИ в космосе)», TG «Suncatcher» (Борис) — публикация по явной просьбе владельца.
+- 2026-09-27: 26.09.2026 внедрён CTA-механизм в автоконвейер iva-news-auto: в CTA-дни (пн/чт в нечётную неделю, вт/пт в чётную — чередование по чётности) автопост уходит в TG-канал t.me/stringikotaborisa со строкой «Разбираю подробнее в канале: …/go/th2». Если текст с CTA не влезает в лимит 500 знаков — публикуется без неё. Правка в /usr/local/bin/iva-news-auto помечена как локальная, файл в tree-allowlist. Сухой прогон --plan прошёл чисто. Счётчик кликов: python3 data/custom/scripts/cta-stats.py 7; первый осмысленный замер — через 1–2 недели.

@@ -1,16 +1,17 @@
 ---
 type: "note"
-description: "Внедрена стратегия Threads «8 шагов»: CTA-ссылки, шаблон ветки, недельная сетка, детектор хитов, CTA-вставка в конвейер"
+description: "Стратегия Threads «8 шагов»: 26.09 все 5 пунктов внедрены — CTA-ссылки через /go/, шаблон ветки, недельная сетка, детектор хитов, CTA-вставка в конвейер."
 tags: ["threads","strategy","content-system","стратегия","контент","автоматизация"]
 status: "active"
 confidence: "EXTRACTED"
 created: "2026-09-25"
 source: "daily/2026-09-25.md"
-updated: "2026-09-26"
+updated: "2026-09-27"
 domain: "knowledge"
-last_accessed: "2026-09-26"
+last_accessed: "2026-09-27"
 tier: "active"
 relevance: 1.0
+access_count: 1
 ---
 
 # Threads стратегия 8 шагов адаптированная
@@ -33,6 +34,8 @@ relevance: 1.0
 
 - [[vault/CORE.md]]
 - [[threads-стратегия-8-шагов-адаптированная]]
+- [[cards/projects/конвейер-новостей-sent-пометки-и-публикации]]
+- [[cards/projects/threads-личный-аккаунт-про-ии-без-котиков]]
 
 ## Log
 
