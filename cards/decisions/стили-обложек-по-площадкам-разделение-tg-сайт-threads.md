@@ -10,7 +10,7 @@ source: daily/2026-08-16.md
 updated: "2026-09-25"
 last_accessed: "2026-09-05"
 tier: "cold"
-relevance: 0.67
+relevance: 0.655
 access_count: 1
 ---
 # Стили обложек по площадкам: разделение TG/сайт/Threads

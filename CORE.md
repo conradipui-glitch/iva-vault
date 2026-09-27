@@ -16,4 +16,4 @@
 - Статья «Фронтир · Сентябрь 2026» на toharo-lab.
 
 ## Указатели
-- Последний день: vault/summaries/daily/2026-09-26 · Индекс: vault/MOC.md
+- Последний день: vault/summaries/daily/2026-09-27 · Индекс: vault/MOC.md

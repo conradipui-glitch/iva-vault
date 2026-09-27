@@ -9,7 +9,7 @@ created: "2026-09-24"
 source: "daily/2026-09-24.md"
 last_accessed: "2026-09-24"
 tier: "active"
-relevance: 0.955
+relevance: 0.94
 ---
 
 # Поиск памяти деградировал: RouterAI в минусе, эмбеддинги не строятся

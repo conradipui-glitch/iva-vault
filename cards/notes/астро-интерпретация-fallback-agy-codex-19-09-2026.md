@@ -9,8 +9,8 @@ source: "daily/2026-09-19.md"
 domain: "work"
 updated: "2026-09-20"
 last_accessed: "2026-09-20"
-tier: "active"
-relevance: 0.895
+tier: "warm"
+relevance: 0.88
 ---
 
 # Астро-интерпретация: fallback agy → codex (19.09.2026)

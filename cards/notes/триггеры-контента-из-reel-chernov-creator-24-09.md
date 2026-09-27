@@ -9,7 +9,7 @@ created: "2026-09-25"
 source: "daily/2026-09-25.md"
 last_accessed: "2026-09-25"
 tier: "active"
-relevance: 0.97
+relevance: 0.955
 ---
 
 # Триггеры контента из reel chernov_creator (24.09)
