@@ -9,7 +9,7 @@ created: "2026-09-19"
 source: "daily/2026-09-19.md"
 last_accessed: "2026-09-19"
 tier: "warm"
-relevance: 0.865
+relevance: 0.85
 ---
 
 # deploychan MCP — постоянное соединение (18.09.2026)

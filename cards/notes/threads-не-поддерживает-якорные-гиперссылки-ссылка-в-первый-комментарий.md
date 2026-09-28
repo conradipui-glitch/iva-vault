@@ -8,8 +8,8 @@ domain: "work"
 created: "2026-09-07"
 source: "daily/2026-09-07.md"
 last_accessed: "2026-09-07"
-tier: "warm"
-relevance: 0.685
+tier: "cold"
+relevance: 0.67
 ---
 
 # Threads не поддерживает якорные гиперссылки — ссылка в первый комментарий

@@ -6,8 +6,8 @@ status: "active"
 confidence: "EXTRACTED"
 created: "2026-09-21"
 source: "daily/2026-09-21.md"
-relevance: 0.895
-tier: "active"
+relevance: 0.88
+tier: "warm"
 domain: "knowledge"
 last_accessed: "2026-09-21"
 ---

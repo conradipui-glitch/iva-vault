@@ -10,7 +10,7 @@ source: daily/2026-08-01.md
 updated: "2026-09-28"
 last_accessed: "2026-09-25"
 tier: "active"
-relevance: 0.986
+relevance: 0.981
 access_count: 9
 ---
 

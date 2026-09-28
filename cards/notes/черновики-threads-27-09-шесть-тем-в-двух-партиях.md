@@ -9,7 +9,7 @@ source: "daily/2026-09-27.md"
 domain: "knowledge"
 last_accessed: "2026-09-28"
 tier: "active"
-relevance: 1.0
+relevance: 0.985
 access_count: 1
 ---
 
