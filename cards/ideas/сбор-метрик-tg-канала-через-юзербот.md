@@ -9,7 +9,7 @@ created: "2026-09-20"
 source: "daily/2026-09-19.md"
 last_accessed: "2026-09-20"
 tier: "warm"
-relevance: 0.865
+relevance: 0.85
 ---
 
 # Сбор метрик TG-канала через юзербот

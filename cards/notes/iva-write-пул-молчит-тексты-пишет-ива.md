@@ -9,7 +9,7 @@ source: "daily/2026-09-23.md"
 domain: "knowledge"
 last_accessed: "2026-09-23"
 tier: "active"
-relevance: 0.91
+relevance: 0.895
 ---
 
 # iva-write пул молчит, тексты пишет Ива

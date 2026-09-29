@@ -8,7 +8,7 @@ domain: "work"
 created: "2026-09-21"
 source: "daily/2026-09-21.md"
 updated: "2026-09-21"
-relevance: 0.88
+relevance: 0.865
 tier: "warm"
 last_accessed: "2026-09-21"
 ---
