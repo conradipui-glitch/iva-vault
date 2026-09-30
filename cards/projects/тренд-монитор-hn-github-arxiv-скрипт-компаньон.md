@@ -13,7 +13,7 @@ tier: "cold"
 relevance: 0.614
 updated: 2026-08-07
 access_count: 3
-truth_date: "2026-08-01"
+truth_date: "2026-08-02"
 ---
 # Тренд-монитор HN + GitHub + arXiv (скрипт-компаньон)
 
