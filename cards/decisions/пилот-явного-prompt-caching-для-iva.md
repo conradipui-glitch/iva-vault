@@ -12,6 +12,7 @@ last_accessed: 2026-08-04
 tier: "cold"
 relevance: 0.145
 updated: 2026-08-12
+truth_date: "2026-08-01"
 ---
 # Пилот явного prompt caching для IVA
 

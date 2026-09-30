@@ -12,6 +12,7 @@ last_accessed: "2026-08-23"
 tier: "cold"
 relevance: 0.43
 access_count: 1
+truth_date: "2026-08-01"
 ---
 # Source-first отбор новостей через авторов
 

@@ -11,6 +11,7 @@ source: owner-approved-test-sources
 last_accessed: 2026-08-04
 tier: "cold"
 relevance: 0.145
+truth_date: "2026-08-01"
 ---
 # X-источники: веб, AI-инструменты, SaaS
 

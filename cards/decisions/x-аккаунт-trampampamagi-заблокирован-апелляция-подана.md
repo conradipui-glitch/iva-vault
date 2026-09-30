@@ -11,6 +11,7 @@ last_accessed: 2026-08-07
 tier: "cold"
 relevance: 0.19
 updated: "2026-09-26"
+truth_date: "2026-08-01"
 ---
 # X-аккаунт TrampampamAGI заблокирован (апелляция подана)
 

@@ -6,8 +6,12 @@ status: "active"
 created: "2026-08-01"
 source: "daily/2026-08-01.md"
 aliases: ["super bash AI"]
+truth_date: "2026-08-01"
 ---
 # Superbash AI
+
+Владелец считает Superbash более вкусным проанализированным источником, чем самостоятельный парсинг HN/GitHub.
+Поручено сравнить свежее за сегодня с другими источниками.
 
 ## Log
 

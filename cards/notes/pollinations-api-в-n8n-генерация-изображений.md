@@ -6,8 +6,12 @@ status: "active"
 created: "2026-08-01"
 source: "daily/2026-08-01.md"
 aliases: ["Polynations","PolyNation"]
+truth_date: "2026-08-01"
 ---
 # Pollinations API в n8n — генерация изображений
+
+В n8n уже настроен API Pollinations — использовать его и оптимальную модель для генерации изображений.
+Дешёвая модель Pollinations коряво отображает кириллицу, поэтому текст на картинках не нужен.
 
 ## Log
 
