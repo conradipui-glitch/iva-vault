@@ -13,7 +13,6 @@ last_accessed: "2026-07-11"
 relevance: 0.1
 tier: "archive"
 ---
-
 # srt-whiteboard анимация «рука рисует» — скилл и видео-посты
 
 Инструмент: github.com/geeklee/srt-whiteboard-animation — Python-скрипты, цепочка «парсер SRT → разметка сцен (annotation.json) → рендер потокового рисования → склейка MP4», лицензия MIT.
