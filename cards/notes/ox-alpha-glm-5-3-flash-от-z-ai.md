@@ -6,8 +6,11 @@ status: "active"
 created: "2026-08-26"
 source: "daily/2026-08-26.md"
 aliases: ["OX Alpha","GLM 5. 3 Flash"]
+truth_date: "2026-08-26"
 ---
 # Ox Alpha = GLM-5.3-Flash от Z.ai
+
+Секретная хайповая модель Ox Alpha оказалась GLM 5.3 Flash. Новость про это выпущена в Threads 26.08 — владелец подтвердил выпуск.
 
 ## Log
 
