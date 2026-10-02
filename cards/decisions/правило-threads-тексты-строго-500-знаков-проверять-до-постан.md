@@ -11,6 +11,7 @@ source: daily/2026-08-16.md
 last_accessed: 2026-08-17
 tier: "cold"
 relevance: 0.34
+truth_date: "2026-08-04"
 ---
 # Правило: Threads-тексты строго ≤500 знаков, проверять до постановки в очередь
 

@@ -5,6 +5,7 @@ tags: ["note"]
 status: "active"
 created: "2026-08-04"
 source: "daily/2026-08-04.md"
+truth_date: "2026-08-04"
 ---
 # Graph Engineering
 

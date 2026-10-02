@@ -11,6 +11,7 @@ updated: "2026-09-21"
 relevance: 0.865
 tier: "warm"
 last_accessed: "2026-09-21"
+truth_date: "2026-08-04"
 ---
 # Генератор обложек — строго ChatGPT-подписка (codex)
 
